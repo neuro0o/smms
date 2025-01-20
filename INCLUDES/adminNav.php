@@ -1,7 +1,7 @@
 <div class="topNav">
   <!-- navigation bar -->
   <nav class="navbar">
-    <a href="">HOME</a>
+    <a href="../../MODULES/ADMIN_MODULE/adminHome.php">HOME</a>
     <a href="">ACCOMMODATION</a>
     <a href="">ACTIVITY</a>
     <a href="">FOOD</a>
