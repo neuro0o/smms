@@ -14,7 +14,7 @@
   $userID = $_SESSION['UID'];
 
   // fetch user data
-  $sql_user =  "SELECT userName, userEmail, userPwd, userImg
+  $sql_user =  "SELECT userName, userEmail, userPwd, userImg, userRole
   FROM user
   WHERE userID = ?";
 
@@ -24,6 +24,9 @@
   $result_user = mysqli_stmt_get_result($stmt);
 
   $user_data = mysqli_fetch_assoc($result_user);
+
+  // determine user role
+  $userRole = $user_data['userRole'];
 
 ?>
 
@@ -59,8 +62,14 @@
     <!-- include topNav.php -->
     <?php include '../../INCLUDES/topHeader.php'; ?>
     
-    <!-- include userNav.php -->
-    <?php include '../../INCLUDES/userNav.php'; ?>
+    <!-- include the appropriate roleNav based on currently logged user's role -->
+    <?php 
+      if ($userRole == 1) {
+          include '../../INCLUDES/adminNav.php'; // adminNav
+      } else {
+          include '../../INCLUDES/userNav.php'; // userNav
+      }
+    ?>
 
     <!-- include headerBanner.php -->
     <?php include '../../INCLUDES/headerBanner.php';?>
