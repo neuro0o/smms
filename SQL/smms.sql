@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2025 at 05:51 AM
+-- Generation Time: Jan 20, 2025 at 09:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -236,8 +236,17 @@ CREATE TABLE `user` (
   `userEmail` varchar(255) NOT NULL,
   `userName` varchar(255) NOT NULL,
   `userPwd` varchar(255) NOT NULL,
+  `userImg` varchar(255) NOT NULL,
   `userRole` int(11) NOT NULL COMMENT '1:Admin 2:User'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`userID`, `userEmail`, `userName`, `userPwd`, `userImg`, `userRole`) VALUES
+(1, 'admin@email.com', 'admin', '$2y$10$dCcKRaRIkMofMQFHJoJdhe.hVS1NuHCwpUKfCO7Qo1GM9D0TyMmBy', '/IMAGES/PROFILE/default.png', 1),
+(2, 'user1@email.com', 'user1', '$2y$10$wfh1eN7mInFUa/2FWQYfMeSlsq2z4Ak8VCscxpdWna0LELNX9bvtS', '/IMAGES/PROFILE/default.png', 2);
 
 --
 -- Indexes for dumped tables
@@ -432,7 +441,7 @@ ALTER TABLE `review_reservation`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
