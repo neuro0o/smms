@@ -1,0 +1,5 @@
+12.	SEARCH & FILTER MODULE - ethan
+a.	Advance Search
+  i.	With keywords to look for specific accommodation/activity/food
+  ii.	Like individual web, after we input keyword, system will list out all hits and give hyperlinks
+  iii.	If clicked, user will be redirected to that specific search results with info

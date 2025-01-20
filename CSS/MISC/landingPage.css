@@ -1,0 +1,194 @@
+/* main container for landing page.php */
+.landing-page {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: var(--jade-500);
+  padding-bottom: 1rem;
+}
+
+/* title */
+.title {
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3rem;
+  color: var(--aliceblue);
+  font-weight: bold;
+  padding-top: 10rem;
+}
+
+/* card container */
+.join-card {
+  margin: 0rem 5rem;
+  height: 50rem;
+  display: flex;
+  flex-direction: row;
+  padding: 10rem 0rem;
+  justify-content: space-between;
+}
+
+/* individual card settings */
+.join-card-explore,
+.join-card-book,
+.join-card-weather,
+.join-card-wishlist {
+  border-style: solid;
+  background-color: var(--teal-500);
+  width: 30rem;
+  height: 30rem;
+  margin: 0rem 2rem;
+  border-radius: 2.5rem;
+  overflow: hidden;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.75s;
+}
+
+/* individual card settings when hovered */
+.join-card-explore:hover,
+.join-card-book:hover,
+.join-card-weather:hover,
+.join-card-wishlist:hover {
+  transform: translateY(-1.7rem);
+  background-color: var(--teal-400);
+}
+
+/* individual card title settings */
+#card-title {
+  color: var(--aliceblue);
+  font-size: 2.5rem;
+  font-weight: bold;
+  transition: 0.75s;
+}
+
+/* individual card title settings when hovered */
+.join-card-explore:hover #card-title,
+.join-card-book:hover #card-title,
+.join-card-weather:hover #card-title,
+.join-card-wishlist:hover #card-title {
+  color: var(--black);
+}
+
+/* individual card desc settings */
+#card-desc {
+  color: #fff;
+  opacity: 0.7;
+  padding-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: 0.75s;
+}
+
+/* individual card desc settings when hovered */
+.join-card-explore:hover #card-desc,
+.join-card-book:hover #card-desc,
+.join-card-weather:hover #card-desc,
+.join-card-wishlist:hover #card-desc {
+  color: var(--black);
+  opacity: 1.0;
+}
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) { 
+  .title {
+    font-size: 2.8rem;
+    padding-top: 8rem;
+  }
+
+  .join-card {
+    height: 50rem;
+    padding: 5rem 0rem;
+  }
+  
+  .join-card-explore,
+  .join-card-book,
+  .join-card-weather,
+  .join-card-wishlist {
+    width: auto;
+    height: auto;
+    margin: 0rem 1rem;
+    border-radius: 2.5rem;
+  }
+
+  #card-title {
+    font-size: 2.2rem;
+  }
+
+  #card-desc {
+    font-size: 1.2rem;
+  }
+}
+
+/* medium sized screen */
+@media (max-width: 768px) { 
+  .title {
+    font-size: 2.8rem;
+    padding-top: 8rem;
+  }
+  
+  .join-card {
+    margin: 0rem 5rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10rem 0rem;
+    justify-content: space-between;
+  }
+  
+  .join-card-explore,
+  .join-card-book,
+  .join-card-weather,
+  .join-card-wishlist {
+    width: auto;
+    height: auto;
+    margin: 1rem 10rem;
+    border-radius: 2.5rem;
+  }
+
+  #card-title {
+    font-size: 2.2rem;
+  }
+
+  #card-desc {
+    font-size: 1.2rem;
+  }
+}
+
+/* small sized screen */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    padding-top: 8rem;
+  }
+  
+  .join-card {
+    margin: 0rem 3rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 0rem;
+    justify-content: space-between;
+  }
+  
+  .join-card-explore,
+  .join-card-book,
+  .join-card-weather,
+  .join-card-wishlist {
+    width: auto;
+    height: auto;
+    margin: 1rem 2rem;
+    border-radius: 2.5rem;
+  }
+
+  #card-title {
+    font-size: 1.8rem;
+  }
+
+  #card-desc {
+    font-size: 1rem;
+  }
+}

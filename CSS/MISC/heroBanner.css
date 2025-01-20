@@ -1,0 +1,187 @@
+/* hero banner image container */
+.hero-banner {
+  position: relative;
+  background-image: url(../../IMAGES/BANNER/banner.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 80rem;
+}
+
+.hero-welcome-message, .hero-site-name, .hero-site-desc {
+  color: var(--aliceblue);
+  font-weight: bold;
+  text-align: center;
+  padding: 1.2rem;
+}
+
+.hero-welcome-message {
+  font-size: 7rem;
+  padding-top: 15rem;
+  transition: 0.75s;
+}
+
+.hero-site-name {
+  font-size: 7rem;
+  line-height: 1;
+  padding-bottom: 8rem;
+  transition: 0.75s;
+}
+
+/* highlight effect */
+.hero-site-name mark {
+  background-color: var(--teal-300);
+  border-radius: 0.2rem;
+}
+
+.hero-site-desc {
+  font-size: 3rem;
+  transition: 0.75s;
+}
+
+.hero-button {
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 7rem 5rem;
+  transition: 0.75s;
+}
+
+.hero-button button {
+  border-style: solid;
+  border-color: #000;
+  border-radius: 1.2rem;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.75s;
+}
+
+.hero-button button:active {
+  opacity: 0.8;
+  transform: translateY(4px);
+}
+
+#register-button {
+  padding: 1rem 0.7rem;
+  margin-right: 2.5rem;
+  background-color: var(--teal-100);
+  transition: 0.75s;
+}
+
+#register-button:hover {
+  background-color: var(--teal-300);
+}
+
+#login-button {
+  padding: 1rem 1.4rem;
+  background-color: var(--teal-300);
+  transition: 0.75s;
+}
+
+#login-button:hover {
+  padding: 1rem 1.4rem;
+  background-color: var(--teal-500);
+}
+
+
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) { 
+  .banner {
+    height: 60vh;
+  }
+
+  .hero-welcome-message {
+    font-size: 6rem;
+    padding-top: 20rem;
+  }
+
+  .hero-site-name {
+    font-size: 6rem;
+    line-height: 1;
+    padding-bottom: 6rem;
+  }
+  .hero-site-desc {
+    font-size: 2.8rem;
+  }
+
+  .hero-button {
+    padding: 6rem 4rem;
+  }
+  
+  .hero-button button {
+    font-size: 2.8rem;
+  }
+  
+  #register-button {
+    padding: 1rem 0.7rem;
+    margin-right: 2.2rem;
+  }
+  
+  #login-button {
+    padding: 1rem 1.4rem;
+  }
+}
+
+/* medium sized screen */
+@media (max-width: 768px) { 
+  .banner {
+    height: 50vh;
+  }
+
+  .hero-welcome-message {
+    font-size: 5rem;
+    padding-top: 20rem;
+  }
+
+  .hero-site-name {
+    font-size: 5rem;
+    line-height: 1;
+    padding-bottom: 6rem;
+  }
+  .hero-site-desc {
+    font-size: 2.6rem;
+  }
+
+  .hero-button {
+    padding: 4rem 2rem;
+  }
+  
+  .hero-button button {
+    font-size: 2.6rem;
+  }
+  
+  #register-button {
+    padding: 1rem 0.5rem;
+    margin-right: 2rem;
+  }
+  
+  #login-button {
+    padding: 1rem 1.2rem;
+  }
+}
+
+/* small sized screen */
+@media (max-width: 480px) {
+  .banner {
+    height: 40vh;
+  }
+
+  .hero-welcome-message {
+    font-size: 4rem;
+    padding-top: 20rem;
+  }
+
+  .hero-site-name {
+    font-size: 4rem;
+    line-height: 1;
+    padding-bottom: 6rem;
+  }
+  .hero-site-desc {
+    font-size: 2.4rem;
+  }
+}

@@ -1,0 +1,6 @@
+<!-- 8.	PAYMENT MODULE - syham -->
+a.	Payment Environment
+  i.	Handle payment for reservation and purchases
+  ii.	Generate receipt for each transaction
+  iii.	Handle refund & transaction history
+  iv.	Integrate with payment environment (mock only I guess)	

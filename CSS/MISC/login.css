@@ -1,0 +1,151 @@
+/* page background */
+html {
+  background-image: url(../../../SMMS/IMAGES/BANNER/banner.jpg);
+  background-size:cover; 
+  background-repeat: no-repeat;
+}
+
+/* section for login settings */
+.login {
+  min-height: 100vh;
+}
+
+/* container for login form settings */
+.login-form {
+  margin: 5rem auto;
+  width: 50%;
+  height: 90vh;
+  border-radius: 2.5rem;
+  background-color: transparent;
+  backdrop-filter: blur(7px);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  transition: 0.75s;
+}
+
+/* form title settings */
+#form-title {
+  color: var(--aliceblue);
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  font-size: 5rem;
+}
+
+/* login form settings */
+.login-form form {
+  padding: 2rem 7rem;
+  transition: 0.75s;
+}
+
+/* form label and input settings */
+.login-form label, .login-form input {
+  font-size: 3rem;
+  color: var(--aliceblue);
+  font-weight: bold;
+  width: 100%;
+}
+
+.login-form input {
+  border-radius: 0.7rem;
+  background-color: #00000055;
+}
+
+/* form button settings */
+.login-form button {
+  border: none;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 1.7rem;
+  background-color: var(--jade-100);
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: var(--jade-300);
+}
+
+.login-form button:active {
+  opacity: 0.8;
+  transform: translateY(4px);
+}
+
+.error-login {
+  color: var(--aliceblue);
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-redirect {
+  color: blue;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem 2rem 1rem 0rem;
+  display: block;
+  text-align: center;
+}
+
+.error-redirect:hover {
+  text-decoration: underline;
+  color: darkblue;
+}
+
+
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) {
+  #form-title {
+    font-size: 4.2rem;
+  }
+
+  .login-form label, .login-form input {
+    font-size: 2.8rem;
+  }
+
+  .login-form button {
+    font-size: 2rem;
+  }
+
+  /* medium sized screen */
+  @media (max-width: 768px) {
+    .login-form {
+      margin: 2rem auto;
+      width: 80%;
+    }
+  
+    .login-form form {
+      padding: 2rem 6rem;
+    }
+  }
+
+  /* small sized screen */
+  @media (max-width: 480px) {
+    .login-form {
+      margin: 2rem auto;
+      height: 70vh;
+      width: 90%;
+    }
+  
+    .login-form form {
+      padding: 2rem 3rem;
+    }
+  
+    #form-title {
+      font-size: 3.2rem;
+    }
+  
+    .login-form label, .login-form input {
+      font-size: 2rem;
+    }
+  
+    .login-form button {
+      font-size: 1.5rem;
+    }
+  }
+}

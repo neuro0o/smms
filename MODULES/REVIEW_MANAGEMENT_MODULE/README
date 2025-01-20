@@ -1,0 +1,5 @@
+<!-- 7.	REVIEW MODULE - tira -->
+a.	Submit Review
+  i.	Submit review based on accommodationID/activity purchase ID - apID/food purchase ID - fpID (similar to individual web)
+  ii.	Implement function to manage/moderate (delete) reviews and ratings – connected to admin
+  iii.	Filter/categorize/sort reviews based on scale (1-5) for user to check in accommodation/activity/food portfolio

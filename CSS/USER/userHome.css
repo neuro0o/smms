@@ -1,0 +1,249 @@
+/* main section for userHome page */
+.userHome {
+  padding: 1rem;
+  min-height: 100vh;
+  /* border-style: solid; */
+}
+
+#section-title {
+  margin-top: 7rem;
+  margin-bottom: 7rem;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+/*==============================
+  info card container
+==============================*/
+/* main container for card info */
+.info-card {
+  margin: 3rem auto;
+  width: 120rem;
+  height: 40rem;
+  border-radius: 2.5rem;
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  transition: 0.75s;
+  background-color: var(--teal-500);
+}
+
+/* container for card info images */
+.info-card-img-left,
+.info-card-img-right { 
+  width: 30rem;
+  height: 30rem;
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  transition: 0.75s;
+}
+
+/* images styling */
+.info-card-img-left img,
+.info-card-img-right img {
+  width: 30rem;
+  height: 30rem;
+  padding: 1rem;
+  border-radius: 3rem;
+  transition: 0.75s;
+  cursor: pointer;
+}
+
+.info-card-img-left img:hover,
+.info-card-img-right img:hover {
+  width: 32rem;
+  height: 32rem;
+  padding: 1rem;
+  transition: 0.75s;
+}
+
+/* container for card info descriptions */
+.info-card-desc-left,
+.info-card-desc-right {
+  width: 30rem;
+  height: 30rem;
+  padding: 5rem 0rem;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  transition: 0.75s;
+}
+
+.info-card-desc-left h1, .info-card-desc-left p {
+  text-align: start;
+}
+
+.info-card-desc-right h1, .info-card-desc-right p {
+  text-align: end;
+}
+
+.info-card-desc-left h1,
+.info-card-desc-right h1 {
+  font-size: 5rem;
+}
+
+.info-card-desc-left p,
+.info-card-desc-right p {
+  font-size: 2.5rem;
+  color: var(--teal-100);
+  font-weight: bold;
+}
+
+
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) { 
+  #section-title {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+    font-size: 4rem;
+  }
+
+  .info-card {
+    margin: 3rem auto;
+    width: 80rem;
+  }
+
+  .info-card-img-left,
+  .info-card-img-right { 
+    width: 28rem;
+    height: 28rem;
+    width: 40%;
+  }
+
+  .info-card-img-left img,
+  .info-card-img-right img {
+    width: 28rem;
+    height: 28rem;
+  }
+
+  .info-card-desc-left,
+  .info-card-desc-right {
+    width: 60%;
+    padding: 3rem 2rem;
+  }
+
+  .info-card-desc-left h1,
+  .info-card-desc-right h1 {
+    font-size: 4.5rem;
+  }
+  
+  .info-card-desc-left p,
+  .info-card-desc-right p {
+    font-size: 2rem;
+  }
+}
+
+/* medium sized screen */
+@media (max-width: 768px) { 
+  #section-title {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    font-size: 3rem;
+  }
+
+  .info-card {
+    margin: 3rem auto;
+    width: 70rem;
+  }
+
+  .info-card-img-left,
+  .info-card-img-right { 
+    width: 26rem;
+    height: 26rem;
+    width: 40%;
+  }
+
+  .info-card-img-left img,
+  .info-card-img-right img {
+    width: 26rem;
+    height: 26rem;
+  }
+
+  .info-card-desc-left,
+  .info-card-desc-right {
+    width: 60%;
+  }
+
+  .info-card-desc-left h1,
+  .info-card-desc-right h1 {
+    font-size: 4rem;
+  }
+  
+  .info-card-desc-left p,
+  .info-card-desc-right p {
+    font-size: 1.5rem;
+  }
+}
+
+/* small sized screen */
+@media (max-width: 480px) {
+  #section-title {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    font-size: 2.5rem;
+  }
+
+  .info-card {
+    margin: 1rem auto;
+    width: 90%;
+    height: 50rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-card-img-left,
+  .info-card-img-right { 
+    width: 22rem;
+    height: 22rem;
+    width: 30%;
+  }
+
+  .info-card-img-left img,
+  .info-card-img-right img {
+    width: 22rem;
+    height: 22rem;
+  }
+
+  .info-card-img-left img:hover,
+  .info-card-img-right img:hover {
+    width: 24rem;
+    height: 24rem;
+    padding: 1rem;
+    transition: 0.75s;
+  }
+
+  .info-card-desc-left,
+  .info-card-desc-right {
+    width: 70%;
+    margin: 3rem;
+    padding: 0;
+  }
+
+  .info-card-desc-right {
+    width: 70%;
+    height: 18rem;
+    padding: 0;
+  }
+
+  .info-card-desc-left h1,
+  .info-card-desc-right h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .info-card-desc-left p,
+  .info-card-desc-right p {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+}

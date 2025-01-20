@@ -1,0 +1,90 @@
+/* header banner image container */
+.header-banner {
+  position: relative;
+  background-image: url(../../IMAGES/BANNER/headerBanner.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 40rem;
+  transition: 0.75s;
+}
+
+.banner-title {
+  color: var(--aliceblue);
+  font-size: 7rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 1.2rem;
+  padding-top: 8rem;
+  transition: 0.75s;
+}
+
+.banner-desc {
+  color: var(--aliceblue);
+  font-style:italic;
+  font-size: 3.5rem;
+  padding-top: 6rem;
+  text-align: center;
+  transition: 0.75s;
+}
+
+/* highlight effect */
+.banner-title mark {
+  background-color: var(--teal-300);
+  padding: 0.8rem;
+  border-radius: 1rem;
+}
+
+
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) { 
+  .header-banner {
+    height: 35rem;
+  }
+
+  .banner-title {
+    font-size: 5rem;
+    transition: 0.75s;
+  }
+
+  .banner-desc {
+    font-size: 3.2rem;
+  }
+}
+
+/* medium sized screen */
+@media (max-width: 768px) { 
+  .header-banner {
+    height: 30rem;
+  }
+  
+  .banner-title {
+    font-size: 4.8rem;
+    padding-top: 4.5rem;
+  }
+
+  .banner-desc {
+    font-size: 2.2rem;
+    padding-top: 4rem;
+  }
+}
+
+/* small sized screen */
+@media (max-width: 480px) { 
+  .header-banner {
+    height: 20rem;
+  }
+  
+  .banner-title {
+    font-size: 3rem;
+    padding-top: 5rem;
+  }
+
+  .banner-desc {
+    font-size: 1.2rem;
+    padding-top: 2rem;
+  }
+}

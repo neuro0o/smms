@@ -1,0 +1,116 @@
+/* main container for topNav */
+.topNav {
+  position: sticky;
+  top: 7rem;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  height: 7rem;
+  background-color: var(--teal-500);
+  justify-content: center;
+}
+
+/* navbar container settings */
+.topNav .navbar {
+  display: flex;
+  margin: 0;
+  padding: 2rem;
+  justify-content: center;
+}
+
+/* navbar link settings */
+.topNav .navbar a {
+  color: var(--aliceblue);
+  font-size: 2.2rem;
+  font-weight: bold;
+  padding: 0rem 1rem;
+  transition: 0.75s;
+}
+
+/* navbar link (hover) settings */
+.topNav .navbar a:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0rem 1rem;
+  border-radius: 1rem;
+  transition: 0.75s;
+}
+
+/* navbar-hamburger settings */
+.topNav .navbar-icon i {
+  font-size: 2.5rem;
+  color: var(--aliceblue);
+  cursor: pointer;
+}
+
+/* navbar-hamburger (not displayed until screen size smaller) */
+#navbar-hamburger {
+  display: none;
+}
+
+
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) { 
+  .topNav .navbar a {
+    font-size: 2rem;
+  }
+}
+
+/* medium sized screen */
+@media (max-width: 768px) { 
+  .topNav {
+    height: 6rem;
+  }
+
+  .topNav .navbar a {
+    font-size: 1.6rem;
+  }
+}
+
+/* small sized screen */
+@media (max-width: 480px) { 
+  .topNav {
+    height: 5rem;
+  }
+  
+  #navbar-hamburger {
+    display: inline-block;
+    position: absolute; 
+    right: 1rem; 
+    top: 1.5rem;
+  }
+
+  .topNav .navbar.active {
+    right: 0%;
+  }
+
+  /* navbar settings for small sized screen */
+  .topNav .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    position: absolute;
+    top: 100%;
+    right: 1000%;
+    width: 40%;
+    height: auto;
+    background-color: var(--teal-500);
+  }
+
+  /* navbar link settings for small sized screen */
+  .topNav .navbar a {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--aliceblue);
+    padding: 1rem;
+  }
+
+  .topNav .navbar a:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    transition: 0.75s;
+  }
+}
