@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2025 at 09:10 AM
+-- Generation Time: Jan 22, 2025 at 04:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `accommodation` (
   `accommodationID` int(11) NOT NULL,
   `accommodationName` varchar(255) NOT NULL,
+  `accommodationImg` varchar(255) NOT NULL,
   `accommodationDesc` varchar(1000) NOT NULL,
   `accommodationPrice` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -43,6 +44,7 @@ CREATE TABLE `accommodation` (
 CREATE TABLE `activity` (
   `activityID` int(11) NOT NULL,
   `activityName` varchar(255) NOT NULL,
+  `activityImg` varchar(255) NOT NULL,
   `activityCategory` int(11) NOT NULL,
   `activityDesc` varchar(1000) NOT NULL,
   `activityPrice` decimal(8,2) NOT NULL
@@ -104,6 +106,7 @@ CREATE TABLE `activity_purchase_detail` (
 CREATE TABLE `food` (
   `foodID` int(11) NOT NULL,
   `foodName` varchar(255) NOT NULL,
+  `foodImg` varchar(255) NOT NULL,
   `foodCategory` int(11) NOT NULL,
   `foodDesc` varchar(1000) NOT NULL,
   `foodPrice` decimal(8,2) NOT NULL
