@@ -168,3 +168,110 @@ button:active {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
 }
+
+
+
+/*==============================
+  MEDIA QUERIES
+==============================*/
+/* large sized screen */
+@media (max-width: 1200px) { 
+  
+}
+
+/* medium sized screen */
+@media (max-width: 768px) { 
+  .weather-container {
+    width: 50rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 30vw;
+  }
+
+  button {
+    font-size: 1.2rem;
+  }
+
+  #temp-div p {
+    font-size: 4rem;
+  }
+
+  #weather-info {
+    font-size: 2.5rem;
+  }
+
+  #additional-info p {
+    font-size: 1.3rem;
+  }
+
+  .hourly-item {
+    font-size: 1.8rem;
+  }
+
+  .daily-item {
+    font-size: 1.8rem;
+  }
+
+  #hourly-forecast::-webkit-scrollbar,
+  #daily-forecast::-webkit-scrollbar {
+    cursor: pointer;
+    height: 1.3rem;
+  }
+}
+
+/* small sized screen */
+@media (max-width: 480px) {
+  .weather-container {
+    width: 30rem;
+    padding: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  input {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    width: 45vw;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
+  #temp-div p {
+    font-size: 3.5rem;
+  }
+
+  #weather-info {
+    font-size: 2rem;
+  }
+
+  #additional-info p {
+    font-size: 1rem;
+  }
+
+  .hourly-item {
+    font-size: 1.5rem;
+    width: 10rem;
+  }
+
+  .daily-item {
+    font-size: 1.5rem;
+    width: 13rem;
+  }
+
+  #hourly-forecast::-webkit-scrollbar,
+  #daily-forecast::-webkit-scrollbar {
+    cursor: pointer;
+    height: 1.2rem;
+  }
+}
