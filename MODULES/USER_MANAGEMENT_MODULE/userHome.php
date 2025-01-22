@@ -104,7 +104,10 @@
         <div class="info-card-img-right">
           <img src="../../IMAGES/MISC/weather.jpg" alt="">
         </div>  
-      </div>
+      </div><br><br><br><br><br>
+
+      <!-- include weather.php -->
+      <?php include '../../MODULES/WEATHER_FORECAST_MODULE/weather.php';?>
     </section>
 
     <!-- include topNav.js -->
