@@ -2,8 +2,8 @@
   <!-- navigation bar -->
   <nav class="navbar">
     <a href="../../MODULES/USER_MANAGEMENT_MODULE/userHome.php">HOME</a>
-    <a href="">ACCOMMODATION</a>
-    <a href="">ACTIVITY</a>
+    <a href="../../MODULES/ACCOMMODATION_MODULE/accommodationList.php">ACCOMMODATION</a>
+    <a href="../../MODULES/ACTIVITY_MODULE/activityList.php">ACTIVITY</a>
     <a href="">FOOD</a>
     <a href="">PURCHASE HISTORY</a>
     <a href="../../MODULES/USER_MANAGEMENT_MODULE/profile.php">MY PROFILE</a>
