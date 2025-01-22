@@ -1,6 +1,7 @@
 /* main section for userHome page */
 .userHome {
   padding: 1rem;
+  /* margin: 1rem; */
   min-height: 100vh;
   /* border-style: solid; */
 }
