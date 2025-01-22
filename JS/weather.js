@@ -67,14 +67,23 @@ function displayWeather(data) {
   // clear existing content in weather and temperature info div
   weatherInfoDiv.innerHTML = '';
   tempDivInfo.innerHTML = '';
+  humidityElem.innerHTML = '';
+  windSpeedElem.innerHTML = '';
+  uvIndexElem.innerHTML = '';
 
   // display alert message if location input not found
   if (data.cod === '404') {
+    // clear all sections in case of invalid location
+    document.getElementById('temp-div').innerHTML = '';
+    document.getElementById('weather-info').innerHTML = '';
+    document.getElementById('weather-icon').style.display = 'none';
+    document.getElementById('humidity').innerHTML = '';
+    document.getElementById('wind-speed').innerHTML = '';
+    document.getElementById('uv-index').innerHTML = '';
+    document.getElementById('hourly-forecast').innerHTML = '';
+    document.getElementById('daily-forecast').innerHTML = '';
+
     weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
-    tempDivInfo.display = 'none';
-    weatherIcon.style.display = 'none';
-    weatherInfoDiv.display = 'none';
-    dailyForecastDiv.display = 'none';    
   }
   else {
     const locationName = data.name;
@@ -92,7 +101,7 @@ function displayWeather(data) {
     weatherInfoDiv.innerHTML = weatherHtml;
     weatherIcon.src = iconUrl;
     weatherIcon.alt = description;
-    weatherIcon.style.display = 'block'; 
+    weatherIcon.style.display = 'block';
 
     humidityElem.innerHTML = `Humidity: ${humidity}%`;
     windSpeedElem.innerHTML = `Wind Speed: ${windSpeed} m/s`;
