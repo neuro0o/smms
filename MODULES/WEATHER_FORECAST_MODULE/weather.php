@@ -22,26 +22,26 @@
       <br><br><br>
       <h1>🌤️ LIVE-WEATHER FORECAST 🌤️</h1><br><br><br>
 
-      <input type="search" id="city" placeholder="Enter location">
-      <button onclick="getWeather()">
-        <i class="fa fa-search"></i>
-      </button><br><br><br>
+      <input type="text" id="location" placeholder="Enter the location, e.g., Kota Belud.">
+      <button onclick="getWeather()">Search</button><br><br><br>
 
-      <img id="weather-icon" alt="Weather Icon"><br><br><br>
+      <div id="temp-div"></div>
 
-      <div id="temperature-div"></div><br><br><br>
+      <img id="weather-icon" alt="Weather Icon">
 
-      <div id="weather-info"></div><br><br><br>
-
-      <div id="hourly-forecast"></div><br><br><br>
-
-      <div id="daily-forecast"></div><br><br><br>
+      <div id="weather-info"></div>
 
       <div id="additional-info">
         <p id="humidity"></p>
         <p id="wind-speed"></p>
         <p id="uv-index"></p>
       </div>
+
+      <div id="hourly-forecast"></div>
+
+      <div id="daily-forecast"></div>
+
+      
     </div>
 
     <script src="../../../smms/JS/weather.js"></script>

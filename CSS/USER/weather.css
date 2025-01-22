@@ -2,8 +2,8 @@
 .weather-container {
   /* border-style: solid; */
   margin: 3rem auto;
-  width: 120rem;
-  height: 40rem;
+  width: 70rem;
+  height: 110rem;
   border: 1rem groove var(--teal-400);
   border-radius: 2.5rem;
   justify-content: center;
@@ -25,6 +25,7 @@ input {
   border: 0.2rem solid var(--teal-500);
   border-radius: 1.5rem;
   font-size: 1.5rem;
+  font-weight: bold;
   width: 30vw;
   transition: 0.75s;
 }
@@ -37,6 +38,7 @@ button {
   color: var(--aliceblue);
   cursor: pointer;
   font-size: 1.5rem;
+  font-weight: bold;
   border-radius: 0.7rem;
 }
 
@@ -51,69 +53,113 @@ button:active {
   opacity: 0.7;
 }
 
+/* today's temperature container settings */
 #temp-div p {
-  font-size: 3rem;
+  font-size: 5rem;
+  font-weight: bold;
 }
 
+/* today's weather info settings */
 #weather-info {
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
+/* today's weather icon settings */
 #weather-icon {
-  width: 3rem;
-  height: 3rem;
-}
-
-/* FIXME: use ur own style pls */
-#hourly-forecast {
-  margin-top: 50px;
-  overflow-x: auto;
-  white-space: nowrap;
-  display: flex;
-  justify-content: space-between;
-}
-
-.hourly-item {
-  flex: 0 0 auto;
-  width: 80px;
-  display: flex;
-  flex-direction: column;
+  width: 5rem;
+  height: 5rem;
+  display: none;
+  margin: 0 auto;
   align-items: center;
-  margin-right: 10px;
-  color: white;
-}
-
-.hourly-item img {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 5px;
-}
-
-#daily-forecast {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.daily-item {
-  flex: 0 0 auto;
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 10px;
-  color: white;
-}
-
-.daily-item img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 5px;
+  justify-content: center;
 }
 
 #additional-info p {
-  color: #fff;
-  margin: 8px 0;
+  color: var(--black);
+  margin: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* hourly forecast container settings */
+#hourly-forecast,
+#daily-forecast {
+  margin-top: 5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+/* hourly item entries settings */
+.hourly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 10rem;
+  color: var(--aliceblue);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 2rem;
+  padding: 2rem;
+  background-color: rgba(0, 128, 128, 0.7);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  transition: 0.75s;
+}
+
+/* daily item entries settings */
+.daily-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 20rem;
+  color: var(--aliceblue);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 2rem;
+  padding: 2rem;
+  background-color: rgba(0, 128, 128, 0.7);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  transition: 0.75s;
+}
+
+
+/* hourly & daily item entries (hover) settings */
+.hourly-item:hover,
+.daily-item:hover {
+  background-color: var(--teal-300);
+  color: var(--black);
+  cursor: pointer;
+}
+
+/* hourly & daily item entries (img) settings */
+.hourly-item img,
+.daily-item img {
+  width: 5rem;
+  height: 5rem;
+}
+
+/* scrollbar container settings */
+#hourly-forecast::-webkit-scrollbar,
+#daily-forecast::-webkit-scrollbar {
+  cursor: pointer;
+  height: 1.5rem;
+}
+
+#hourly-forecast::-webkit-scrollbar-thumb,
+#daily-forecast::-webkit-scrollbar-thumb {
+  background-color: var(--teal-200);
+  border-radius: 1rem;
+}
+
+#hourly-forecast::-webkit-scrollbar-track,
+#daily-forecast::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
 }
