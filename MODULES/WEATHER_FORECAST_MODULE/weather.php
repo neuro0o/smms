@@ -17,7 +17,6 @@
   </head>
   <body>
     
-
     <div class="weather-container">
       <br><br><br>
       <h1>🌤️ LIVE-WEATHER FORECAST 🌤️</h1><br><br><br>
@@ -45,6 +44,5 @@
     </div>
 
     <script src="../../../smms/JS/weather.js"></script>
-
   </body>
 </html>

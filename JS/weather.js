@@ -1,4 +1,3 @@
-
 // function to fetch weather
 function getWeather() {
 
@@ -10,8 +9,8 @@ function getWeather() {
 
   // display alert message if no location is inserted
   if (!location) {
-      alert('Please enter a location');
-      return;
+    alert('Please enter a location');
+    return;
   }
 
   // URLs for fetching current weather and forecast data
@@ -20,39 +19,39 @@ function getWeather() {
 
   // fetch current weather data from OpenWeatherMap API
   fetch(currentWeatherUrl)
-      .then(response => response.json())
-      .then(data => {
-          displayWeather(data);
+    .then(response => response.json())
+    .then(data => {
+      displayWeather(data);
 
-          // URLs for fetching UV index data
-          const uvUrl = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${data.coord.lat}&lon=${data.coord.lon}`;
-          fetch(uvUrl)
-              .then(response => response.json())
-              .then(uvData => {
-                  document.getElementById('uv-index').innerHTML = `UV Index: ${uvData.value}`;
-              })
-              // display alert message if uv index fetching process failed
-              .catch(error => {
-                  console.error('Error fetching UV index:', error);
-              });
-      })
-      // display alert message if current weather data fetching process failed
-      .catch(error => {
-          console.error('Error fetching current weather data:', error);
-          alert('Error fetching current weather data. Please try again.');
-      });
+      // URLs for fetching UV index data
+      const uvUrl = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${data.coord.lat}&lon=${data.coord.lon}`;
+      fetch(uvUrl)
+        .then(response => response.json())
+        .then(uvData => {
+            document.getElementById('uv-index').innerHTML = `UV Index: ${uvData.value}`;
+        })
+        // display alert message if uv index fetching process failed
+        .catch(error => {
+            console.error('Error fetching UV index:', error);
+        });
+    })
+    // display alert message if current weather data fetching process failed
+    .catch(error => {
+      console.error('Error fetching current weather data:', error);
+      alert('Error fetching current weather data. Please try again.');
+    });
 
   // fetch daily and hourly forecast data
   fetch(forecastUrl)
-      .then(response => response.json())
-      .then(data => {
-          displayHourlyForecast(data.list);
-          displayDailyForecast(data.list);
-      })
-      .catch(error => {
-          console.error('Error fetching forecast data:', error);
-          alert('Error fetching forecast data. Please try again.');
-      });
+    .then(response => response.json())
+    .then(data => {
+        displayHourlyForecast(data.list);
+        displayDailyForecast(data.list);
+    })
+    .catch(error => {
+        console.error('Error fetching forecast data:', error);
+        alert('Error fetching forecast data. Please try again.');
+    });
 }
 
 // function to display current weather info
@@ -117,21 +116,21 @@ function displayHourlyForecast(hourlyData) {
   const next24Hours = hourlyData.slice(0, 8);
 
   next24Hours.forEach(item => {
-      const dateTime = new Date(item.dt * 1000); 
-      const hour = dateTime.getHours();
-      const temperature = Math.round(item.main.temp - 273.15); 
-      const iconCode = item.weather[0].icon;
-      const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+    const dateTime = new Date(item.dt * 1000); 
+    const hour = dateTime.getHours();
+    const temperature = Math.round(item.main.temp - 273.15); 
+    const iconCode = item.weather[0].icon;
+    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
 
-      const hourlyItemHtml = `
-          <div class="hourly-item">
-              <span>${hour}:00</span>
-              <img src="${iconUrl}" alt="Hourly Weather Icon">
-              <span>${temperature}°C</span>
-          </div>
-      `;
+    const hourlyItemHtml = `
+      <div class="hourly-item">
+        <span>${hour}:00</span>
+        <img src="${iconUrl}" alt="Hourly Weather Icon">
+        <span>${temperature}°C</span>
+      </div>
+    `;
 
-      hourlyForecastDiv.innerHTML += hourlyItemHtml;
+    hourlyForecastDiv.innerHTML += hourlyItemHtml;
   });
 }
 
@@ -158,10 +157,10 @@ function displayDailyForecast(hourlyData) {
 
     if (!dailyData[dateKey]) {
       dailyData[dateKey] = {
-          temp: [],
-          humidity: [],
-          windSpeed: [],
-          icon: item.weather[0].icon
+        temp: [],
+        humidity: [],
+        windSpeed: [],
+        icon: item.weather[0].icon
       };
     }
 
@@ -172,23 +171,23 @@ function displayDailyForecast(hourlyData) {
 
   // calculate averages
   for (const date in dailyData) {
-      const temps = dailyData[date].temp;
-      const averageTemp = Math.round(temps.reduce((a, b) => a + b, 0) / temps.length - 273.15);
-      const averageHumidity = Math.round(dailyData[date].humidity.reduce((a, b) => a + b, 0) / dailyData[date].humidity.length);
-      const averageWindSpeed = (dailyData[date].windSpeed.reduce((a, b) => a + b, 0) / dailyData[date].windSpeed.length).toFixed(1);
+    const temps = dailyData[date].temp;
+    const averageTemp = Math.round(temps.reduce((a, b) => a + b, 0) / temps.length - 273.15);
+    const averageHumidity = Math.round(dailyData[date].humidity.reduce((a, b) => a + b, 0) / dailyData[date].humidity.length);
+    const averageWindSpeed = (dailyData[date].windSpeed.reduce((a, b) => a + b, 0) / dailyData[date].windSpeed.length).toFixed(1);
 
-      const iconUrl = `https://openweathermap.org/img/wn/${dailyData[date].icon}.png`;
+    const iconUrl = `https://openweathermap.org/img/wn/${dailyData[date].icon}.png`;
 
-      const dailyItemHtml = `
-          <div class="daily-item">
-              <span>${date}</span>
-              <img src="${iconUrl}" alt="Daily Weather Icon">
-              <span>${averageTemp}°C</span>
-              <span>Humidity: ${averageHumidity}%</span>
-              <span>Wind: ${averageWindSpeed} m/s</span>
-          </div>
-      `;
+    const dailyItemHtml = `
+      <div class="daily-item">
+        <span>${date}</span>
+        <img src="${iconUrl}" alt="Daily Weather Icon">
+        <span>${averageTemp}°C</span>
+        <span>Humidity: ${averageHumidity}%</span>
+        <span>Wind: ${averageWindSpeed} m/s</span>
+      </div>
+    `;
 
-      dailyForecastDiv.innerHTML += dailyItemHtml;
+    dailyForecastDiv.innerHTML += dailyItemHtml;
   }
 }
