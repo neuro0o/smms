@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2025 at 09:10 AM
+-- Generation Time: Jan 22, 2025 at 06:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,8 +31,20 @@ CREATE TABLE `accommodation` (
   `accommodationID` int(11) NOT NULL,
   `accommodationName` varchar(255) NOT NULL,
   `accommodationDesc` varchar(1000) NOT NULL,
-  `accommodationPrice` decimal(8,2) NOT NULL
+  `accommodationPrice` decimal(8,2) NOT NULL,
+  `accommodationImg` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accommodation`
+--
+
+INSERT INTO `accommodation` (`accommodationID`, `accommodationName`, `accommodationDesc`, `accommodationPrice`, `accommodationImg`) VALUES
+(1, 'Oceanview Suite', 'A spacious room offering stunning views of the ocean with modern amenities. Perfect for a relaxing getaway.', 1250.00, ''),
+(2, 'Mountain Retreat Room', 'A cozy room nestled at the foot of the mountains, designed for a peaceful and scenic stay.', 350.00, ''),
+(3, 'Garden Paradise Room', 'A serene room overlooking beautifully landscaped gardens. Enjoy tranquility and nature from your private balcony.', 400.00, ''),
+(4, 'Cityscape Deluxe', 'A chic and modern room with panoramic views of the city skyline, perfect for business and leisure stays.', 500.00, ''),
+(5, 'Skyline Penthouse', 'A luxurious penthouse suite with a private terrace, offering unmatched views of the city’s skyline and ultimate comfort.', 1000.00, '');
 
 -- --------------------------------------------------------
 
@@ -45,8 +57,21 @@ CREATE TABLE `activity` (
   `activityName` varchar(255) NOT NULL,
   `activityCategory` int(11) NOT NULL,
   `activityDesc` varchar(1000) NOT NULL,
-  `activityPrice` decimal(8,2) NOT NULL
+  `activityPrice` decimal(8,2) NOT NULL,
+  `activityImg` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `activity`
+--
+
+INSERT INTO `activity` (`activityID`, `activityName`, `activityCategory`, `activityDesc`, `activityPrice`, `activityImg`) VALUES
+(1, 'Scuba Diving', 1, 'Explore the underwater world with a guided scuba diving session. Suitable for beginners and advanced divers.', 250.00, ''),
+(2, 'Mountain Trekking', 2, 'A thrilling hike through the lush mountains, guided by an experienced trek leader. Experience nature at its finest.', 150.00, ''),
+(3, 'Cooking Class', 3, 'Learn to prepare local dishes with expert chefs. A fun and interactive activity for food enthusiasts.', 120.00, ''),
+(4, 'Sunset Cruise', 1, 'Enjoy a relaxing evening on the water with a sunset cruise, complete with drinks and light snacks.', 180.00, ''),
+(5, 'Zipline Adventure', 2, 'Experience an adrenaline rush while soaring across valleys and forests with a thrilling zipline adventure.', 60.00, ''),
+(6, 'Art Workshop', 3, 'Unleash your creativity in an art workshop, where you can create your own masterpiece using various mediums.', 80.00, '');
 
 -- --------------------------------------------------------
 
@@ -82,6 +107,17 @@ CREATE TABLE `activity_purchase` (
   `purchaseAmt` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `activity_purchase`
+--
+
+INSERT INTO `activity_purchase` (`apID`, `userID`, `purchaseDate`, `purchaseAmt`) VALUES
+(1, 2, '2025-01-22', 60.00),
+(2, 2, '2025-01-22', 180.00),
+(3, 2, '2025-01-22', 180.00),
+(4, 2, '2025-01-22', 180.00),
+(5, 2, '2025-01-23', 120.00);
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +131,20 @@ CREATE TABLE `activity_purchase_detail` (
   `purchaseQty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `activity_purchase_detail`
+--
+
+INSERT INTO `activity_purchase_detail` (`lineID`, `apID`, `activityID`, `purchaseQty`) VALUES
+(1, 1, 5, 1),
+(2, 2, 5, 3),
+(3, 3, 5, 3),
+(4, 4, 5, 3),
+(5, 5, 3, 1),
+(6, 1, 1, 1),
+(7, 1, 4, 1),
+(8, 1, 6, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -106,7 +156,8 @@ CREATE TABLE `food` (
   `foodName` varchar(255) NOT NULL,
   `foodCategory` int(11) NOT NULL,
   `foodDesc` varchar(1000) NOT NULL,
-  `foodPrice` decimal(8,2) NOT NULL
+  `foodPrice` decimal(8,2) NOT NULL,
+  `foodImg` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -176,6 +227,14 @@ CREATE TABLE `reservation` (
   `accommodationID` int(11) NOT NULL,
   `reservationStatus` int(11) NOT NULL COMMENT '1: Confirm 2:Cancel 3:Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`reservationID`, `dateFrom`, `dateUntil`, `totalAmt`, `reservedBy`, `accommodationID`, `reservationStatus`) VALUES
+(1, '2025-01-22', '2025-01-23', 350.00, 2, 2, 3),
+(2, '2025-01-23', '2025-01-25', 2500.00, 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -363,13 +422,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `accommodation`
 --
 ALTER TABLE `accommodation`
-  MODIFY `accommodationID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `accommodationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
-  MODIFY `activityID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `activityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `activity_category`
@@ -381,13 +440,13 @@ ALTER TABLE `activity_category`
 -- AUTO_INCREMENT for table `activity_purchase`
 --
 ALTER TABLE `activity_purchase`
-  MODIFY `apID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `apID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `activity_purchase_detail`
 --
 ALTER TABLE `activity_purchase_detail`
-  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `food`
@@ -417,7 +476,7 @@ ALTER TABLE `food_purchase_detail`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservationID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `review_activity`
