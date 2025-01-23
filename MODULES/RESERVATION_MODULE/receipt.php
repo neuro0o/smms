@@ -13,60 +13,89 @@ if (!isset($_SESSION['UID'])) {
 // Get the user ID
 $userID = $_SESSION['UID'];
 
-// Initialize total amounts
+// Initialize totals
 $totalAccommodation = 0;
 $totalActivities = 0;
 $totalFood = 0;
 
-// Query to fetch the purchase details
-$query = "
-    SELECT 
-        r.reservationID, 
-        a.accommodationName, 
-        f.foodName, 
-        fpd.purchaseQty AS foodQuantity, 
-        act.activityName, 
-        apd.purchaseQty AS activityQuantity, 
-        r.totalAmt 
-    FROM reservation r
-    LEFT JOIN accommodation a ON r.accommodationID = a.accommodationID
-    LEFT JOIN food_purchase fp ON fp.userID = '$userID'
-    LEFT JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
-    LEFT JOIN food f ON fpd.foodID = f.foodID
-    LEFT JOIN activity_purchase ap ON ap.userID = '$userID'
-    LEFT JOIN activity_purchase_detail apd ON ap.apID = apd.apID
-    LEFT JOIN activity act ON apd.activityID = act.activityID
-    WHERE r.reservedBy = '$userID'
-";
-
-$result = mysqli_query($conn, $query);
-
-// Check for query errors
-if (!$result) {
-    die("Error fetching receipt details: " . mysqli_error($conn));
+// Fetch Accommodation Data
+$accommodationQuery = "
+SELECT 
+    r.reservationID, 
+    a.accommodationName, 
+    r.dateFrom, 
+    r.dateUntil, 
+    r.totalAmt 
+FROM reservation r
+JOIN accommodation a ON r.accommodationID = a.accommodationID
+WHERE r.reservedBy = '$userID' AND r.reservationStatus = 3
+ORDER BY r.dateFrom DESC";
+$accommodationResult = mysqli_query($conn, $accommodationQuery);
+$accommodationData = [];
+while ($row = mysqli_fetch_assoc($accommodationResult)) {
+    $accommodationData[] = $row;
+    $totalAccommodation += $row['totalAmt'];
 }
 
-// Calculate totals for accommodation, activities, and food
-while ($row = mysqli_fetch_assoc($result)) {
-    if (!empty($row['totalAmt'])) {
-        $totalAccommodation += $row['totalAmt'];
-    }
-    if (!empty($row['activityQuantity']) && !empty($row['activityName'])) {
-        $activityPriceQuery = "SELECT activityPrice FROM activity WHERE activityName = '{$row['activityName']}'";
-        $activityResult = mysqli_query($conn, $activityPriceQuery);
-        $activityPrice = mysqli_fetch_assoc($activityResult)['activityPrice'];
-        $totalActivities += $activityPrice * $row['activityQuantity'];
-    }
-    if (!empty($row['foodQuantity']) && !empty($row['foodName'])) {
-        $foodPriceQuery = "SELECT foodPrice FROM food WHERE foodName = '{$row['foodName']}'";
-        $foodResult = mysqli_query($conn, $foodPriceQuery);
-        $foodPrice = mysqli_fetch_assoc($foodResult)['foodPrice'];
-        $totalFood += $foodPrice * $row['foodQuantity'];
-    }
+// Fetch Activity Data
+$activityQuery = "
+SELECT 
+    apd.lineID, 
+    act.activityName, 
+    act.activityPrice, 
+    apd.purchaseQty AS activityQuantity
+FROM activity_purchase ap
+JOIN activity_purchase_detail apd ON ap.apID = apd.apID
+JOIN activity act ON apd.activityID = act.activityID
+WHERE ap.userID = '$userID'
+ORDER BY ap.purchaseDate DESC";
+$activityResult = mysqli_query($conn, $activityQuery);
+$activityData = [];
+while ($row = mysqli_fetch_assoc($activityResult)) {
+    $activityData[] = $row;
+    $totalActivities += $row['activityPrice'] * $row['activityQuantity'];
+}
+
+// Fetch Food Data
+$foodQuery = "
+SELECT 
+    fpd.lineID, 
+    f.foodName, 
+    f.foodPrice, 
+    fpd.purchaseQty AS foodQuantity
+FROM food_purchase fp
+JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
+JOIN food f ON fpd.foodID = f.foodID
+WHERE fp.userID = '$userID'
+ORDER BY fp.purchaseDate DESC";
+$foodResult = mysqli_query($conn, $foodQuery);
+$foodData = [];
+while ($row = mysqli_fetch_assoc($foodResult)) {
+    $foodData[] = $row;
+    $totalFood += $row['foodPrice'] * $row['foodQuantity'];
 }
 
 // Calculate grand total
 $grandTotal = $totalAccommodation + $totalActivities + $totalFood;
+
+// Clear the cart after generating the receipt
+$clearCartQueries = [
+    "DELETE FROM reservation WHERE reservedBy = '$userID' AND reservationStatus = 3",
+    "DELETE FROM activity_purchase_detail WHERE apID IN (
+        SELECT apID FROM activity_purchase WHERE userID = '$userID'
+    )",
+    "DELETE FROM activity_purchase WHERE userID = '$userID'",
+    "DELETE FROM food_purchase_detail WHERE fpID IN (
+        SELECT fpID FROM food_purchase WHERE userID = '$userID'
+    )",
+    "DELETE FROM food_purchase WHERE userID = '$userID'"
+];
+
+foreach ($clearCartQueries as $query) {
+    if (!mysqli_query($conn, $query)) {
+        die("Error clearing cart data: " . mysqli_error($conn));
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -75,73 +104,86 @@ $grandTotal = $totalAccommodation + $totalActivities + $totalFood;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receipt</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" type="text/css" href="CSS/USER/receipt.css">
     <style>
+        /* Teal Color Theme */
         body {
             font-family: Arial, sans-serif;
-            background-color: #e6f7f5; /* Light teal background */
-            margin: 0;
-            padding: 0;
+            background-color: #f4f9f9;
+            color: #333;
         }
+
         .receipt-container {
-            width: 60%;
-            margin: 30px auto;
-            padding: 20px;
+            width: 80%;
+            margin: 20px auto;
             background-color: #ffffff;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .receipt-header {
             text-align: center;
-            color: #008080; /* Teal color */
             margin-bottom: 20px;
         }
+
         .receipt-header h1 {
-            font-size: 24px;
-            margin: 0;
+            color: #00695c; /* Teal color */
+            font-size: 2em;
         }
-        .receipt-details {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #333333;
+
+        .receipt-header p {
+            color: #00796b; /* Darker teal */
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
+
         table th, table td {
+            border: 1px solid #00796b;
+            padding: 8px;
             text-align: left;
-            padding: 10px;
-            border: 1px solid #ddd;
         }
+
         table th {
-            background-color: #008080; /* Teal header background */
-            color: #ffffff;
-            text-align: center;
+            background-color: #004d40; /* Dark teal */
+            color: white;
         }
-        table td {
-            text-align: center;
-        }
+
         table tr:nth-child(even) {
-            background-color: #f2f2f2; /* Light grey */
-        }
-        .total-row {
-            font-weight: bold;
             background-color: #e0f2f1; /* Light teal */
         }
+
+        .grand-total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #004d40; /* Dark teal */
+        }
+
         .button-container {
             text-align: center;
             margin-top: 20px;
         }
-        .button {
+
+        .button-container a {
+            display: inline-block;
             padding: 10px 20px;
-            background-color: #008080; /* Teal button background */
-            color: #ffffff;
+            background-color: #00796b; /* Teal */
+            color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
         }
-        .button:hover {
-            background-color: #006666; /* Darker teal */
+
+        .button-container a:hover {
+            background-color: #004d40; /* Dark teal */
+        }
+
+        .button-container a:active {
+            background-color: #00332e; /* Even darker teal */
         }
     </style>
 </head>
@@ -151,44 +193,90 @@ $grandTotal = $totalAccommodation + $totalActivities + $totalFood;
             <h1>Receipt</h1>
             <p>Thank you for your purchase. Below are the details:</p>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Reservation ID</th>
-                    <th>Accommodation</th>
-                    <th>Food</th>
-                    <th>Quantity</th>
-                    <th>Activity</th>
-                    <th>Quantity</th>
-                    <th>Grand Total</th> <!-- Replaced Total Amount with Grand Total -->
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                // Fetch and display the data
-                mysqli_data_seek($result, 0); // Reset result pointer
-                if (mysqli_num_rows($result) > 0):
-                    while ($row = mysqli_fetch_assoc($result)): ?>
-                        <tr>
-                            <td><?php echo $row['reservationID'] ?: '-'; ?></td>
-                            <td><?php echo $row['accommodationName'] ?: '-'; ?></td>
-                            <td><?php echo $row['foodName'] ?: '-'; ?></td>
-                            <td><?php echo $row['foodQuantity'] ?: '-'; ?></td>
-                            <td><?php echo $row['activityName'] ?: '-'; ?></td>
-                            <td><?php echo $row['activityQuantity'] ?: '-'; ?></td>
-                            <td>RM <?php echo number_format($grandTotal, 2); ?></td> <!-- Display Grand Total -->
-                        </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
+
+        <!-- Accommodation Section -->
+        <?php if (!empty($accommodationData)): ?>
+            <h2>Accommodation</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="7">No purchases found.</td>
+                        <th>Reservation ID</th>
+                        <th>Accommodation</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                        <th>Total Amount</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-        <div class="total-row">
-            <p><strong>Grand Total: RM <?php echo number_format($grandTotal, 2); ?></strong></p>
+                </thead>
+                <tbody>
+                    <?php foreach ($accommodationData as $row): ?>
+                        <tr>
+                            <td><?= $row['reservationID']; ?></td>
+                            <td><?= $row['accommodationName']; ?></td>
+                            <td><?= $row['dateFrom']; ?></td>
+                            <td><?= $row['dateUntil']; ?></td>
+                            <td>RM <?= number_format($row['totalAmt'], 2); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+
+        <!-- Activity Section -->
+        <?php if (!empty($activityData)): ?>
+            <h2>Activities</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Price per Pax</th>
+                        <th>Quantity</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($activityData as $row): ?>
+                        <tr>
+                            <td><?= $row['activityName']; ?></td>
+                            <td>RM <?= number_format($row['activityPrice'], 2); ?></td>
+                            <td><?= $row['activityQuantity']; ?></td>
+                            <td>RM <?= number_format($row['activityPrice'] * $row['activityQuantity'], 2); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+
+        <!-- Food Section -->
+        <?php if (!empty($foodData)): ?>
+            <h2>Food</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food</th>
+                        <th>Price per Item</th>
+                        <th>Quantity</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($foodData as $row): ?>
+                        <tr>
+                            <td><?= $row['foodName']; ?></td>
+                            <td>RM <?= number_format($row['foodPrice'], 2); ?></td>
+                            <td><?= $row['foodQuantity']; ?></td>
+                            <td>RM <?= number_format($row['foodPrice'] * $row['foodQuantity'], 2); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+
+        <!-- Grand Total -->
+        <div class="grand-total">
+            <p><strong>Grand Total: RM <?= number_format($grandTotal, 2); ?></strong></p>
         </div>
+
+        <!-- Button for history -->
         <div class="button-container">
             <a href="reservation.php" class="button">View History</a>
         </div>

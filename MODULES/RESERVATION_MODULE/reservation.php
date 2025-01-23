@@ -2,229 +2,209 @@
 session_start();
 include("../../../SMMS/CONFIG/config.php");
 
-// Check if user is logged in
+// Ensure the user is logged in
 if (!isset($_SESSION['UID'])) {
-    die("Error: You must log in to view your purchase history.");
+    die("Error: You must log in to view this page.");
 }
 
-// Get the logged-in user's ID
+// Get the user ID
 $userID = $_SESSION['UID'];
 
-// Query to fetch reservation and purchase details
-$query = "
+// Fetch Accommodation History
+$accommodationHistoryQuery = "
 SELECT 
-    r.reservationID, r.dateFrom, r.dateUntil, r.totalAmt,
-    a.accommodationName, a.accommodationID, 
-    f.foodName, f.foodID, fpd.purchaseQty AS foodQuantity,
-    act.activityName, act.activityID, apd.purchaseQty AS activityQuantity
+    r.reservationID, 
+    a.accommodationName, 
+    r.dateFrom, 
+    r.dateUntil, 
+    r.totalAmt 
 FROM reservation r
-LEFT JOIN accommodation a ON r.accommodationID = a.accommodationID
-LEFT JOIN food_purchase fp ON fp.userID = r.reservedBy
-LEFT JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
-LEFT JOIN food f ON fpd.foodID = f.foodID
-LEFT JOIN activity_purchase ap ON ap.userID = r.reservedBy
-LEFT JOIN activity_purchase_detail apd ON ap.apID = apd.apID
-LEFT JOIN activity act ON apd.activityID = act.activityID
+JOIN accommodation a ON r.accommodationID = a.accommodationID
 WHERE r.reservedBy = '$userID'
 ORDER BY r.dateFrom DESC";
+$accommodationHistoryResult = mysqli_query($conn, $accommodationHistoryQuery);
+if (!$accommodationHistoryResult) {
+    die("Error fetching accommodation history: " . mysqli_error($conn));
+}
 
-$result = mysqli_query($conn, $query);
+// Fetch Activity History
+$activityHistoryQuery = "
+SELECT 
+    apd.lineID, 
+    act.activityName, 
+    act.activityPrice, 
+    apd.purchaseQty AS activityQuantity
+FROM activity_purchase ap
+JOIN activity_purchase_detail apd ON ap.apID = apd.apID
+JOIN activity act ON apd.activityID = act.activityID
+WHERE ap.userID = '$userID'
+ORDER BY ap.purchaseDate DESC";
+$activityHistoryResult = mysqli_query($conn, $activityHistoryQuery);
+if (!$activityHistoryResult) {
+    die("Error fetching activity history: " . mysqli_error($conn));
+}
+
+// Fetch Food History
+$foodHistoryQuery = "
+SELECT 
+    fpd.lineID, 
+    f.foodName, 
+    f.foodPrice, 
+    fpd.purchaseQty AS foodQuantity
+FROM food_purchase fp
+JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
+JOIN food f ON fpd.foodID = f.foodID
+WHERE fp.userID = '$userID'
+ORDER BY fp.purchaseDate DESC";
+$foodHistoryResult = mysqli_query($conn, $foodHistoryQuery);
+if (!$foodHistoryResult) {
+    die("Error fetching food history: " . mysqli_error($conn));
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Link to external CSS (reservation.css) -->
-    <link rel="stylesheet" href="../../../SMMS/CSS/USER/reservation.css">
-
-    <!-- cdn icon link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- utils css file -->
-    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/utils.css">
-
-    <!-- topNav css file -->
-    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/topNav.css">
-
-    <!-- topHeader css file -->
-    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/topHeader.css">
-
     <title>Purchase History</title>
+    <link rel="stylesheet" type="text/css" href="CSS/USER/history.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9f9;
+            color: #333;
+        }
+
+        .history-container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #00695c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #00796b;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #004d40;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #e0f2f1;
+        }
+
+        .review-button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .review-button:hover {
+            background-color: #004d40;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00796b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background-color: #004d40;
+        }
+    </style>
 </head>
-
 <body>
-
-    <!-- include topNav.php -->
-    <?php include '../../INCLUDES/topHeader.php'; ?>
-
-    <!-- include userNav.php -->
-    <?php include '../../INCLUDES/userNav.php'; ?>
-
-    <div class="container">
+    <div class="history-container">
         <h1>Purchase History</h1>
-        <h2>Accommodations</h2>
+
+        <!-- Accommodation History Section -->
+        <h2>Accommodation History </h2>
         <table>
-            <thead>
-                <tr>
-                    <th>Reservation ID</th>
-                    <th>Accommodation Name</th>
-                    <th>Date From</th>
-                    <th>Date Until</th>
-                    <th>Total Amount</th>
-                    <th>Review</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                mysqli_data_seek($result, 0);
-                $accommodationFound = false;
-                while ($row = mysqli_fetch_assoc($result)):
-                    if ($row['accommodationName']):
-                        $accommodationFound = true; ?>
-                        <tr>
-                            <td><?php echo $row['reservationID']; ?></td>
-                            <td><?php echo $row['accommodationName']; ?></td>
-                            <td><?php echo $row['dateFrom']; ?></td>
-                            <td><?php echo $row['dateUntil']; ?></td>
-                            <td>RM <?php echo number_format($row['totalAmt'], 2); ?></td>
-                            <td>
-                                <?php
-                                $accommodationReviewQuery = "
-                                    SELECT reviewID 
-                                    FROM review_reservation
-                                    WHERE reviewedBy = '$userID' 
-                                    AND accommodationID = '{$row['accommodationID']}' 
-                                    AND reservationID = '{$row['reservationID']}'
-                                ";
-                                $accommodationReviewResult = mysqli_query($conn, $accommodationReviewQuery);
-                                if (mysqli_num_rows($accommodationReviewResult) > 0): ?>
-                                    <span class="button complete">Complete</span>
-                                <?php else: ?>
-                                    <a href="../REVIEW_MANAGEMENT_MODULE/review.php?type=accommodation&id=<?php echo $row['accommodationID']; ?>"
-                                        class="button">Review</a>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endif;
-                endwhile; ?>
-                <?php if (!$accommodationFound): ?>
-                    <tr>
-                        <td colspan="6">No accommodations found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Accommodation Name</th>
+                <th>Date From</th>
+                <th>Date Until</th>
+                <th>Total Amount</th>
+            </tr>
+            <?php while ($row = mysqli_fetch_assoc($accommodationHistoryResult)): ?>
+            <tr>
+                <td><?php echo $row['reservationID']; ?></td>
+                <td><?php echo $row['accommodationName']; ?></td>
+                <td><?php echo $row['dateFrom']; ?></td>
+                <td><?php echo $row['dateUntil']; ?></td>
+                <td><?php echo $row['totalAmt']; ?></td>
+            </tr>
+            <?php endwhile; ?>
         </table>
 
-        <h2>Foods</h2>
+        <!-- Activity History Section -->
+        <h2>Activity History</h2>
         <table>
-            <thead>
-                <tr>
-                    <th>Reservation ID</th>
-                    <th>Food Name</th>
-                    <th>Quantity</th>
-                    <th>Review</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                mysqli_data_seek($result, 0);
-                $foodFound = false;
-                while ($row = mysqli_fetch_assoc($result)):
-                    if ($row['foodName']):
-                        $foodFound = true; ?>
-                        <tr>
-                            <td><?php echo $row['reservationID']; ?></td>
-                            <td><?php echo $row['foodName']; ?></td>
-                            <td><?php echo $row['foodQuantity']; ?></td>
-                            <td>
-                                <?php
-                                $foodReviewQuery = "
-                                    SELECT reviewID 
-                                    FROM review_food 
-                                    WHERE reviewedBy = '$userID' 
-                                    AND foodID = '{$row['foodID']}' 
-                                    AND fpID = '{$row['reservationID']}'
-                                ";
-                                $foodReviewResult = mysqli_query($conn, $foodReviewQuery);
-                                if (mysqli_num_rows($foodReviewResult) > 0): ?>
-                                    <span class="button complete">Complete</span>
-                                <?php else: ?>
-                                    <a href="../REVIEW_MANAGEMENT_MODULE/review.php?type=food&id=<?php echo $row['foodID']; ?>"
-                                        class="button">Review</a>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endif;
-                endwhile; ?>
-                <?php if (!$foodFound): ?>
-                    <tr>
-                        <td colspan="4">No food items found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+            <tr>
+                <th>Line ID</th>
+                <th>Activity Name</th>
+                <th>Activity Price</th>
+                <th>Quantity</th>
+            </tr>
+            <?php while ($row = mysqli_fetch_assoc($activityHistoryResult)): ?>
+            <tr>
+                <td><?php echo $row['lineID']; ?></td>
+                <td><?php echo $row['activityName']; ?></td>
+                <td><?php echo $row['activityPrice']; ?></td>
+                <td><?php echo $row['activityQuantity']; ?></td>
+            </tr>
+            <?php endwhile; ?>
         </table>
 
-        <h2>Activities</h2>
+        <!-- Food History Section -->
+        <h2>Food History</h2>
         <table>
-            <thead>
-                <tr>
-                    <th>Reservation ID</th>
-                    <th>Activity Name</th>
-                    <th>Quantity</th>
-                    <th>Review</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                mysqli_data_seek($result, 0);
-                $activityFound = false;
-                while ($row = mysqli_fetch_assoc($result)):
-                    if ($row['activityName']):
-                        $activityFound = true; ?>
-                        <tr>
-                            <td><?php echo $row['reservationID']; ?></td>
-                            <td><?php echo $row['activityName']; ?></td>
-                            <td><?php echo $row['activityQuantity']; ?></td>
-                            <td>
-                                <?php
-                                // Correct query to check if a review for the activity exists
-                                $activityReviewQuery = "
-                            SELECT reviewID 
-                            FROM review_activity 
-                            WHERE reviewedBy = '$userID' 
-                            AND activityID = '{$row['activityID']}' 
-                            AND apID = '{$row['reservationID']}'
-                        ";
-                                $activityReviewResult = mysqli_query($conn, $activityReviewQuery);
-
-                                if (!$activityReviewResult) {
-                                    // Debugging in case of query error
-                                    echo "Error: " . mysqli_error($conn);
-                                }
-
-                                // Check if the query returned any rows
-                                if (mysqli_num_rows($activityReviewResult) > 0): ?>
-                                    <span class="button complete">Complete</span>
-                                <?php else: ?>
-                                    <a href="../REVIEW_MANAGEMENT_MODULE/review.php?type=activity&id=<?php echo $row['activityID']; ?>"
-                                        class="button">Review</a>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endif;
-                endwhile; ?>
-                <?php if (!$activityFound): ?>
-                    <tr>
-                        <td colspan="4">No activities found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+            <tr>
+                <th>Line ID</th>
+                <th>Food Name</th>
+                <th>Food Price</th>
+                <th>Quantity</th>
+            </tr>
+            <?php while ($row = mysqli_fetch_assoc($foodHistoryResult)): ?>
+            <tr>
+                <td><?php echo $row['lineID']; ?></td>
+                <td><?php echo $row['foodName']; ?></td>
+                <td><?php echo $row['foodPrice']; ?></td>
+                <td><?php echo $row['foodQuantity']; ?></td>
+            </tr>
+            <?php endwhile; ?>
         </table>
+
+        <a href="../../MODULES/USER_MANAGEMENT_MODULE/userHome.php" class="back-button">Back to Home</a>
     </div>
 </body>
-
 </html>

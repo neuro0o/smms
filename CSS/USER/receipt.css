@@ -1,0 +1,67 @@
+/* receipt.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f9f9;
+}
+
+.receipt-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #008080; /* Teal color */
+}
+
+p {
+    color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #008080; /* Teal header */
+    color: white;
+}
+
+table td {
+    background-color: #f2f2f2; /* Light background for cells */
+}
+
+.grand-total {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #008080;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #008080; /* Teal button */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.button-container a:hover {
+    background: #004f4f; /* Darker teal on hover */
+}
