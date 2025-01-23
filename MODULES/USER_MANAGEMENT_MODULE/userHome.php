@@ -77,10 +77,11 @@
       </div>
 
       <!-- wishlist card -->
+      <a href="../WISHLIST_MODULE/wishlist.php" style="text-decoration: none; color: inherit;"> <!-- Make the card clickable -->
       <div class="info-card">
-        <div class="info-card-img-left">
-          <img src="../../IMAGES/MISC/wishlist.jpg" alt="">
-        </div>  
+          <div class="info-card-img-left">
+             <img src="../../IMAGES/MISC/wishlist.jpg" alt="">
+      </div> 
 
         <div class="info-card-desc-left">
           <h1>Create Your Dream Wishlist!</h1><br>
