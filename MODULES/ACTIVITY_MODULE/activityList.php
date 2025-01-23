@@ -78,38 +78,39 @@
 
       <!-- activity Section -->
       <div class="product-container">
-        <?php
-          // check if a specific activity ID was provided
-          if (isset($activityDetails)) {
-            // construct the full image URL using BASE_URL
-            $imageURL = BASE_URL . '/' . $activityDetails['activityImg'];
+      <?php
+    // check if a specific activity ID was provided
+    if (isset($activityDetails)) {
+        // construct the full image URL using BASE_URL
+        $imageURL = BASE_URL . '/' . $activityDetails['activityImg'];
+        ?>
+        <div class="centered-card">
+            <div id="product-card" class="product-card">
+                <img id="product-card-img" src="<?php echo $imageURL; ?>" alt="<?php echo htmlspecialchars($activityDetails["activityName"]); ?>">
+                <h3 id="product-card-name"><?php echo htmlspecialchars($activityDetails["activityName"]); ?></h3>
+                <p id="product-card-category">Category: <?php echo htmlspecialchars($activityDetails["categoryName"]); ?></p>
+                <p id="product-card-desc"><?php echo htmlspecialchars($activityDetails["activityDesc"]); ?></p>
+                <p id="product-card-price">RM <?php echo htmlspecialchars($activityDetails["activityPrice"]); ?></p>
 
-            echo '<div id="product-card" class="product-card">';
-            echo '<img id="product-card-img" src="' . $imageURL . '" alt="' . htmlspecialchars($activityDetails["activityName"]) . '">';
-            echo '<h3 id="product-card-name">' . htmlspecialchars($activityDetails["activityName"]) . '</h3>';
-            echo '<p id="product-card-category">Category: ' . htmlspecialchars($activityDetails["categoryName"]) . '</p>';
-            echo '<p id="product-card-desc">' . htmlspecialchars($activityDetails["activityDesc"]) . '</p>';
-            echo '<p id="product-card-price">RM ' . htmlspecialchars($activityDetails["activityPrice"]) . '</p>';
-
-            // check if the user is logged in or not
-            if (isset($_SESSION['UID'])) {
-              echo '<form id="cart-amount-input" method="post" action="../../MODULES/RESERVATION_MODULE/cart_action.php">
-                <input type="hidden" name="activityID" value="' . htmlspecialchars($activityDetails['activityID']) . '">
-                <input type="hidden" name="activityName" value="' . htmlspecialchars($activityDetails['activityName']) . '">
-                <input type="hidden" name="activityPrice" value="' . htmlspecialchars($activityDetails['activityPrice']) . '">
-                <label for="pax-' . htmlspecialchars($activityDetails['activityID']) . '">Number of Pax:</label>
-                <input type="number" id="pax-' . htmlspecialchars($activityDetails['activityID']) . '" name="pax" min="1" value="1" required>
-                <button type="submit">
-                  <i class="fa fa-calendar"></i> Book Now
-                </button>
-              </form>';
-            } 
-            else {
-            echo '<h2><i>Login to book this activity.</i></h2>';
-            }
-          echo '</div>';
-        }
-        else {
+                <!-- check if the user is logged in or not -->
+                <?php if (isset($_SESSION['UID'])): ?>
+                    <form id="cart-amount-input" method="post" action="../../MODULES/RESERVATION_MODULE/cart_action.php">
+                        <input type="hidden" name="activityID" value="<?php echo htmlspecialchars($activityDetails['activityID']); ?>">
+                        <input type="hidden" name="activityName" value="<?php echo htmlspecialchars($activityDetails['activityName']); ?>">
+                        <input type="hidden" name="activityPrice" value="<?php echo htmlspecialchars($activityDetails['activityPrice']); ?>">
+                        <label for="pax-<?php echo htmlspecialchars($activityDetails['activityID']); ?>">Number of Pax:</label>
+                        <input type="number" id="pax-<?php echo htmlspecialchars($activityDetails['activityID']); ?>" name="pax" min="1" value="1" required>
+                        <button type="submit">
+                            <i class="fa fa-calendar"></i> Book Now
+                        </button>
+                    </form>
+                <?php else: ?>
+                    <h2><i>Login to book this activity.</i></h2>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php
+    } else {
           // fetch selected category from the URL, default to all (0)
           $selectedCategory = isset($_GET['cat']) ? (int) $_GET['cat'] : 0;
 
