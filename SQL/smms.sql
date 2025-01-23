@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2025 at 06:13 PM
+-- Generation Time: Jan 23, 2025 at 07:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,11 +40,11 @@ CREATE TABLE `accommodation` (
 --
 
 INSERT INTO `accommodation` (`accommodationID`, `accommodationName`, `accommodationDesc`, `accommodationPrice`, `accommodationImg`) VALUES
-(1, 'Oceanview Suite', 'A spacious room offering stunning views of the ocean with modern amenities. Perfect for a relaxing getaway.', 1250.00, ''),
-(2, 'Mountain Retreat Room', 'A cozy room nestled at the foot of the mountains, designed for a peaceful and scenic stay.', 350.00, ''),
-(3, 'Garden Paradise Room', 'A serene room overlooking beautifully landscaped gardens. Enjoy tranquility and nature from your private balcony.', 400.00, ''),
-(4, 'Cityscape Deluxe', 'A chic and modern room with panoramic views of the city skyline, perfect for business and leisure stays.', 500.00, ''),
-(5, 'Skyline Penthouse', 'A luxurious penthouse suite with a private terrace, offering unmatched views of the city’s skyline and ultimate comfort.', 1000.00, '');
+(1, 'Oceanview Suite', 'A spacious room offering stunning views of the ocean with modern amenities. Perfect for a relaxing getaway.', 1250.00, 'IMAGES/ACCOMMODATION/OceanviewRoom.jpg'),
+(2, 'Mountain Retreat Room', 'A cozy room nestled at the foot of the mountains, designed for a peaceful and scenic stay.', 350.00, 'IMAGES/ACCOMMODATION/MountainRetreatRoom.jpg'),
+(3, 'Garden Paradise Room', 'A serene room overlooking beautifully landscaped gardens. Enjoy tranquility and nature from your private balcony.', 400.00, 'IMAGES/ACCOMMODATION/GardenParadiseRoom.jpg'),
+(4, 'Cityscape Deluxe', 'A chic and modern room with panoramic views of the city skyline, perfect for business and leisure stays.', 500.00, 'IMAGES/ACCOMMODATION/CityscapeDeluxe.jpeg'),
+(5, 'Skyline Penthouse', 'A luxurious penthouse suite with a private terrace, offering unmatched views of the city’s skyline and ultimate comfort.', 1000.00, 'IMAGES/ACCOMMODATION/SkylinePenthouse.jpg');
 
 -- --------------------------------------------------------
 
@@ -234,7 +234,9 @@ CREATE TABLE `reservation` (
 
 INSERT INTO `reservation` (`reservationID`, `dateFrom`, `dateUntil`, `totalAmt`, `reservedBy`, `accommodationID`, `reservationStatus`) VALUES
 (1, '2025-01-22', '2025-01-23', 350.00, 2, 2, 3),
-(2, '2025-01-23', '2025-01-25', 2500.00, 2, 1, 3);
+(2, '2025-01-23', '2025-01-25', 2500.00, 2, 1, 3),
+(3, '2025-01-02', '2025-01-03', 350.00, 2, 2, 3),
+(4, '2025-01-23', '2025-01-24', 1250.00, 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -476,7 +478,7 @@ ALTER TABLE `food_purchase_detail`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `reservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `review_activity`
