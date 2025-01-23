@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --gradient: linear-gradient(45deg, #f0f8ff, #2dd4bf);
+  --card: #109e7d;
+}
+
+body {
+  background: var(--gradient);
+  color: #ffffff;
+  color: #050303;
+  font-family: "Poppins";
+  
+
+}
+
+
+/* Section Title */
+#section-title {
+  margin-top: 7rem;
+  margin-bottom: 7rem;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #0f2b44;
+}
+
+/* Category Container */
+.category-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 3rem;
+  }
+
+.category-link {
+  text-decoration: none;
+  background: #2dd4bf;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 2rem;
+}
+
+.category-link:hover {
+  background: #109e7d;
+  transform: scale(1.1);
+}
+
+/* Product/Activity Container */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0 2rem;
+}
+
+/* Product/Activity Card */
+.product-card {
+  background: #14b8a6;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Product/Activity Image */
+#product-card-img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+#product-card-name, #activity-card-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0f2b44;
+  margin: 1rem 0;
+  text-transform: uppercase; /* Add this line to make the text uppercase */
+}
+
+#product-card-category {
+  font-size: 1.5rem;
+  color: #0f2b44;
+  margin-bottom: 0.5rem;
+}
+
+#product-card-desc {
+  font-size: 1.4rem;
+  color: #0f2b44;
+  margin-bottom: 0.5rem;
+}
+
+#product-card-price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #00203c;
+  margin-bottom: 1rem;
+}
+
+/* Form Container for Number of Pax and Book Now Button */
+#cart-amount-input {
+  font-size: 1.2rem; 
+  display: flex;
+  flex-direction: row; /* Arrange items horizontally */
+  align-items: center; /* Align items vertically */
+  gap: 15px; /* Space between Number of Pax and Book Now button */
+  justify-content: center; /* Center content */
+}
+
+/* Styling for Number of Pax Input Box */
+#cart-amount-input input[type="number"] {
+  width: 70px; /* Adjust width of the input box */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  color: #050303;
+}
+
+/* Book Now Button */
+#cart-amount-input button {
+  background: #2dd4bf;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#cart-amount-input button:hover {
+  background: #80EE98;
+    box-shadow: 0 0 5px #80EE98, 0 0 25px #80EE98, 0 0 50px #80EE98, 0 0 200px #80EE98;
+
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-container {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  #section-title {
+      font-size: 2rem;
+  }
+
+  .category-link {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+  }
+
+  #product-card-img {
+      height: 150px;
+  }
+
+  #product-card-name {
+      font-size: 1rem;
+  }
+
+  #product-card-price {
+      font-size: 1rem;
+  }
+}
