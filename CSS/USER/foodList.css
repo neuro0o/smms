@@ -283,6 +283,7 @@ h2 {
   right: 1.5em; 
   font-size: 2.25em; 
   color: #004d40; 
+  background-color: var(--aliceblue);
   cursor: pointer;
   z-index: 1002;
   transition: color 0.3s ease, transform 0.3s ease;
