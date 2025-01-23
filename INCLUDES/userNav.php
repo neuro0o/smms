@@ -4,7 +4,7 @@
     <a href="../../MODULES/USER_MANAGEMENT_MODULE/userHome.php">HOME</a>
     <a href="">ACCOMMODATION</a>
     <a href="">ACTIVITY</a>
-    <a href="">FOOD</a>
+    <a href="../../MODULES/FOOD_MODULE/foodList.php">FOOD</a>
     <a href="">PURCHASE HISTORY</a>
     <a href="../../MODULES/USER_MANAGEMENT_MODULE/profile.php">MY PROFILE</a>
   </nav>
