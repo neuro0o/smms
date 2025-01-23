@@ -1,0 +1,96 @@
+/* General Body and Container Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+h1 {
+    text-align: center;
+    color: #008080; /* Teal color */
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #008080; /* Teal color */
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #008080; /* Teal color */
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles */
+.button {
+    padding: 5px 10px;
+    background-color: #008080; /* Teal color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #005959; /* Darker teal */
+}
+
+/* No items found message */
+.no-items {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}
+
+/* Responsive Table Styles */
+@media (max-width: 768px) {
+    table th,
+    table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    h1, h2 {
+        font-size: 20px;
+    }
+
+    .container {
+        width: 95%;
+    }
+}

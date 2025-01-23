@@ -1,0 +1,126 @@
+/* Define the color variable */
+:root {
+    --teal-500: #009688; /* Primary teal color */
+}
+
+/* General table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Main button styling */
+.button {
+    padding: 8px 12px;
+    color: white;
+    background-color: var(--teal-500); /* Use the teal color variable */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none; /* Remove border for consistency */
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #006d5f; /* Slightly darker teal for hover */
+}
+
+/* Delete button styling */
+.delete-button {
+    background-color: var(--teal-500); /* Apply teal */
+}
+
+.delete-button:hover {
+    background-color: #006d5f; /* Hover color for delete button */
+}
+
+/* Continue shopping button */
+.continue-button {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: var(--teal-500); /* Teal color */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.continue-button:hover {
+    background-color: #006d5f; /* Hover effect */
+}
+
+/* Checkout button styling */
+.checkout-button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    color: white;
+    background-color: var(--teal-500); /* Teal color */
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
+    background-color: #006d5f; /* Hover color for checkout button */
+}
+
+/* Responsive design for small screens */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    .button,
+    .continue-button,
+    .checkout-button {
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+
+.checkout-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
