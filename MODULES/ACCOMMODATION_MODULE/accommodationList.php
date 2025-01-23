@@ -61,14 +61,18 @@ $rowcount = mysqli_num_rows($result);
             // Check if accommodations exist
             if ($rowcount > 0) {
                 while ($accommodation = mysqli_fetch_assoc($result)) {
-                    echo '<div class="card">';
-                    echo '<img src="' . $accommodation["accommodationImg"] . '" alt="' . $accommodation["accommodationName"] . '">';
-                    echo '<div>';
-                    echo '<h2>' . $accommodation["accommodationName"] . '</h2>';
-                    echo '<h3>RM ' . $accommodation["accommodationPrice"] . ' / night</h3>';
-                    echo '<p>' . $accommodation["accommodationDesc"] . '</p>';
-                    echo '<div class="socials">';
 
+                     // Construct the full image URL using BASE_URL
+                     $imageURL = BASE_URL . '/' . $accommodation["accommodationImg"];
+
+                     echo '<div class="card">';
+                     echo '<img src="' . $imageURL . '" alt="' . htmlspecialchars($accommodation["accommodationName"]) . '">';
+                     echo '<div>';
+                     echo '<h2>' . htmlspecialchars($accommodation["accommodationName"]) . '</h2>';
+                     echo '<h3>RM ' . htmlspecialchars($accommodation["accommodationPrice"]) . ' / night</h3>';
+                     echo '<p>' . htmlspecialchars($accommodation["accommodationDesc"]) . '</p>';
+                     echo '<div class="socials">';
+ 
                     // Add booking button or login prompt
                     if (isset($_SESSION['UID'])) {
                         echo '<form method="post" action="../../MODULES/RESERVATION_MODULE/accommodationForm.php"> 

@@ -23,6 +23,9 @@ if ($result->num_rows === 0) {
 }
 
 $accommodation = $result->fetch_assoc();
+
+// Construct the full image URL using BASE_URL
+$imageURL = BASE_URL . '/' . $accommodation['accommodationImg'];
 ?>
 
 <!DOCTYPE html>
@@ -64,35 +67,35 @@ $accommodation = $result->fetch_assoc();
     <!-- Display accommodation details -->
     <div class="product-container">
       <div class="card">
-        <img src="<?php echo $accommodation['accommodationImg']; ?>" alt="<?php echo $accommodation['accommodationName']; ?>">
+        <img src="<?php echo $imageURL; ?>" alt="<?php echo htmlspecialchars($accommodation['accommodationName']); ?>">
         <div>
-          <h2><?php echo $accommodation['accommodationName']; ?></h2>
-          <h3>RM <?php echo $accommodation['accommodationPrice']; ?> / night</h3>
-          <p><?php echo $accommodation['accommodationDesc']; ?></p>
+          <h2><?php echo htmlspecialchars($accommodation['accommodationName']); ?></h2>
+          <h3>RM <?php echo htmlspecialchars($accommodation['accommodationPrice']); ?> / night</h3>
+          <p><?php echo htmlspecialchars($accommodation['accommodationDesc']); ?></p>
 
           <!-- Booking form -->
-    <form method="post" action="../../MODULES/RESERVATION_MODULE/cart_action.php">
-      <input type="hidden" name="accommodationID" value="<?php echo $accommodation['accommodationID']; ?>">
+          <form method="post" action="../../MODULES/RESERVATION_MODULE/cart_action.php">
+            <input type="hidden" name="accommodationID" value="<?php echo htmlspecialchars($accommodation['accommodationID']); ?>">
 
-      <div class="form-container">
-        <label for="dateFrom">Check-in Date:</label>
-        <input type="date" id="dateFrom" name="dateFrom" required>
-      </div>
+            <div class="form-container">
+              <label for="dateFrom">Check-in Date:</label>
+              <input type="date" id="dateFrom" name="dateFrom" required>
+            </div>
 
-      <div class="form-container">
-        <label for="dateUntil">Check-out Date:</label>
-        <input type="date" id="dateUntil" name="dateUntil" required>
-      </div>
+            <div class="form-container">
+              <label for="dateUntil">Check-out Date:</label>
+              <input type="date" id="dateUntil" name="dateUntil" required>
+            </div>
 
-      <div class="form-container">
-        <button type="submit">
-          <i class="fa fa-calendar-check"></i> Proceed to Cart
-        </button>
-      </div>
-    </form>
+            <div class="form-container">
+              <button type="submit">
+                <i class="fa fa-calendar-check"></i> Proceed to Cart
+              </button>
+            </div>
+          </form>
 
-       <!-- Back Button -->
-       <div class="back-btn-container">
+          <!-- Back Button -->
+          <div class="back-btn-container">
             <button onclick="history.back()" class="back-btn">
               <i class="fa fa-arrow-left"></i> Back
             </button>
@@ -101,9 +104,6 @@ $accommodation = $result->fetch_assoc();
         </div>
       </div>
     </div>
-
-
-
   </section>
 
   <!-- include topNav.js -->
