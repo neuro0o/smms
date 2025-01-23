@@ -45,9 +45,6 @@
   }
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,33 +84,33 @@
     <section class="userHome">
     <h2>Food Categories</h2>
     <div class="foodCategorySection">
-        <?php while ($categoryRow = mysqli_fetch_assoc($categoryResult)): ?>
-            <div class="foodCategoryItem">
-                <a href="foodList.php?categoryID=<?= $categoryRow['categoryID']; ?>" class="categoryLink">
-                    <?= $categoryRow['categoryName']; ?>
-                </a>
-            </div>
-        <?php endwhile; ?>
+      <?php while ($categoryRow = mysqli_fetch_assoc($categoryResult)): ?>
+      <div class="foodCategoryItem">
+        <a href="foodList.php?categoryID=<?= $categoryRow['categoryID']; ?>" class="categoryLink">
+          <?= $categoryRow['categoryName']; ?>
+        </a>
+      </div>
+      <?php endwhile; ?>
     </div>
 
     <!-- Food Items List Section -->
     <div class="foodList">
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <div class="foodItem">
-                <img src="../../../SMMS/images/food/<?= $row['foodImg']; ?>" alt="<?= $row['foodName']; ?>" class="foodImg">
-                <h3>
-                    <a href="javascript:void(0);" onclick="openFoodPopup(<?= htmlspecialchars(json_encode($row)); ?>)" class="food-name">
-                        <?= $row['foodName']; ?>
-                    </a>
-                </h3>
-                <!-- Check if categoryName exists before displaying -->
-                <?php if (isset($row['categoryName'])): ?>
-                    <p class="foodCategory"><?= $row['categoryName']; ?></p>
-                <?php else: ?>
-                    <p class="foodCategory">No category available</p>
-                <?php endif; ?>
-                <p class="foodPrice">RM<?= number_format($row['foodPrice'], 2); ?></p>
-            </div>
+      <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <div class="foodItem">
+        <img src="../../../SMMS/images/food/<?= $row['foodImg']; ?>" alt="<?= $row['foodName']; ?>" class="foodImg">
+        <h3>
+          <a href="javascript:void(0);" onclick="openFoodPopup(<?= htmlspecialchars(json_encode($row)); ?>)" class="food-name">
+              <?= $row['foodName']; ?>
+          </a>
+        </h3>
+        <!-- Check if categoryName exists before displaying -->
+        <?php if (isset($row['categoryName'])): ?>
+            <p class="foodCategory"><?= $row['categoryName']; ?></p>
+        <?php else: ?>
+            <p class="foodCategory">No category available</p>
+        <?php endif; ?>
+        <p class="foodPrice">RM<?= number_format($row['foodPrice'], 2); ?></p>
+    </div>
         <?php endwhile; ?>
     </div>
   </section>
