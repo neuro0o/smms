@@ -1,0 +1,294 @@
+/* main section for userHome page */
+.userHome {
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+/* Main container for food items */
+.foodList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center; /* Center items if fewer than the full row */
+  padding: 30px;
+}
+
+/* Individual food item box */
+.foodItem {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect on food item */
+.foodItem:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Food image styling */
+.foodImg {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 3px solid #f1f1f1;
+}
+
+/* Food category styling */
+.foodCategory {
+  font-size: 1.5em;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+/* Food description styling */
+.foodDesc {
+  font-size: 1em;
+  color: #555;
+  padding: 0 15px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  height: 80px;
+  overflow: hidden;
+}
+
+/* Food price styling */
+.foodPrice {
+  font-size: 2.0em;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 20px;
+}
+
+/* Responsive layout for smaller screens */
+@media screen and (max-width: 768px) {
+  .foodItem {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 20px;
+  }
+  .foodCategoryItem {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 20px;
+  }
+  .food-popup {
+      width: 90%;
+      padding: 1.25em;
+  }
+
+  .food-popup-content h2 {
+      font-size: 1.5em;
+  }
+
+  .food-popup-content input[type="number"] {
+      width: 100%;
+  }
+
+  .food-popup-content button {
+      width: 100%;
+  }
+
+  .food-popup-close-btn {
+      top: 1em;
+      right: 1em;
+  }
+}
+
+/* Styling for the product name link */
+.food-name {
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Food Category Styling */
+.foodCategorySection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.foodCategoryItem {
+  background-color: #f8f8f8;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 180px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.foodCategoryItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.foodCategoryItem a {
+  font-size: 1.3em;
+  text-decoration: none;
+  color: #514fff;
+  font-weight: bold;
+}
+
+.foodCategoryItem a:hover {
+  text-decoration: noen ;
+}
+
+/* Style for the "Food Categories" heading */
+h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #514fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  background-image: linear-gradient(to right, #514fff, #1c18ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Food Popup */
+.food-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #008080; /* Teal */
+  border-radius: 1.5em;
+  padding: 2.5em;
+  width: 38em; /* Made the popup bigger */
+  max-height: 90vh;
+  box-shadow: 0 1.5em 2.5em rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  animation: popupFadeIn 0.3s ease-out;
+  overflow-y: auto;
+}
+
+/* Content inside the popup */
+.food-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 1.5em;
+}
+
+/* Image inside the popup */
+.food-popup-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Food Name */
+.food-popup-content h2 {
+  margin-top: 1em;
+  font-size: 2.5em; /* Bigger font size */
+  color: #ffffff; /* White text */
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Food Description */
+.food-popup-content p {
+  margin: 0.75em 0;
+  font-size: 1.75em; /* Bigger font size */
+  color: #e0f2f1; /* Light teal text */
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Form section for quantity */
+.food-popup-content form {
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Quantity input */
+.food-popup-content input[type="number"] {
+  padding: 1em; /* Larger padding */
+  width: 85%;
+  margin-bottom: 1.5em;
+  border: 0.15em solid #b2dfdb; /* Teal border */
+  border-radius: 0.75em;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+/* Quantity input on focus */
+.food-popup-content input[type="number"]:focus {
+  border-color: #00796b; /* Dark teal border on focus */
+  outline: none;
+}
+
+/* Add to Cart button */
+.food-popup-content button {
+  background-color: #00796b; /* Dark teal */
+  color: white;
+  border: none;
+  padding: 1em 1.5em; /* Bigger button */
+  border-radius: 0.75em;
+  cursor: pointer;
+  font-size: 1.25em; /* Bigger font size */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Add to Cart button hover effect */
+.food-popup-content button:hover {
+  background-color: #004d40; /* Even darker teal */
+  transform: scale(1.05); /* Slight grow effect */
+}
+
+/* Overlay for the Popup */
+.food-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 128, 128, 0.7); /* Teal overlay */
+  z-index: 1000;
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+/* Animation for Overlay */
+@keyframes overlayFadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+/* Close Button */
+.food-popup-close-btn {
+  position: absolute;
+  top: 1.5em; 
+  right: 1.5em; 
+  font-size: 2.25em; 
+  color: #004d40; 
+  cursor: pointer;
+  z-index: 1002;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.food-popup-close-btn:hover {
+  color: #d32f2f; /* Reddish hover effect */
+  transform: scale(1.1);
+}
