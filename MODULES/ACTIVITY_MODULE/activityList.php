@@ -104,7 +104,19 @@
                   <button type="submit">
                     <i class="fa fa-calendar"></i> Book Now
                   </button>
+                </form><br>
+
+                <form method="post" action="../WISHLIST_MODULE/wishlist.php">
+                  <input type="hidden" name="itemType" value="activity">
+                  <input type="hidden" name="itemID" value="<?php echo htmlspecialchars($activityDetails['activityID']); ?>">
+                  <input type="hidden" name="itemName" value="<?php echo htmlspecialchars($activityDetails['activityName']); ?>">
+                  <input type="hidden" name="itemPrice" value="<?php echo htmlspecialchars($activityDetails['activityPrice']); ?>">
+                  <input type="hidden" name="itemImg" value="<?php echo htmlspecialchars($activityDetails['activityImg']); ?>">
+                  <button type="submit" class="wishlist-button">
+                      <i class="fa fa-heart"></i> Add to Wishlist
+                  </button>
                 </form>
+
               <?php else: ?>
               <h2><i>Login to book this activity.</i></h2>
               <?php endif; ?>
@@ -114,7 +126,7 @@
           }
           else {
           
-            // fetch selected category from the URL, default to all (0)
+          // fetch selected category from the URL, default to all (0)
           $selectedCategory = isset($_GET['cat']) ? (int) $_GET['cat'] : 0;
 
           // build query based on selected category
@@ -154,7 +166,19 @@
                   <button type="submit">
                     <i class="fa fa-calendar"></i> Book Now
                   </button>
-                </form>';
+                </form><br><br>';
+
+                // Add to Wishlist form for activity
+                echo '<form method="post" action="../WISHLIST_MODULE/wishlist.php">
+                <input type="hidden" name="itemType" value="activity">
+                <input type="hidden" name="itemID" value="' . htmlspecialchars($activity['activityID']) . '">
+                <input type="hidden" name="itemName" value="' . htmlspecialchars($activity['activityName']) . '">
+                <input type="hidden" name="itemPrice" value="' . htmlspecialchars($activity['activityPrice']) . '">
+                <input type="hidden" name="itemImg" value="' . htmlspecialchars($activity['activityImg']) . '">
+                <button type="submit" class="wishlist-button">
+                  <i class="fa fa-heart"></i> Add to Wishlist
+                </button>
+              </form><br><br>';
               }
               else {
                 echo '<h2><i>Login to book this activity.</i></h2>';

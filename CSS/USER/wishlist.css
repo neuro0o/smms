@@ -1,0 +1,100 @@
+/* main section for userHome page */
+.userHome {
+  padding: 1rem;
+  min-height: 100vh;
+  background: var(--gradient); /* Background gradient */
+}
+
+#section-title {
+  margin-top: 7rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #0f2b44;
+}
+
+/* Wishlist Section Styles */
+.itemsSection {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 item per row */
+  gap: 20px;
+  padding: 40px 10%;
+  justify-items: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #109e7d;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* Increased max-width for longer items */
+}
+
+.item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.itemName {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.itemDesc {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.itemPrice {
+  font-size: 16px;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.removeWishlistButton {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.removeWishlistButton i {
+  margin-right: 5px;
+}
+
+.removeWishlistButton:hover {
+  background: #ff1a1a;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+  .itemsSection {
+      grid-template-columns: 1fr; /* Still one item per row on smaller screens */
+  }
+
+  .item {
+      max-width: 100%;
+      padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .itemsSection {
+      grid-template-columns: 1fr; /* 1 item per row on extra small screens */
+      padding: 20px;
+  }
+}

@@ -32,6 +32,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,7 +62,6 @@
     <!-- include userNav.php -->
     <?php include '../../INCLUDES/userNav.php'; ?>
 
-
     <!-- accommodation section starts here -->
     <section class="product">
       <!-- page title -->
@@ -87,6 +87,17 @@
                 <form method="post" action="../../MODULES/RESERVATION_MODULE/accommodationForm.php"> 
                   <input type="hidden" name="accommodationID" value="<?php echo $accommodationDetails['accommodationID']; ?>">
                   <button><i class="fa fa-bed"></i> Book Now</button>
+                </form><br><br>
+
+                <form method="post" action="../WISHLIST_MODULE/wishlist.php">
+                  <input type="hidden" name="itemType" value="accommodation">
+                  <input type="hidden" name="itemID" value="<?php echo htmlspecialchars($accommodationDetails['accommodationID']); ?>">
+                  <input type="hidden" name="itemName" value="<?php echo htmlspecialchars($accommodationDetails['accommodationName']); ?>">
+                  <input type="hidden" name="itemPrice" value="<?php echo htmlspecialchars($accommodationDetails['accommodationPrice']); ?>">
+                  <input type="hidden" name="itemImg" value="<?php echo htmlspecialchars($accommodationDetails['accommodationImg']); ?>">
+                  <button type="submit" class="wishlist-button">
+                      <i class="fa fa-heart"></i> Add to Wishlist
+                  </button>
                 </form>
               <?php else: ?>
                 <h4><i>Login to book accommodation.</i></h4>
@@ -113,20 +124,32 @@
                   echo '<p>' . htmlspecialchars($accommodation["accommodationDesc"]) . '</p>';
                 echo '<div class="socials">';
                   
-                // add booking button or login prompt
+                // Add booking and wishlist buttons if user is logged in
                 if (isset($_SESSION['UID'])) {
+                  // Booking button
                   echo '<form method="post" action="../../MODULES/RESERVATION_MODULE/accommodationForm.php"> 
                           <input type="hidden" name="accommodationID" value="' . $accommodation['accommodationID'] . '">
                           <button><i class="fa fa-bed"></i> Book Now</button>
+                        </form><br><br>';
+                  
+                  // Wishlist button - Add item to wishlist session
+                  echo '<form method="post" action="../WISHLIST_MODULE/wishlist.php">
+                          <input type="hidden" name="itemType" value="accommodation">
+                          <input type="hidden" name="itemID" value="' . $accommodation['accommodationID'] . '">
+                          <input type="hidden" name="itemName" value="' . htmlspecialchars($accommodation["accommodationName"]) . '">
+                          <input type="hidden" name="itemPrice" value="' . htmlspecialchars($accommodation["accommodationPrice"]) . '">
+                          <input type="hidden" name="itemImg" value="' . htmlspecialchars($accommodation["accommodationImg"]) . '">
+                          <button type="submit" class="wishlist-button">
+                              <i class="fa fa-heart"></i> Add to Wishlist
+                          </button>
                         </form>';
-                }
-                else {
-                  echo '<h4><i>Login to book accommodation.</i></h4>';
-                }
+              } else {
+                  echo '<h4><i>Login to book or add to wishlist.</i></h4>';
+              }
 
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
+              echo '</div>';
+              echo '</div>';
+              echo '</div>';
               }
             }
             else {
