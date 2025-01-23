@@ -29,7 +29,7 @@
     <!-- adminForm css file -->
     <link rel="stylesheet" href="../../../SMMS/CSS/ADMIN/adminForm.css">
 
-    <title>ACTIVITY INSERT</title>
+    <title>FOOD INSERT</title>
   </head>
   <body>
 
@@ -47,20 +47,20 @@
     <?php
     // handle form submission
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-      $activityName = mysqli_real_escape_string($conn, $_POST['activityName']);
-      $activityCategory = mysqli_real_escape_string($conn, $_POST['activityCategory']);
-      $activityDesc = mysqli_real_escape_string($conn, $_POST['activityDesc']);
-      $activityPrice = mysqli_real_escape_string($conn, $_POST['activityPrice']);
+      $foodName = mysqli_real_escape_string($conn, $_POST['foodName']);
+      $foodCategory = mysqli_real_escape_string($conn, $_POST['foodCategory']);
+      $foodDesc = mysqli_real_escape_string($conn, $_POST['foodDesc']);
+      $foodPrice = mysqli_real_escape_string($conn, $_POST['foodPrice']);
 
       // handle image upload
-      $target_dir = "../../IMAGES/ACTIVITY/";
-      $target_path = "IMAGES/ACTIVITY/";
-      $target_file = $target_dir . basename($_FILES["activityImg"]["name"]);
-      $target_fileDB = $target_path . basename($_FILES["activityImg"]["name"]);
+      $target_dir = "../../IMAGES/FOOD/";
+      $target_path = "IMAGES/FOOD/";
+      $target_file = $target_dir . basename($_FILES["foodImg"]["name"]);
+      $target_fileDB = $target_path . basename($_FILES["foodImg"]["name"]);
       $upload_ok = 1;
 
       // check if image file is an actual image
-      $check = getimagesize($_FILES["activityImg"]["tmp_name"]);
+      $check = getimagesize($_FILES["foodImg"]["tmp_name"]);
       if ($check !== false) {
         $upload_ok = 1;
       }
@@ -70,25 +70,25 @@
       }
 
       // move uploaded file to target directory
-      if ($upload_ok && move_uploaded_file($_FILES["activityImg"]["tmp_name"], $target_file)) {
+      if ($upload_ok && move_uploaded_file($_FILES["foodImg"]["tmp_name"], $target_file)) {
 
-        $sql = "INSERT INTO activity (activityName, activityCategory, activityDesc, activityPrice, activityImg)
-        VALUES ('$activityName', '$activityCategory', '$activityDesc', '$activityPrice', '$target_fileDB')";
+        $sql = "INSERT INTO food (foodName, foodCategory, foodDesc, foodPrice, foodImg)
+        VALUES ('$foodName', '$foodCategory', '$foodDesc', '$foodPrice', '$target_fileDB')";
 
         if (mysqli_query($conn, $sql)) {
           echo "
             <div id='successMessage'>
-              <p>NEW ACTIVITY CREATED SUCCESSFULLY!</p>
+              <p>NEW FOOD ENTRY IS CREATED SUCCESSFULLY!</p>
               <a id='adminDashboardLink' href='adminHome.php'>
                 Back to Admin Dashboard
               </a>
               <br>
-              <a id='viewList' href='activityList.php'>
-                View Activity List
+              <a id='viewList' href='foodList.php'>
+                View Food List
               </a>
               <br>
-              <a id='createLink' href='activityForm.php'>
-                Create New Activity
+              <a id='createLink' href='foodForm.php'>
+                Create New Food Entry
               </a>
             </div>
             ";

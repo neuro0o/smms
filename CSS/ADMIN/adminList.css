@@ -16,8 +16,41 @@
 /*==============================
   accommodationList.php
 ==============================*/
-/* container for user profile */
-.accom-container {
+/* container for accommodation */
+.list-container {
+    margin: 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#list-table {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+#list-table table, th, td {
+    border: 1px solid;
+  }
+  
+#list-table th {
+    background-color: var(--teal-500);
+  }
+  
+#list-row-count {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: start;
+    margin: 1rem;
+  }
+
+/*==============================
+  activityList.php
+==============================*/
+/* container for activity */
+.activity-container {
     margin: 2rem;
     justify-content: center;
     align-items: center;

@@ -29,7 +29,7 @@
     <!-- adminList css file -->
     <link rel="stylesheet" href="../../../SMMS/CSS/ADMIN/adminList.css">
 
-    <title>ACCOMMODATION LIST</title>
+    <title>FOOD LIST</title>
   </head>
   <body>
 
@@ -46,18 +46,19 @@
     <section class="adminHome">
       <div class="list-container">
         <h1 id="admin-listTitle">
-          ACCOMMODATION LIST
+          FOOD LIST
         </h1><br><br>
 
         <?php
-          // sql query to select accommodation details
-          $sql_accom = "SELECT a.accommodationID, a.accommodationName, a.accommodationDesc,
-          a.accommodationPrice
-          FROM accommodation a
-          ORDER BY a.accommodationID ASC";
+          // sql query to select food details
+          $sql_food = "SELECT f.foodID, f.foodName, f.foodCategory, fc.categoryID, fc.categoryName, f.foodDesc,
+          f.foodPrice
+          FROM food f, food_category fc
+          WHERE f.foodCategory = fc.categoryID
+          ORDER BY f.foodID ASC";
 
           // execute query on the database connection
-          $result = mysqli_query($conn, $sql_accom);
+          $result = mysqli_query($conn, $sql_food);
 
           // get the number of rows returned by the query
           $rowcount = mysqli_num_rows($result);
@@ -66,26 +67,28 @@
         <!-- start of the table -->
         <table id="list-table">
           <tr>
-            <th>ACCOMMODATION ID</th>
-            <th>ACCOMMODATION NAME</th>
-            <th>ACCOMMODATION DESCRIPTION</th>
-            <th>ACCOMMODATION PRICE (RM)</th>
+            <th>FOOD ID</th>
+            <th>CATEGORY NAME</th>
+            <th>FOOD NAME</th>
+            <th>FOOD DESCRIPTION</th>
+            <th>FOOD PRICE (RM)</th>
             <th>ACTIONS</th>
           </tr>
 
-        <!-- dynamically create html table row based on output data of each row from accommodation table -->
+        <!-- dynamically create html table row based on output data of each row from blog table -->
         <?php
           if ($rowcount > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
               echo "<tr>";
-              echo "<td>" . htmlspecialchars($row["accommodationID"]) . "</td>";
-              echo "<td>" . htmlspecialchars($row["accommodationName"]) . "</td>";
-              echo "<td>" . htmlspecialchars($row["accommodationDesc"]) . "</td>";
-              echo "<td>" . htmlspecialchars($row["accommodationPrice"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["foodID"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["categoryName"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["foodName"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["foodDesc"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["foodPrice"]) . "</td>";
 
               echo "<td>";
-                    echo "<a href='accommodationEdit.php?id=" . urlencode($row["accommodationID"]) . "'>Edit</a> | ";
-                    echo "<a href='accommodationDelete.php?id=" . urlencode($row["accommodationID"]) . "' onclick='return confirm(\"Are you sure you want to delete this accommodation?\");'>Delete</a>";
+                    echo "<a href='foodEdit.php?id=" . urlencode($row["foodID"]) . "'>Edit</a> | ";
+                    echo "<a href='foodDelete.php?id=" . urlencode($row["foodID"]) . "' onclick='return confirm(\"Are you sure you want to delete this food entry?\");'>Delete</a>";
                   echo "</td>";
             }
           }
@@ -100,7 +103,7 @@
         ?>
       </table>
         <!-- display row count -->
-        <h2 id="list-row-count">Total Accommodations: <?php echo $rowcount; ?></h2>
+        <h2 id="list-row-count">Total Food: <?php echo $rowcount; ?></h2>
       </div>
     </section>
 

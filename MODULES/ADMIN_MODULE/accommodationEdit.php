@@ -35,19 +35,19 @@
   <?php
   // check if ID is provided
   if (isset($_GET['id'])) {
-    $accomID = intval($_GET['id']);
+    $accommodationID = intval($_GET['id']);
 
     // another example to retrieve the existing accommodation data using prepared statement
     $sql = "SELECT * FROM accommodation WHERE accommodationID = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $accomID);
+    mysqli_stmt_bind_param($stmt, "i", $accommodationID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-      $accomName = $row['accommodationName'];
-      $accomDesc = $row['accommodationDesc'];
-      $accomPrice = $row['accommodationPrice'];
+      $accommodationName = $row['accommodationName'];
+      $accommodationDesc = $row['accommodationDesc'];
+      $accommodationPrice = $row['accommodationPrice'];
       $accommodationImg = $row['accommodationImg'];
     }
     else {
@@ -61,11 +61,11 @@
     exit;
   }
 
-  // handle blog update form submission
+  // handle accommodation update form submission
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $accomName = $_POST['accomName'];
-    $accomDesc = $_POST['accomDesc'];
-    $accomPrice = $_POST['accomPrice'];
+    $accommodationName = $_POST['accomName'];
+    $accommodationDesc = $_POST['accomDesc'];
+    $accommodationPrice = $_POST['accomPrice'];
 
     $uploadDir = '../../IMAGES/ACCOMMODATION/';
     $accommodationImg = null;
@@ -84,13 +84,13 @@
         // optional: delete the old image if necessary
         $sql = "SELECT accommodationImg FROM accommodation WHERE accommodationID = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "i", $accomID);
+        mysqli_stmt_bind_param($stmt, "i", $accommodationID);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        $accom = mysqli_fetch_assoc($result);
+        $accommodation = mysqli_fetch_assoc($result);
 
-        if ($accom && $accom['accommodationImg'] && file_exists($uploadDir . $accom['accommodationImg'])) {
-          unlink($uploadDir . $accom['accommodationImg']); // deletes the old image file
+        if ($accommodation && $accommodation['accommodationImg'] && file_exists($uploadDir . $accommodation['accommodationImg'])) {
+          unlink($uploadDir . $accommodation['accommodationImg']); // deletes the old image file
         }
         mysqli_stmt_close($stmt);
         echo $accommodationImg;
@@ -105,20 +105,20 @@
       $sql = "UPDATE accommodation SET accommodationName = ?, accommodationDesc = ?, accommodationPrice = ?, accommodationImg = ?
       WHERE accommodationID = ?";
       $stmt = mysqli_prepare($conn, $sql);
-      mysqli_stmt_bind_param($stmt, "ssdsi", $accomName, $accomDesc, $accomPrice, $accommodationImg, $accomID);
+      mysqli_stmt_bind_param($stmt, "ssdsi", $accommodationName, $accommodationDesc, $accommodationPrice, $accommodationImg, $accommodationID);
     }
     else {
       $sql = "UPDATE accommodation SET accommodationName = ?, accommodationDesc = ?, accommodationPrice = ?,
       WHERE accommodationID = ?";
       $stmt = mysqli_prepare($conn, $sql);
-      mysqli_stmt_bind_param($stmt, "ssdi", $accomName, $accomDesc, $accomPrice, $accomID);
+      mysqli_stmt_bind_param($stmt, "ssdi", $accommodationName, $accommodationDesc, $accommodationPrice, $accommodationID);
     }
 
     // execute query
     if (mysqli_stmt_execute($stmt)) {
       echo "
             <div id='successMessage'>
-              <p> ($accomName) with Blog ID of ($accomID) was edited successfully!</p>
+              <p> ($accommodationName) with accommodation ID of ($accommodationID) was edited successfully!</p>
               <a id='adminDashboardLink' href='adminHome.php'>
                 Back to Admin Dashboard
               </a>
@@ -160,21 +160,19 @@
         <h1 id="form-title">ACCOMMODATION EDIT FORM</h1><br><br>
 
         <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="accomID" value="<?= isset($accomID) ? htmlspecialchars($accomID) : 'NONE'; ?>">
+            <input type="hidden" name="accomID" value="<?= isset($accommodationID) ? htmlspecialchars($accommodationID) : 'NONE'; ?>">
 
             <label for="accomName">Accommodation Name:</label><br>
-            <input type="text" name="accomName" id="accomName" value="<?= htmlspecialchars($accomName) ?>" required><br><br>
+            <input type="text" name="accomName" id="accomName" value="<?= htmlspecialchars($accommodationName) ?>" required><br><br>
 
             <label for="accomDesc">Accommodation Description:</label><br>
-            <textarea id="accomDesc" name="accomDesc" rows="5" cols="80" required><?= htmlspecialchars($accomDesc) ?></textarea><br><br>
+            <textarea id="accomDesc" name="accomDesc" rows="5" cols="80" required><?= htmlspecialchars($accommodationDesc) ?></textarea><br><br>
 
             <label for="accomPrice">Accommodation Price (RM):</label><br>
-            <input type="number" id="accomPrice" name="accomPrice" value="<?= htmlspecialchars($accomPrice) ?>" required><br><br>
+            <input type="number" id="accomPrice" name="accomPrice" value="<?= htmlspecialchars($accommodationPrice) ?>" required><br><br>
           
             <label for="accommodationImg">Accommodation Image:</label><br>
-            <?php if (!empty($accommodationImg)): ?>
-            <img src="<?= htmlspecialchars($accommodationImg) ?>" style="width:150px;height:150px;text-align: center;"><br><br>
-            <?php endif; ?>
+            <img src="<?= BASE_URL . '/' . htmlspecialchars($accommodationImg) ?>" style="width:150px;height:150px;text-align: center;"><br><br>
             <input type="file" id="accommodationImg" name="accommodationImg" accept="image/*"><br><br>
 
             <button type="submit">Update</button><br>

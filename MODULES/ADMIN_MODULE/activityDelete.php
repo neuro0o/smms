@@ -29,7 +29,7 @@
     <!-- adminForm css file -->
     <link rel="stylesheet" href="../../../SMMS/CSS/ADMIN/adminForm.css">
 
-    <title>ACCOMMODATION DELETE</title>
+    <title>ACTIVITY DELETE</title>
   </head>
   <body>
 
@@ -46,27 +46,27 @@
     <section class="adminHome">
     <?php
   if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
-      $accommodationID = intval($_GET['id']);
-      // delete the accommodation record
-      $sql = "DELETE FROM accommodation WHERE accommodationID = ?";
+      $activityID = intval($_GET['id']);
+      // delete the activity record
+      $sql = "DELETE FROM activity WHERE activityID = ?";
       $stmt = mysqli_prepare($conn, $sql);
-      mysqli_stmt_bind_param($stmt, "i", $accommodationID);
+      mysqli_stmt_bind_param($stmt, "i", $activityID);
 
       if (mysqli_stmt_execute($stmt)) {
 
           echo "
                 <div id='successMessage'>
-                  <p>ACCOMMODATION WITH ID ($accommodationID) IS DELETED SUCCESSFULLY!</p>
+                  <p>ACTIVITY WITH ID ($activityID) IS DELETED SUCCESSFULLY!</p>
                   <a id='adminDashboardLink' href='adminHome.php'>
                     Back to Admin Dashboard
                   </a>
                   <br>
-                  <a id='viewList' href='accommodationList.php'>
-                    View Accommodation List
+                  <a id='viewList' href='activityList.php'>
+                    View Activity List
                   </a>
                   <br>
-                  <a id='createLink' href='accommodationForm.php'>
-                    Create New Accommodation
+                  <a id='createLink' href='activityForm.php'>
+                    Create New Activity
                   </a>
                 </div>
                 ";

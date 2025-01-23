@@ -48,14 +48,14 @@
         <h1 id="form-title">ACCOMMODATION FORM</h1><br><br>
 
         <form action="accommodationInsert.php" method="POST" enctype="multipart/form-data">
-          <label for="accomName">Accommodation Name:</label><br>
-          <input type="text" name="accomName" id="accomName" required><br><br>
+          <label for="accommodationName">Accommodation Name:</label><br>
+          <input type="text" name="accommodationName" id="accommodationName" required><br><br>
 
-          <label for="accomDesc">Accommodation Description:</label><br>
-          <textarea id="accomDesc" name="accomDesc" rows="5" cols="80" required></textarea><br><br>
+          <label for="accommodationDesc">Accommodation Description:</label><br>
+          <textarea id="accommodationDesc" name="accommodationDesc" rows="5" cols="80" required></textarea><br><br>
 
-          <label for="accomPrice">Accommodation Price (RM):</label><br>
-          <input type="number" id="accomPrice" name="accomPrice" min="0.01" step="0.01" required><br><br>
+          <label for="accommodationPrice">Accommodation Price (RM):</label><br>
+          <input type="number" id="accommodationPrice" name="accommodationPrice" min="0.01" step="0.01" required><br><br>
           
           <label for="accommodationImg">Accommodation Image:</label><br>
           <input type="file" id="accommodationImg" name="accommodationImg" accept="image/*" required><br><br>

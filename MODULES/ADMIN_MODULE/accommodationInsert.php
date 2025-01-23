@@ -47,9 +47,9 @@
     <?php
     // handle form submission
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-      $accomName = mysqli_real_escape_string($conn, $_POST['accomName']);
-      $accomDesc = mysqli_real_escape_string($conn, $_POST['accomDesc']);
-      $accomPrice = mysqli_real_escape_string($conn, $_POST['accomPrice']);
+      $accommodationName = mysqli_real_escape_string($conn, $_POST['accommodationName']);
+      $accommodationDesc = mysqli_real_escape_string($conn, $_POST['accommodationDesc']);
+      $accommodationPrice = mysqli_real_escape_string($conn, $_POST['accommodationPrice']);
 
       // handle image upload
       $target_dir = "../../IMAGES/ACCOMMODATION/";
@@ -72,7 +72,7 @@
       if ($upload_ok && move_uploaded_file($_FILES["accommodationImg"]["tmp_name"], $target_file)) {
 
         $sql = "INSERT INTO accommodation (accommodationName, accommodationDesc, accommodationPrice, accommodationImg)
-        VALUES ('$accomName', '$accomDesc', '$accomPrice', '$target_fileDB')";
+        VALUES ('$accommodationName', '$accommodationDesc', '$accommodationPrice', '$target_fileDB')";
 
         if (mysqli_query($conn, $sql)) {
           echo "
