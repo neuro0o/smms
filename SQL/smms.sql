@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2025 at 06:56 AM
+-- Generation Time: Jan 23, 2025 at 07:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,17 @@ CREATE TABLE `accommodation` (
   `accommodationPrice` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `accommodation`
+--
+
+INSERT INTO `accommodation` (`accommodationID`, `accommodationName`, `accommodationImg`, `accommodationDesc`, `accommodationPrice`) VALUES
+(1, 'Oceanview Suite', 'IMAGES/ACCOMMODATION/OceanviewRoom.jpg', 'A spacious room offering stunning views of the ocean with modern amenities. Perfect for a relaxing getaway.', 1250.00),
+(2, 'Mountain Retreat Room', 'IMAGES/ACCOMMODATION/MountainRetreatRoom.jpg', 'A cozy room nestled at the foot of the mountains, designed for a peaceful and scenic stay.', 350.00),
+(3, 'Garden Paradise Room', 'IMAGES/ACCOMMODATION/GardenParadiseRoom.jpg', 'A serene room overlooking beautifully landscaped gardens. Enjoy tranquility and nature from your private balcony.', 400.00),
+(4, 'Cityscape Deluxe', 'IMAGES/ACCOMMODATION/CityscapeDeluxe.jpeg', 'A chic and modern room with panoramic views of the city skyline, perfect for business and leisure stays.', 500.00),
+(5, 'Skyline Penthouse', 'IMAGES/ACCOMMODATION/SkylinePenthouse.jpg', 'A luxurious penthouse suite with a private terrace, offering unmatched views of the city’s skyline and ultimate comfort.', 1000.00);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +60,18 @@ CREATE TABLE `activity` (
   `activityDesc` varchar(1000) NOT NULL,
   `activityPrice` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `activity`
+--
+
+INSERT INTO `activity` (`activityID`, `activityName`, `activityImg`, `activityCategory`, `activityDesc`, `activityPrice`) VALUES
+(1, 'Scuba Diving', 'IMAGES/ACTIVITY/ScubaDiving.jpg', 1, 'Explore the underwater world with a guided scuba diving session. Suitable for beginners and advanced divers.', 250.00),
+(2, 'Mountain Trekking', 'IMAGES/ACTIVITY/MountainTrekking.jpg', 2, 'A thrilling hike through the lush mountains, guided by an experienced trek leader. Experience nature at its finest.', 150.00),
+(3, 'Cooking Class', 'IMAGES/ACTIVITY/CookingClass.jpg', 3, 'Learn to prepare local dishes with expert chefs. A fun and interactive activity for food enthusiasts.', 120.00),
+(4, 'Sunset Cruise', 'IMAGES/ACTIVITY/SunsetCruise.jpg', 1, 'Enjoy a relaxing evening on the water with a sunset cruise, complete with drinks and light snacks.', 180.00),
+(5, 'Zipline Adventure', 'IMAGES/ACTIVITY/ZiplineAdventure.jpg', 2, 'Experience an adrenaline rush while soaring across valleys and forests with a thrilling zipline adventure.', 60.00),
+(6, 'Art Workshop', 'IMAGES/ACTIVITY/ArtWorkshop.jpeg', 3, 'Unleash your creativity in an art workshop, where you can create your own masterpiece using various mediums.', 80.00);
 
 -- --------------------------------------------------------
 
@@ -423,13 +446,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `accommodation`
 --
 ALTER TABLE `accommodation`
-  MODIFY `accommodationID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `accommodationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
-  MODIFY `activityID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `activityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `activity_category`
