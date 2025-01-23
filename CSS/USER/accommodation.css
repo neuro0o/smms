@@ -1,0 +1,205 @@
+/* main section for userHome page */
+.userHome {
+  padding: 1rem;
+  min-height: 100vh;
+  /* border-style: solid; */
+}
+
+#section-title {
+  margin-top: 7rem;
+  /* margin-bottom: 7rem; */
+  text-align: center;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #0f2b44;
+}
+
+
+/* Accommodation Section Styles */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --gradient: linear-gradient(45deg, #f0f8ff, #2dd4bf);
+  --card: #109e7d;
+}
+
+body {
+  background: var(--gradient);
+  color: #ffffff;
+  font-family: "Poppins";
+
+}
+
+h2 {
+  /* background: var(--gradient); */
+  font-size: 24px;
+  color: #0f2b44;
+  text-align: center;
+  /* Center the text horizontally */
+  margin: 0;
+  /* Remove default margins */
+  padding: 0px;
+  /* Optional padding for visual comfort */
+}
+
+.product-container {
+  display: grid;
+  /* Use grid layout */
+  grid-template-columns: repeat(2, 1fr);
+  /* Two columns */
+  gap: 20px;
+  /* Space between the cards */
+  padding: 40px 10%;
+  /* Padding around the container */
+  justify-items: center;
+  /* Center cards horizontally within their grid cells */
+}
+
+.card {
+  display: inline-flex;
+  align-items: center;
+  width: 100vw;
+  max-width: 650px;
+  padding: 44px 30px 50px 70px;
+  background: var(--card);
+  border-radius: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Add smooth transitions */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  /* Slightly enlarge the card */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  /* Add a shadow effect */
+  background: #13b593;
+  /* Optional: Slightly change the background color */
+}
+
+.card img {
+  max-width: 280px;
+  width: 36vw;
+  height: 300px;
+  object-fit: cover;
+  margin-left: -60px;
+  margin-right: 30px;
+  border-radius: inherit;
+  box-shadow: 0 60px 40px #076a53;
+  transition: border-radius 0.5s;
+}
+
+.card h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: 0;
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.75;
+}
+
+.card p {
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  opacity: 0.5;
+}
+
+
+.socials form button {
+  position: relative;
+  border: 0;
+  background: #4CAF50;
+  /* Change to a new color */
+  color: #fff;
+  padding: 12px 25px;
+  /* Add padding to increase size */
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 25px;
+  /* More rounded corners */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+}
+
+.socials form button:hover {
+  background: #ff96ad;
+  box-shadow: 0 0 5px #ff96ad, 0 0 25px #ff96ad, 0 0 50px #ff96ad, 0 0 200px #ff96ad;
+}
+
+/* Button icon size adjustment */
+.socials form button>i {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: none;
+  font-size: 24px;
+  /* Adjust icon size */
+  margin-right: 10px;
+  /* Space between icon and text */
+}
+
+/* Make sure the icon aligns correctly */
+.socials form button>i {
+  vertical-align: middle;
+}
+
+@media (width <=600px) {
+  .product-container {
+      grid-template-columns: 1fr;
+      /* Make the grid one column */
+      gap: 20px;
+      /* Maintain spacing between cards */
+      padding: 20px;
+      /* Adjust padding for smaller screens */
+  }
+
+  .card {
+      margin: 0 40px;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 60px;
+      width: 100%;
+      text-align: center;
+      flex-direction: column;
+  }
+
+  .card h2 {
+      margin-right: 0;
+      font-size: 26px;
+  }
+
+  .card img {
+      margin: -100px 0 30px 0;
+      width: 100%;
+      max-width: 1000px;
+      height: 250px;
+  }
+
+  .card p {
+      max-width: 360px;
+  }
+
+  .socials {
+      justify-content: center;
+  }
+}
+
+@media (width <=479px) {
+  .card img {
+      height: 50vw;
+      width: 50vw;
+      border-radius: 50%;
+      border: 12px solid #80EE98;
+      margin: -140px 0 30px 0;
+  }
+}
