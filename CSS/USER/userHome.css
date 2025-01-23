@@ -97,6 +97,48 @@
 
 
 /*==============================
+  search
+==============================*/
+/* search message styling */
+#searchMessage {
+  color: green;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* search result container styling */
+.searchResult-container {
+  text-align: center;
+}
+
+/* search result links styling */
+.searchResult {
+  color: blue;
+  text-decoration: none;
+  font-size: 2rem;
+  margin: 1rem 2rem 1rem 0rem;
+  display: inline-block;
+}
+
+.homePage-link {
+  color: blue;
+  text-decoration: none;
+  font-size: 2rem;
+  margin: 1rem 2rem 1rem 0rem;
+  display: inline-block;
+}
+
+
+.searchResult:hover, .homePage-link:hover {
+  text-decoration: underline;
+  color: darkblue;
+}
+
+
+
+
+/*==============================
   MEDIA QUERIES
 ==============================*/
 /* large sized screen */

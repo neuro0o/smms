@@ -4,7 +4,7 @@
   
   <!-- container for mid section (search bar) -->
   <div class="mid">
-  <form action="" method="post">
+  <form action="../SEARCH_FILTER_MODULE/search.php" method="post">
         <input type="search" placeholder="Things to do, Foods to eat, Rooms..." name="search_text" required>
         <button type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
     </form>

@@ -2,32 +2,48 @@
   session_start();
   include("../../../SMMS/CONFIG/config.php");
 
-  // Fetch food categories from the database
+  // check if a specific product ID is provided
+  if (isset($_GET['id'])) {
+    $foodID = intval($_GET['id']);
+
+    // fetch the specific food based on the food ID
+    $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
+    FROM food f
+    JOIN food_category c ON f.foodCategory = c.categoryID
+    WHERE f.foodID = $foodID";
+  }
+  elseif (isset($_GET['categoryID'])) {
+    // get the categoryID from the URL
+    $categoryID = intval($_GET['categoryID']);
+
+    // fetch food items for the selected category
+    $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
+    FROM food f
+    JOIN food_category c ON f.foodCategory = c.categoryID
+    WHERE f.foodCategory = $categoryID";
+  }
+  else {
+    // fetch all food items
+    $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
+    FROM food f
+    JOIN food_category c ON f.foodCategory = c.categoryID";
+  }
+
+  // execute the food query
+  $result = mysqli_query($conn, $sql_food);
+
+  if (!$result) {
+      die("Error executing query: " . mysqli_error($conn));
+  }
+
+  // fetch all food categories
   $categorySql = "SELECT * FROM food_category";
   $categoryResult = mysqli_query($conn, $categorySql);
 
-  // Get the categoryID from the URL, if it exists
-  $categoryID = isset($_GET['categoryID']) ? intval($_GET['categoryID']) : null;
-
-  // Build the SQL query for food items
-  if ($categoryID) {
-      // Fetch food items for the selected category
-      $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
-                   FROM food f
-                   JOIN food_category c ON f.foodCategory = c.categoryID
-                   WHERE f.foodCategory = $categoryID";
-  } else {
-      // Fetch all food items
-      $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
-                   FROM food f
-                   JOIN food_category c ON f.foodCategory = c.categoryID";
+  if (!$categoryResult) {
+      die("Error fetching categories: " . mysqli_error($conn));
   }
-
-  // Execute the food query
-  $result = mysqli_query($conn, $sql_food);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,28 +84,33 @@
     <section class="userHome">
     <h2>Food Categories</h2>
     <div class="foodCategorySection">
-        <?php while ($categoryRow = mysqli_fetch_assoc($categoryResult)): ?>
-            <div class="foodCategoryItem">
-                <a href="foodList.php?categoryID=<?= $categoryRow['categoryID']; ?>" class="categoryLink">
-                    <?= $categoryRow['categoryName']; ?>
-                </a>
-            </div>
-        <?php endwhile; ?>
+      <?php while ($categoryRow = mysqli_fetch_assoc($categoryResult)): ?>
+      <div class="foodCategoryItem">
+        <a href="foodList.php?categoryID=<?= $categoryRow['categoryID']; ?>" class="categoryLink">
+          <?= $categoryRow['categoryName']; ?>
+        </a>
+      </div>
+      <?php endwhile; ?>
     </div>
 
     <!-- Food Items List Section -->
     <div class="foodList">
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <div class="foodItem">
-                <img src="../../../SMMS/images/food/<?= $row['foodImg']; ?>" alt="<?= $row['foodName']; ?>" class="foodImg">
-                <h3>
-                    <a href="javascript:void(0);" onclick="openFoodPopup(<?= htmlspecialchars(json_encode($row)); ?>)" class="food-name">
-                        <?= $row['foodName']; ?>
-                    </a>
-                </h3>
-                <p class="foodCategory"><?= $row['categoryName']; ?></p>
-                <p class="foodPrice">RM<?= number_format($row['foodPrice'], 2); ?></p>
-            </div>
+      <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <div class="foodItem">
+        <img src="../../../SMMS/images/food/<?= $row['foodImg']; ?>" alt="<?= $row['foodName']; ?>" class="foodImg">
+        <h3>
+          <a href="javascript:void(0);" onclick="openFoodPopup(<?= htmlspecialchars(json_encode($row)); ?>)" class="food-name">
+              <?= $row['foodName']; ?>
+          </a>
+        </h3>
+        <!-- Check if categoryName exists before displaying -->
+        <?php if (isset($row['categoryName'])): ?>
+            <p class="foodCategory"><?= $row['categoryName']; ?></p>
+        <?php else: ?>
+            <p class="foodCategory">No category available</p>
+        <?php endif; ?>
+        <p class="foodPrice">RM<?= number_format($row['foodPrice'], 2); ?></p>
+    </div>
         <?php endwhile; ?>
     </div>
   </section>
