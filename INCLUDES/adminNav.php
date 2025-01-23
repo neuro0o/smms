@@ -37,7 +37,19 @@
     </div>
 
 
-    <a href="">REVIEW</a>
+    <div class="dropdown">
+      <a href="javascript:void(0)">REVIEW
+      <i class="fa fa-caret-down"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="../../MODULES/ADMIN_MODULE/reservationReview.php">Manage Reservation Review</a>
+        <a href="../../MODULES/ADMIN_MODULE/activityReview.php">Manage Activity Review</a>
+        <a href="../../MODULES/ADMIN_MODULE/foodReview.php">Manage Food Review</a>
+      </div>
+    </div>
+
+    <a href="../../MODULES/ADMIN_MODULE/reservationList.php">RESERVATION</a>
+
     <a href="../../MODULES/USER_MANAGEMENT_MODULE/profile.php">PROFILE</a>
   </nav>
 

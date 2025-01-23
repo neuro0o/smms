@@ -44,8 +44,8 @@
     
 
     <section class="adminHome">
-      <h1 style="text-align: center;">
-        -- START OF ADMIN HOME PAGE --
+      <h1 style="text-align: center; font-size:3rem;">
+        WELCOME TO THE ADMIN DASHBOARD!
       </h1><br><br>
     </section>
 
