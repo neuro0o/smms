@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2025 at 04:19 AM
+-- Generation Time: Jan 23, 2025 at 06:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -111,6 +111,63 @@ CREATE TABLE `food` (
   `foodDesc` varchar(1000) NOT NULL,
   `foodPrice` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food`
+--
+
+INSERT INTO `food` (`foodID`, `foodName`, `foodImg`, `foodCategory`, `foodDesc`, `foodPrice`) VALUES
+(1, 'Savory Party Bread', '../../IMAGES/FOOD/food1.jpg', 1, 'Warm, cheesy, onion bread perfect for snacking or parties.', 10.90),
+(2, 'Teriyaki Pineapple Meatballs', '../../IMAGES/FOOD/food2.jpg', 1, 'Meatballs with teriyaki glaze and pineapple, a family-favorite dish.', 12.90),
+(3, 'Fruit Charcuterie Board', '../../IMAGES/FOOD/food3.jpg', 1, 'Seasonal fruits arranged for a visually stunning and tasty treat.', 8.90),
+(4, 'Hot Spinach Artichoke Dip', '../../IMAGES/FOOD/food4.jpg', 1, 'Savory artichoke, spinach, and Parmesan dip, irresistibly addictive.', 14.90),
+(5, 'Orange-Glazed Meatballs', '../../IMAGES/FOOD/food5.jpg', 1, 'Meatballs in a sweet and tangy orange jalapeño glaze.', 11.90),
+(6, 'Chicken Parm Sliders', '../../IMAGES/FOOD/food6.jpg', 1, 'Mini chicken Parmesan sliders, perfect for parties or casual dinners.', 8.90),
+(7, 'Potsticker Soup', '../../IMAGES/FOOD/food7.jpg', 2, 'Light soup with dumplings, savory vegetables, and mushrooms in flavorful broth.', 9.90),
+(8, 'Chicken Soup', '../../IMAGES/FOOD/food8.jpg', 2, 'Classic chicken soup, hearty and comforting for every occasion.', 11.50),
+(9, 'Beef Soup', '../../IMAGES/FOOD/food9.jpg', 2, 'Rich and savory soup made with tender beef and spices.', 13.00),
+(10, 'French Onion Soup', '../../IMAGES/FOOD/food10.jpg', 2, 'Caramelized onions in broth topped with melted cheese.', 15.90),
+(11, 'Creamy Chicken and Rice Soup', '../../IMAGES/FOOD/food11.jpg', 2, 'Comforting soup with chicken, rice, and a creamy base.', 8.50),
+(12, 'English Pub Split Pea Soup', '../../IMAGES/FOOD/food12.jpg', 2, 'Hearty pea soup inspired by classic English pub recipes.', 7.90),
+(13, 'Mee bandung', '../../IMAGES/FOOD/food13.jpg', 3, 'Traditional noodle dish in rich, savory broth with local spices.', 14.90),
+(14, 'Khao soi', '../../IMAGES/FOOD/food14.jpg', 3, 'Thai-inspired curry noodle soup with creamy coconut base.', 10.50),
+(15, 'Pho', '../../IMAGES/FOOD/food15.jpg', 3, 'Vietnamese noodle soup with aromatic broth and fresh herbs.', 12.50),
+(16, 'Quang-Style Noodles', '../../IMAGES/FOOD/food16.jpg', 3, 'Vietnamese turmeric noodles with rich flavors and fresh herbs.', 6.90),
+(17, 'Southern Vietnamese Beef Noodle Salad', '../../IMAGES/FOOD/food17.jpg', 3, 'Refreshing noodle salad with beef, herbs, and savory dressing.', 5.50),
+(18, 'Ohn no khao swè', '../../IMAGES/FOOD/food18.jpg', 3, 'Burmese coconut chicken noodles with savory and spicy flavors.', 9.00),
+(19, 'Kimchi Fried Rice', '../../IMAGES/FOOD/food19.jpg', 4, 'Spicy fried rice with kimchi and bold Korean flavors.', 13.90),
+(20, 'Shrimp Fried Rice', '../../IMAGES/FOOD/food20.jpg', 4, 'Classic fried rice with succulent shrimp and savory seasoning.', 7.90),
+(21, 'Nasi Goreng', '../../IMAGES/FOOD/food21.jpg', 4, 'Indonesian-style fried rice with sweet soy sauce and spices.', 14.00),
+(22, 'Garlic Fried Rice', '../../IMAGES/FOOD/food22.jpg', 4, 'Fragrant fried rice infused with garlic and umami flavors.', 12.90),
+(23, 'Egg Fried Rice', '../../IMAGES/FOOD/food23.jpg', 4, 'Simple yet flavorful fried rice with egg and seasonings.', 16.50),
+(24, 'Chicken Fried Rice', '../../IMAGES/FOOD/food24.jpg', 4, 'Delicious fried rice with tender chicken pieces and vegetables.', 6.50),
+(25, 'Pasta Salad', '../../IMAGES/FOOD/food25.jpg', 5, 'Chilled pasta salad with fresh vegetables and tangy dressing.', 18.00),
+(26, 'Cheesecake Factory Pasta da Vinci', '../../IMAGES/FOOD/food26.jpg', 5, 'Rich, creamy pasta with mushrooms and chicken, inspired by a classic.', 8.90),
+(27, 'Pasta Bake with Feta', '../../IMAGES/FOOD/food27.jpg', 5, 'Baked pasta topped with creamy feta cheese and tomatoes.', 9.90),
+(28, 'Pasta Napolitana', '../../IMAGES/FOOD/food28.jpg', 5, 'Traditional Italian pasta with rich tomato sauce and herbs.', 7.00),
+(29, 'Pasta with Prosciutto and Peas', '../../IMAGES/FOOD/food29.jpg', 5, 'Classic pasta with prosciutto, peas, and light creamy sauce.', 5.90),
+(30, 'Pasta with Creamy Fennel Sauce', '../../IMAGES/FOOD/food30.jpg', 5, 'Pasta served with a smooth fennel cream sauce.', 6.50),
+(31, 'Beef Burger', '../../IMAGES/FOOD/food31.jpg', 6, 'Juicy beef burger with classic toppings on a toasted bun.', 12.50),
+(32, 'Cajun Fries with Malt Vinegar Sauce', '../../IMAGES/FOOD/food32.jpg', 6, 'Crispy fries seasoned with Cajun spices, served with tangy dip.', 9.90),
+(33, 'Apple Pie Egg Rolls', '../../IMAGES/FOOD/food33.jpg', 6, 'Crispy rolls filled with spiced apple pie filling.', 6.90),
+(34, 'Creole Shrimp Pizza', '../../IMAGES/FOOD/food34.jpg', 6, 'Thin crust pizza topped with Creole-spiced shrimp.', 11.00),
+(35, 'Macaroni Chicken Casserole', '../../IMAGES/FOOD/food35.jpg', 6, 'Creamy macaroni casserole with tender chicken and cheese.', 14.90),
+(36, 'Mashed Potatoes and Gravy', '../../IMAGES/FOOD/food36.jpg', 6, 'Creamy mashed potatoes topped with savory gravy.', 8.90),
+(37, 'Banana Cakes', '../../IMAGES/FOOD/food37.jpg', 7, 'Moist banana cake with a hint of cinnamon and sweetness.', 13.90),
+(38, 'Chocolate Mousse Cakes', '../../IMAGES/FOOD/food38.jpg', 7, 'Rich chocolate mousse layered into decadent cakes.', 9.00),
+(39, 'Carrot Cakes', '../../IMAGES/FOOD/food39.jpg', 7, 'Classic carrot cake with cream cheese frosting.', 12.90),
+(40, 'Tiramisu', '../../IMAGES/FOOD/food40.jpg', 7, 'Classic Italian dessert with espresso and mascarpone layers.', 10.00),
+(41, 'New York Baked Cheesecake', '../../IMAGES/FOOD/food41.jpg', 7, 'Creamy baked cheesecake with a graham cracker crust.', 8.50),
+(42, 'Vanilla Ice Cream with Chocolate', '../../IMAGES/FOOD/food42.jpg', 7, 'Vanilla ice cream drizzled with rich chocolate syrup.', 15.90),
+(43, 'Salad Sandwiches with Chicken', '../../IMAGES/FOOD/food43.jpg', 8, 'Fresh salad sandwiches with chicken, lettuce, and light dressing.', 11.50),
+(44, 'Mega Salad Sandwiches', '../../IMAGES/FOOD/food44.jpg', 8, 'Hearty sandwiches with layers of fresh vegetables and spreads.', 10.90),
+(45, 'French Toast Sandwiches with Cheese', '../../IMAGES/FOOD/food45.jpg', 8, 'Sweet French toast sandwiches filled with melted cheese.', 9.90),
+(46, 'Orange Mint Ice Tea', '../../IMAGES/FOOD/food46.jpg', 9, 'Refreshing iced tea with orange and mint flavors.', 14.50),
+(47, 'Cha Bang Ang', '../../IMAGES/FOOD/food47.jpg', 9, 'Popular Malaysian dessert with ice, syrup, and sweet toppings.', 8.90),
+(48, 'Longan Limau Gula Melaka', '../../IMAGES/FOOD/food48.jpg', 9, 'Sweet dessert with longan, lime, and palm sugar syrup.', 13.90),
+(49, 'Sirap Bandung Float', '../../IMAGES/FOOD/food49.jpg', 9, 'Classic rose-flavored drink topped with vanilla ice cream.', 10.50),
+(50, 'Mangga Susu', '../../IMAGES/FOOD/food50.jpg', 9, 'Creamy mango drink with milk, perfect for a tropical treat.', 6.90),
+(51, 'Tembikai Susu', '../../IMAGES/FOOD/food51.jpg', 9, 'Watermelon drink mixed with sweetened milk for a refreshing taste.', 7.90);
 
 -- --------------------------------------------------------
 
@@ -396,7 +453,7 @@ ALTER TABLE `activity_purchase_detail`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `foodID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `foodID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `food_category`
