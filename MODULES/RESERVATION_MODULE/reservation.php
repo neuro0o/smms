@@ -125,6 +125,19 @@ if (!$foodHistoryResult) {
         .back-button:hover {
             background-color: #004d40;
         }
+
+        .review-button {
+            padding: 5px 10px;
+            background-color: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .review-button:hover {
+            background-color: #e65100;
+        }
     </style>
 </head>
 <body>
@@ -140,6 +153,7 @@ if (!$foodHistoryResult) {
                 <th>Date From</th>
                 <th>Date Until</th>
                 <th>Total Amount</th>
+                <th>Review</th>
             </tr>
             <?php while ($row = mysqli_fetch_assoc($accommodationHistoryResult)): ?>
             <tr>
@@ -148,6 +162,7 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['dateFrom']; ?></td>
                 <td><?php echo $row['dateUntil']; ?></td>
                 <td><?php echo $row['totalAmt']; ?></td>
+                <td><a href="submit_review.php?type=accommodation&id=<?php echo $row['reservationID']; ?>" class="review-button">Write Review</a></td>
             </tr>
             <?php endwhile; ?>
         </table>
@@ -160,6 +175,7 @@ if (!$foodHistoryResult) {
                 <th>Activity Name</th>
                 <th>Activity Price</th>
                 <th>Quantity</th>
+                <th>Review</th>
             </tr>
             <?php while ($row = mysqli_fetch_assoc($activityHistoryResult)): ?>
             <tr>
@@ -167,6 +183,7 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['activityName']; ?></td>
                 <td><?php echo $row['activityPrice']; ?></td>
                 <td><?php echo $row['activityQuantity']; ?></td>
+                <td><a href="submit_review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
             </tr>
             <?php endwhile; ?>
         </table>
@@ -179,6 +196,7 @@ if (!$foodHistoryResult) {
                 <th>Food Name</th>
                 <th>Food Price</th>
                 <th>Quantity</th>
+                <th>Review</th>
             </tr>
             <?php while ($row = mysqli_fetch_assoc($foodHistoryResult)): ?>
             <tr>
@@ -186,6 +204,7 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['foodName']; ?></td>
                 <td><?php echo $row['foodPrice']; ?></td>
                 <td><?php echo $row['foodQuantity']; ?></td>
+                <td><a href="submit_review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
             </tr>
             <?php endwhile; ?>
         </table>

@@ -104,7 +104,6 @@ foreach ($clearCartQueries as $query) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receipt</title>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" type="text/css" href="CSS/USER/receipt.css">
     <style>
         /* Teal Color Theme */
@@ -129,12 +128,12 @@ foreach ($clearCartQueries as $query) {
         }
 
         .receipt-header h1 {
-            color: #00695c; /* Teal color */
+            color: #00695c;
             font-size: 2em;
         }
 
         .receipt-header p {
-            color: #00796b; /* Darker teal */
+            color: #00796b;
         }
 
         table {
@@ -150,18 +149,18 @@ foreach ($clearCartQueries as $query) {
         }
 
         table th {
-            background-color: #004d40; /* Dark teal */
+            background-color: #004d40;
             color: white;
         }
 
         table tr:nth-child(even) {
-            background-color: #e0f2f1; /* Light teal */
+            background-color: #e0f2f1;
         }
 
         .grand-total {
             font-size: 1.2em;
             font-weight: bold;
-            color: #004d40; /* Dark teal */
+            color: #004d40;
         }
 
         .button-container {
@@ -172,18 +171,18 @@ foreach ($clearCartQueries as $query) {
         .button-container a {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #00796b; /* Teal */
+            background-color: #00796b;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
 
         .button-container a:hover {
-            background-color: #004d40; /* Dark teal */
+            background-color: #004d40;
         }
 
         .button-container a:active {
-            background-color: #00332e; /* Even darker teal */
+            background-color: #00332e;
         }
     </style>
 </head>
