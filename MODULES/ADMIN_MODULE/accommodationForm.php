@@ -1,7 +1,7 @@
 <?php
   session_start();
   // include db config
-  include("../../../../SMMS/CONFIG/config.php");  
+  include("../../../SMMS/CONFIG/config.php");  
 ?>
 
 
@@ -15,32 +15,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- utils css file -->
-    <link rel="stylesheet" href="../../../../SMMS/CSS/MISC/utils.css">
+    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/utils.css">
 
     <!-- headerBanner css file -->
-    <link rel="stylesheet" href="../../../../SMMS/CSS/MISC/headerBanner.css">
+    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/headerBanner.css">
 
     <!-- topNav css file -->
-    <link rel="stylesheet" href="../../../../SMMS/CSS/MISC/topNav.css">
+    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/topNav.css">
 
     <!-- topHeader css file -->
-    <link rel="stylesheet" href="../../../../SMMS/CSS/MISC/topHeader.css">
+    <link rel="stylesheet" href="../../../SMMS/CSS/MISC/topHeader.css">
 
     <!-- adminHome css file -->
-    <link rel="stylesheet" href="../../../../SMMS/CSS/ADMIN/adminHome.css">
+    <link rel="stylesheet" href="../../../SMMS/CSS/ADMIN/adminHome.css">
 
     <title>ACCOMMODATION FORM</title>
   </head>
   <body>
 
     <!-- include topNav.php -->
-    <?php include '../../../INCLUDES/topHeader.php'; ?>
+    <?php include '../../INCLUDES/topHeader.php'; ?>
     
     <!-- include adminNav.php -->
-    <?php include '../../../INCLUDES/adminNav.php'; ?>
+    <?php include '../../INCLUDES/adminNav.php'; ?>
 
     <!-- include headerBanner.php -->
-    <?php include '../../../INCLUDES/headerBanner.php';?>
+    <?php include '../../INCLUDES/headerBanner.php';?>
     
 
     <section class="adminHome">

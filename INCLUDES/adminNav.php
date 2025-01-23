@@ -1,7 +1,7 @@
 <div class="topNav">
   <!-- navigation bar -->
   <nav class="navbar">
-    <a href="../../../MODULES/ADMIN_MODULE/adminHome.php">HOME</a>
+    <a href="../../MODULES/ADMIN_MODULE/adminHome.php">HOME</a>
 
 
     <div class="dropdown">
@@ -9,8 +9,8 @@
       <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">
-        <a href="../../MODULES/ADMIN_MODULE/ACCOMMODATION/accommodationForm.php">Add New Accommodation</a>
-        <a href="../../MODULES/ADMIN_MODULE/ACCOMMODATION/accommodationList.php">Manage Accommodation</a>
+        <a href="../../MODULES/ADMIN_MODULE/accommodationForm.php">Add New Accommodation</a>
+        <a href="../../MODULES/ADMIN_MODULE/accommodationList.php">Manage Accommodation</a>
       </div>
     </div>
 
@@ -20,8 +20,8 @@
       <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">
-        <a href="../../../MODULES/ADMIN_MODULE/ACTIVITY/page1.php">Add New Activity</a>
-        <a href="../../../MODULES/ADMIN_MODULE/ACTIVITY/page1.php">Manage Activity</a>
+        <a href="../../MODULES/ADMIN_MODULE/page1.php">Add New Activity</a>
+        <a href="../../MODULES/ADMIN_MODULE/page1.php">Manage Activity</a>
       </div>
     </div>
 
@@ -31,8 +31,8 @@
       <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">
-        <a href="../../../MODULES/ADMIN_MODULE/FOOD/page1.php">Add New Food</a>
-        <a href="../../../MODULES/ADMIN_MODULE/FOOD/page1.php">Manage Food</a>
+        <a href="../../MODULES/ADMIN_MODULE/page1.php">Add New Food</a>
+        <a href="../../MODULES/ADMIN_MODULE/page1.php">Manage Food</a>
       </div>
     </div>
 
