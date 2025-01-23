@@ -29,7 +29,7 @@
     <!-- adminForm css file -->
     <link rel="stylesheet" href="../../../SMMS/CSS/ADMIN/adminForm.css">
 
-    <title>ACCOMMODATION FORM</title>
+    <title>ACCOMMODATION DELETE</title>
   </head>
   <body>
 
@@ -44,26 +44,44 @@
     
 
     <section class="adminHome">
-    <div class="admin-form">
-        <h1 id="form-title">ACCOMMODATION FORM</h1><br><br>
+    <?php
+  if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
+      $accomID = intval($_GET['id']);
+      // delete the accommodation record
+      $sql = "DELETE FROM accommodation WHERE accommodationID = ?";
+      $stmt = mysqli_prepare($conn, $sql);
+      mysqli_stmt_bind_param($stmt, "i", $accomID);
 
-        <form action="accommodationInsert.php" method="POST" enctype="multipart/form-data">
-          <label for="accomName">Accommodation Name:</label><br>
-          <input type="text" name="accomName" id="accomName" required><br><br>
+      if (mysqli_stmt_execute($stmt)) {
 
-          <label for="accomDesc">Accommodation Description:</label><br>
-          <textarea id="accomDesc" name="accomDesc" rows="5" cols="80" required></textarea><br><br>
+          echo "
+                <div id='successMessage'>
+                  <p>ACCOMMODATION WITH ID ($accomID) IS DELETED SUCCESSFULLY!</p>
+                  <a id='adminDashboardLink' href='adminHome.php'>
+                    Back to Admin Dashboard
+                  </a>
+                  <br>
+                  <a id='viewList' href='accommodationList.php'>
+                    View Accommodation List
+                  </a>
+                  <br>
+                  <a id='createLink' href='accommodationForm.php'>
+                    Create New Accommodation
+                  </a>
+                </div>
+                ";
+      }
+      else {
+        echo "Error deleting record: " . mysqli_error($conn);
+      }
 
-          <label for="accomPrice">Accommodation Price (RM):</label><br>
-          <input type="number" id="accomPrice" name="accomPrice" min="0.01" step="0.01" required><br><br>
-          
-          <label for="accommodationImg">Accommodation Image:</label><br>
-          <input type="file" id="accommodationImg" name="accommodationImg" accept="image/*" required><br><br>
+      mysqli_stmt_close($stmt);
+  } else {
+      echo "Invalid request.";
+  }
 
-          <button type="submit">Submit</button><br>
-        </form>
-
-     </div>
+  mysqli_close($conn);
+  ?>
     </section>
 
     <!-- include topNav.js -->

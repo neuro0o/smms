@@ -20,8 +20,8 @@
       <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">
-        <a href="../../MODULES/ADMIN_MODULE/page1.php">Add New Activity</a>
-        <a href="../../MODULES/ADMIN_MODULE/page1.php">Manage Activity</a>
+        <a href="../../MODULES/ADMIN_MODULE/activityForm.php">Add New Activity</a>
+        <a href="../../MODULES/ADMIN_MODULE/activityList.php">Manage Activity</a>
       </div>
     </div>
 
@@ -31,8 +31,8 @@
       <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">
-        <a href="../../MODULES/ADMIN_MODULE/page1.php">Add New Food</a>
-        <a href="../../MODULES/ADMIN_MODULE/page1.php">Manage Food</a>
+        <a href="../../MODULES/ADMIN_MODULE/foodForm.php">Add New Food</a>
+        <a href="../../MODULES/ADMIN_MODULE/foodList.php">Manage Food</a>
       </div>
     </div>
 
