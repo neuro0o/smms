@@ -106,9 +106,12 @@
         <form method="post" id="food-popup-cart-form" action="">
           <h3 label for="food-popup-quantity">Quantity:</h3></label>
           <input type="number" id="food-popup-quantity" name="quantity" value="1" min="1" max="999" position: center; required />
-          <button type="submit">
-            <i class="fa fa-shopping-cart"></i> Add to Cart
-          </button>
+          <form action="cart_action.php" method="post">
+            <input type="hidden" name="foodID" value="<?php echo $foodID; ?>"> 
+            <button type="submit" name="add_to_cart">
+              <i class="fa fa-shopping-cart"></i> Add to Cart
+            </button>
+          </form>
         </form>
       </div>
     </div>
