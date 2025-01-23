@@ -20,7 +20,7 @@ SELECT
     r.totalAmt 
 FROM reservation r
 JOIN accommodation a ON r.accommodationID = a.accommodationID
-WHERE r.reservedBy = '$userID'
+WHERE r.reservedBy = '$userID' AND r.reservationStatus = 1
 ORDER BY r.dateFrom DESC";
 $accommodationHistoryResult = mysqli_query($conn, $accommodationHistoryQuery);
 if (!$accommodationHistoryResult) {
@@ -111,20 +111,6 @@ if (!$foodHistoryResult) {
             background-color: #e0f2f1;
         }
 
-        .review-button {
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .review-button:hover {
-            background-color: #004d40;
-        }
-
         .back-button {
             display: inline-block;
             margin-top: 20px;
@@ -146,7 +132,7 @@ if (!$foodHistoryResult) {
         <h1>Purchase History</h1>
 
         <!-- Accommodation History Section -->
-        <h2>Accommodation History </h2>
+        <h2>Accommodation History</h2>
         <table>
             <tr>
                 <th>Reservation ID</th>
