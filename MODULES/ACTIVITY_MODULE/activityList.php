@@ -81,21 +81,24 @@ include("../../../SMMS/CONFIG/config.php");
       // check if activities exist for the selected category
       if ($activityResult && mysqli_num_rows($activityResult) > 0) {
         while ($activity = mysqli_fetch_assoc($activityResult)) {
+          // Construct the full image URL using BASE_URL
+          $imageURL = BASE_URL . '/' . $activity['activityImg'];
+
           echo '<div id="product-card" class="product-card">';
-          echo '<img id="product-card-img" src="' . $activity["activityImg"] . '" alt="' . $activity["activityName"] . '">';
-          echo '<h3 id="product-card-name">' . $activity["activityName"] . '</h3>';
-          echo '<p id="product-card-category">Category: ' . $activity["categoryName"] . '</p>';
-          echo '<p id="product-card-desc">' . $activity["activityDesc"] . '</p>';
-          echo '<p id="product-card-price">RM ' . $activity["activityPrice"] . '</p>';
+          echo '<img id="product-card-img" src="' . $imageURL . '" alt="' . htmlspecialchars($activity["activityName"]) . '">';
+          echo '<h3 id="product-card-name">' . htmlspecialchars($activity["activityName"]) . '</h3>';
+          echo '<p id="product-card-category">Category: ' . htmlspecialchars($activity["categoryName"]) . '</p>';
+          echo '<p id="product-card-desc">' . htmlspecialchars($activity["activityDesc"]) . '</p>';
+          echo '<p id="product-card-price">RM ' . htmlspecialchars($activity["activityPrice"]) . '</p>';
 
           // check if the user is logged in or not
           if (isset($_SESSION['UID'])) {
             echo '<form id="cart-amount-input" method="post" action="../../MODULES/RESERVATION_MODULE/cart_action.php">
-              <input type="hidden" name="activityID" value="' . $activity['activityID'] . '">
-              <input type="hidden" name="activityName" value="' . $activity['activityName'] . '">
-              <input type="hidden" name="activityPrice" value="' . $activity['activityPrice'] . '">
-              <label for="pax-' . $activity['activityID'] . '">Number of Pax:</label>
-              <input type="number" id="pax-' . $activity['activityID'] . '" name="pax" min="1" value="1" required>
+              <input type="hidden" name="activityID" value="' . htmlspecialchars($activity['activityID']) . '">
+              <input type="hidden" name="activityName" value="' . htmlspecialchars($activity['activityName']) . '">
+              <input type="hidden" name="activityPrice" value="' . htmlspecialchars($activity['activityPrice']) . '">
+              <label for="pax-' . htmlspecialchars($activity['activityID']) . '">Number of Pax:</label>
+              <input type="number" id="pax-' . htmlspecialchars($activity['activityID']) . '" name="pax" min="1" value="1" required>
               <button type="submit">
                 <i class="fa fa-calendar"></i> Book Now
               </button>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2025 at 07:06 AM
+-- Generation Time: Jan 23, 2025 at 07:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,12 +66,12 @@ CREATE TABLE `activity` (
 --
 
 INSERT INTO `activity` (`activityID`, `activityName`, `activityCategory`, `activityDesc`, `activityPrice`, `activityImg`) VALUES
-(1, 'Scuba Diving', 1, 'Explore the underwater world with a guided scuba diving session. Suitable for beginners and advanced divers.', 250.00, ''),
-(2, 'Mountain Trekking', 2, 'A thrilling hike through the lush mountains, guided by an experienced trek leader. Experience nature at its finest.', 150.00, ''),
-(3, 'Cooking Class', 3, 'Learn to prepare local dishes with expert chefs. A fun and interactive activity for food enthusiasts.', 120.00, ''),
-(4, 'Sunset Cruise', 1, 'Enjoy a relaxing evening on the water with a sunset cruise, complete with drinks and light snacks.', 180.00, ''),
-(5, 'Zipline Adventure', 2, 'Experience an adrenaline rush while soaring across valleys and forests with a thrilling zipline adventure.', 60.00, ''),
-(6, 'Art Workshop', 3, 'Unleash your creativity in an art workshop, where you can create your own masterpiece using various mediums.', 80.00, '');
+(1, 'Scuba Diving', 1, 'Explore the underwater world with a guided scuba diving session. Suitable for beginners and advanced divers.', 250.00, 'IMAGES/ACTIVITY/ScubaDiving.jpg'),
+(2, 'Mountain Trekking', 2, 'A thrilling hike through the lush mountains, guided by an experienced trek leader. Experience nature at its finest.', 150.00, 'IMAGES/ACTIVITY/MountainTrekking.jpg'),
+(3, 'Cooking Class', 3, 'Learn to prepare local dishes with expert chefs. A fun and interactive activity for food enthusiasts.', 120.00, 'IMAGES/ACTIVITY/CookingClass.jpg'),
+(4, 'Sunset Cruise', 1, 'Enjoy a relaxing evening on the water with a sunset cruise, complete with drinks and light snacks.', 180.00, 'IMAGES/ACTIVITY/SunsetCruise.jpg'),
+(5, 'Zipline Adventure', 2, 'Experience an adrenaline rush while soaring across valleys and forests with a thrilling zipline adventure.', 60.00, 'IMAGES/ACTIVITY/ZiplineAdventure.jpg'),
+(6, 'Art Workshop', 3, 'Unleash your creativity in an art workshop, where you can create your own masterpiece using various mediums.', 80.00, 'IMAGES/ACTIVITY/ArtWorkshop.jpeg');
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,9 @@ INSERT INTO `activity_purchase_detail` (`lineID`, `apID`, `activityID`, `purchas
 (5, 5, 3, 1),
 (6, 1, 1, 1),
 (7, 1, 4, 1),
-(8, 1, 6, 1);
+(8, 1, 6, 1),
+(9, 1, 1, 1),
+(10, 1, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -448,7 +450,7 @@ ALTER TABLE `activity_purchase`
 -- AUTO_INCREMENT for table `activity_purchase_detail`
 --
 ALTER TABLE `activity_purchase_detail`
-  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `food`
