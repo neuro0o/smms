@@ -162,7 +162,8 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['dateFrom']; ?></td>
                 <td><?php echo $row['dateUntil']; ?></td>
                 <td><?php echo $row['totalAmt']; ?></td>
-                <td><a href="submit_review.php?type=accommodation&id=<?php echo $row['reservationID']; ?>" class="review-button">Write Review</a></td>
+                <td><a href="../../MODULES/REVIEW_MANAGEMENT_MODULE/review.php?type=accommodation&id=<?php echo $row['reservationID']; ?>" class="review-button">Write Review</a></td>
+
             </tr>
             <?php endwhile; ?>
         </table>
@@ -183,7 +184,8 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['activityName']; ?></td>
                 <td><?php echo $row['activityPrice']; ?></td>
                 <td><?php echo $row['activityQuantity']; ?></td>
-                <td><a href="submit_review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
+                <td><a href="../../MODULES/REVIEW_MANAGEMENT_MODULE/review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
+
             </tr>
             <?php endwhile; ?>
         </table>
@@ -204,7 +206,8 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['foodName']; ?></td>
                 <td><?php echo $row['foodPrice']; ?></td>
                 <td><?php echo $row['foodQuantity']; ?></td>
-                <td><a href="submit_review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
+                <td><a href="../../MODULES/REVIEW_MANAGEMENT_MODULE/review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
+
             </tr>
             <?php endwhile; ?>
         </table>
