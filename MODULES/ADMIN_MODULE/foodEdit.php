@@ -172,7 +172,7 @@
             <input type="number" id="foodPrice" name="foodPrice" value="<?= htmlspecialchars($foodPrice) ?>" required><br><br>
           
             <label for="foodImg">Food Image:</label><br>
-            <img src="<?= BASE_URL . '/' . htmlspecialchars($foodImg) ?>" style="width:150px;height:150px;text-align: center;"><br><br>
+            <img src="<?= BASE_URL . '/MODULES/FOOD_MODULE/' . htmlspecialchars($foodImg) ?>" style="width:150px;height:150px;text-align: center;"><br><br>
             <input type="file" id="foodImg" name="foodImg" accept="image/*"><br><br>
 
             <button type="submit">Update</button><br>
