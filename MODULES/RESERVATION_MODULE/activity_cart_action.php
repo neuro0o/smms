@@ -147,7 +147,7 @@ if (!empty($_GET["action"])) {
                         <td><?php echo htmlspecialchars($item_price); ?></td>
                         <td><?php echo number_format($total_item_price, 2); ?></td>
                         <td>
-                            <a href="cart_action.php?action=remove&activityID=<?php echo $item['activityID']; ?>">
+                            <a href="activity_cart_action.php?action=remove&activityID=<?php echo $item['activityID']; ?>">
                                 <i class="fa fa-times-circle"></i> Remove
                             </a>
                         </td>
@@ -189,7 +189,7 @@ if (!empty($_GET["action"])) {
             </table>
 
             <p id="cart-misc-button">
-                <a href="cart_action.php?action=empty">
+                <a href="activity_cart_action.php?action=empty">
                     <i class="fa fa-trash"></i>
                     Empty Cart
                 </a>
