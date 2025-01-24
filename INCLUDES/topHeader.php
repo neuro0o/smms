@@ -24,6 +24,7 @@
     }
   ?>
 
+    <a href="../RESERVATION_MODULE/cart_action.php">
     <div class="cart-icon">
       <i class="fas fa-shopping-cart" id="cart-icon"></i>
       <?php
@@ -35,6 +36,6 @@
           }
         ?>
     </div>
-
+    </a>
   </div>
 </div>
