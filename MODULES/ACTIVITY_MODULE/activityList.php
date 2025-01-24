@@ -196,5 +196,6 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
 
 <!-- Include topNav.js -->
 <script src="../../../SMMS/JS/topNav.js"></script>
+
 </body>
 </html>

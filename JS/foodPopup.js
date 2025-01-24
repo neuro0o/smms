@@ -8,7 +8,7 @@ function openFoodPopup(food) {
   document.getElementById("food-popup-category").innerText = food.categoryName;  // Change from foodCategory to categoryName
 
   // Populate the hidden input fields for wishlist form
-  document.getElementById("food-popup-itemID").value = food.foodID;
+  document.getElementById("food-popup-itemID1").value = food.foodID;
   document.getElementById("food-popup-itemName").value = food.foodName;
   document.getElementById("food-popup-itemPrice").value = food.foodPrice;
   document.getElementById("food-popup-itemImg").value = food.foodImg;

@@ -143,7 +143,7 @@
         <!-- Add to Wishlist form in Popup -->
         <form method="post" id="food-popup-wishlist-form" action="../WISHLIST_MODULE/wishlist.php">
             <input type="hidden" name="itemType" value="food">
-            <input type="hidden" name="itemID" id="food-popup-itemID" value="">
+            <input type="hidden" name="itemID" id="food-popup-itemID1" value="">
             <input type="hidden" name="itemName" id="food-popup-itemName" value="">
             <input type="hidden" name="itemPrice" id="food-popup-itemPrice" value="">
             <input type="hidden" name="itemImg" id="food-popup-itemImg" value="">
