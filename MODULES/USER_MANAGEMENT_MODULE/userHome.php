@@ -77,19 +77,21 @@
       </div>
 
       <!-- wishlist card -->
-      <div class="info-card">
-        <div class="info-card-img-left">
-          <img src="../../IMAGES/MISC/wishlist.jpg" alt="">
-        </div>  
+      <a href="../WISHLIST_MODULE/wishlist.php" style="text-decoration: none; color: inherit;"> <!-- Make the card clickable -->
+        <div class="info-card">
+            <div class="info-card-img-left">
+              <img src="../../IMAGES/MISC/wishlist.jpg" alt="">
+        </div> 
 
-        <div class="info-card-desc-left">
-          <h1>Create Your Dream Wishlist!</h1><br>
-          <p>
-            Got dreams of a fabulous vacation but need to save up? No worries! Add your dream
-            vacations to your wishlist and start planning for the future!
-          </p>
+          <div class="info-card-desc-left">
+            <h1>Create Your Dream Wishlist!</h1><br>
+            <p>
+              Got dreams of a fabulous vacation but need to save up? No worries! Add your dream
+              vacations to your wishlist and start planning for the future!
+            </p>
+          </div>
         </div>
-      </div>
+      </a>
 
       <!-- weather forecast card -->
       <div class="info-card">

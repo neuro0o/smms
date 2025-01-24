@@ -148,6 +148,51 @@ body {
 
 }
 
+.centered-card {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
+
+/* Wishlist Button */
+.wishlist-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: #2dd4bf; /* Same color as book button */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-button i {
+  margin-right: 8px;
+  font-size: 1.5rem;
+}
+
+.wishlist-button:hover {
+  background: #80EE98; /* Same hover effect as book button */
+  box-shadow: 0 0 5px #80EE98, 0 0 25px #80EE98, 0 0 50px #80EE98, 0 0 200px #80EE98;
+  transform: translateY(-2px);
+}
+
+.wishlist-button:active {
+  background: #109e7d; /* Darker shade for active state */
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.wishlist-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.5); /* Subtle focus ring */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-container {

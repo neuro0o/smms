@@ -4,7 +4,7 @@
   
   <!-- container for mid section (search bar) -->
   <div class="mid">
-  <form action="" method="post">
+  <form action="../SEARCH_FILTER_MODULE/search.php" method="post">
         <input type="search" placeholder="Things to do, Foods to eat, Rooms..." name="search_text" required>
         <button type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
     </form>
@@ -24,6 +24,7 @@
     }
   ?>
 
+    <a href="../RESERVATION_MODULE/cart_action.php">
     <div class="cart-icon">
       <i class="fas fa-shopping-cart" id="cart-icon"></i>
       <?php
@@ -35,6 +36,6 @@
           }
         ?>
     </div>
-
+    </a>
   </div>
 </div>

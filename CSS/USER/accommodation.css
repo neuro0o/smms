@@ -153,6 +153,13 @@ h2 {
   vertical-align: middle;
 }
 
+.centered-card {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 100vh;
+}
+
 @media (width <=600px) {
   .product-container {
       grid-template-columns: 1fr;

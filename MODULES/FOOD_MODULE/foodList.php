@@ -1,33 +1,54 @@
 <?php
   session_start();
+  // include db config
   include("../../../SMMS/CONFIG/config.php");
 
-  // Fetch food categories from the database
+  // Initialize variables
+  $foodDetails = null;
+  $selectedCategory = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
+
+  // check if a specific product ID is provided
+  if (isset($_GET['id'])) {
+    $foodID = intval($_GET['id']);
+
+    // fetch the specific food based on the food ID
+    $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
+    FROM food f
+    JOIN food_category c ON f.foodCategory = c.categoryID
+    WHERE f.foodID = $foodID";
+  }
+  elseif (isset($_GET['categoryID'])) {
+    // get the categoryID from the URL
+    $categoryID = intval($_GET['categoryID']);
+
+    // fetch food items for the selected category
+    $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
+    FROM food f
+    JOIN food_category c ON f.foodCategory = c.categoryID
+    WHERE f.foodCategory = $categoryID";
+  }
+  else {
+    // fetch all food items
+    $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
+    FROM food f
+    JOIN food_category c ON f.foodCategory = c.categoryID";
+  }
+
+  // execute the food query
+  $result = mysqli_query($conn, $sql_food);
+
+  if (!$result) {
+      die("Error executing query: " . mysqli_error($conn));
+  }
+
+  // fetch all food categories
   $categorySql = "SELECT * FROM food_category";
   $categoryResult = mysqli_query($conn, $categorySql);
 
-  // Get the categoryID from the URL, if it exists
-  $categoryID = isset($_GET['categoryID']) ? intval($_GET['categoryID']) : null;
-
-  // Build the SQL query for food items
-  if ($categoryID) {
-      // Fetch food items for the selected category
-      $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
-                   FROM food f
-                   JOIN food_category c ON f.foodCategory = c.categoryID
-                   WHERE f.foodCategory = $categoryID";
-  } else {
-      // Fetch all food items
-      $sql_food = "SELECT f.foodID, f.foodName, f.foodDesc, f.foodPrice, f.foodImg, c.categoryName
-                   FROM food f
-                   JOIN food_category c ON f.foodCategory = c.categoryID";
+  if (!$categoryResult) {
+      die("Error fetching categories: " . mysqli_error($conn));
   }
-
-  // Execute the food query
-  $result = mysqli_query($conn, $sql_food);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,53 +89,70 @@
     <section class="userHome">
     <h2>Food Categories</h2>
     <div class="foodCategorySection">
-        <?php while ($categoryRow = mysqli_fetch_assoc($categoryResult)): ?>
-            <div class="foodCategoryItem">
-                <a href="foodList.php?categoryID=<?= $categoryRow['categoryID']; ?>" class="categoryLink">
-                    <?= $categoryRow['categoryName']; ?>
-                </a>
-            </div>
-        <?php endwhile; ?>
+      <?php while ($categoryRow = mysqli_fetch_assoc($categoryResult)): ?>
+      <div class="foodCategoryItem">
+        <a href="foodList.php?categoryID=<?= $categoryRow['categoryID']; ?>" class="categoryLink">
+          <?= $categoryRow['categoryName']; ?>
+        </a>
+      </div>
+      <?php endwhile; ?>
     </div>
 
     <!-- Food Items List Section -->
     <div class="foodList">
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <div class="foodItem">
-                <img src="../../../SMMS/images/food/<?= $row['foodImg']; ?>" alt="<?= $row['foodName']; ?>" class="foodImg">
-                <h3>
-                    <a href="javascript:void(0);" onclick="openFoodPopup(<?= htmlspecialchars(json_encode($row)); ?>)" class="food-name">
-                        <?= $row['foodName']; ?>
-                    </a>
-                </h3>
-                <p class="foodCategory"><?= $row['categoryName']; ?></p>
-                <p class="foodPrice">RM<?= number_format($row['foodPrice'], 2); ?></p>
-            </div>
+      <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <div class="foodItem">
+        <img src="../../../SMMS/images/food/<?= $row['foodImg']; ?>" alt="<?= $row['foodName']; ?>" class="foodImg">
+        <h3>
+          <a href="javascript:void(0);" onclick="openFoodPopup(<?= htmlspecialchars(json_encode($row)); ?>)" class="food-name">
+              <?= $row['foodName']; ?>
+          </a>
+        </h3>
+        <!-- Check if categoryName exists before displaying -->
+        <?php if (isset($row['categoryName'])): ?>
+            <p class="foodCategory"><?= $row['categoryName']; ?></p>
+        <?php else: ?>
+            <p class="foodCategory">No category available</p>
+        <?php endif; ?>
+        <p class="foodPrice">RM<?= number_format($row['foodPrice'], 2); ?></p>
+    </div>
         <?php endwhile; ?>
     </div>
   </section>
 
     <!-- Popup Structure -->
-    <div class="food-popup" id="food-popup" style="display: none;">
+<div class="food-popup" id="food-popup" style="display: none;">
     <span class="food-popup-close-btn" onclick="closeFoodPopup()">&times;</span>
-      <div class="food-popup-content">
+    <div class="food-popup-content">
         <img id="food-popup-img" src="" alt="Food Image" />
         <h2 id="food-popup-name"></h2>
         <p><strong>Category:</strong> <span id="food-popup-category"></span></p>
         <p id="food-popup-desc"></p>
-        <p ><strong>Price:</strong> RM <span id="food-popup-price"></span></p>
-        <form method="post" id="food-popup-cart-form" action="">
-          <h3 label for="food-popup-quantity">Quantity:</h3></label>
-          <input type="number" id="food-popup-quantity" name="quantity" value="1" min="1" max="999" position: center; required />
-          <form action="cart_action.php" method="post">
-            <input type="hidden" name="foodID" value="<?php echo $foodID; ?>"> 
+        <p><strong>Price:</strong> RM <span id="food-popup-price"></span></p>
+        
+        <!-- Single Form for Adding to Cart -->
+        <form method="post" id="food-popup-cart-form" action="../../MODULES/RESERVATION_MODULE/food_cart_action.php?action=add">
+            <h3>Quantity:</h3>
+            <input type="number" id="food-popup-quantity" name="quantity" value="1" min="1" max="999" required />
+            <input type="hidden" name="id" id="food-popup-itemID" value="">
             <button type="submit" name="add_to_cart">
-              <i class="fa fa-shopping-cart"></i> Add to Cart
+                <i class="fa fa-shopping-cart"></i> Add to Cart
             </button>
-          </form>
         </form>
-      </div>
+
+        <!-- Add to Wishlist form in Popup -->
+        <form method="post" id="food-popup-wishlist-form" action="../WISHLIST_MODULE/wishlist.php">
+            <input type="hidden" name="itemType" value="food">
+            <input type="hidden" name="itemID" id="food-popup-itemID" value="">
+            <input type="hidden" name="itemName" id="food-popup-itemName" value="">
+            <input type="hidden" name="itemPrice" id="food-popup-itemPrice" value="">
+            <input type="hidden" name="itemImg" id="food-popup-itemImg" value="">
+            <button type="submit" class="wishlist-button">
+                <i class="fa fa-heart"></i> Add to Wishlist
+            </button>
+        </form>
     </div>
+</div>
 
     <!-- Overlay -->
     <div class="food-popup-overlay" id="food-popup-overlay" style="display: none;"></div>
