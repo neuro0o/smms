@@ -1,6 +1,11 @@
 <?php
   session_start();
+  // include db config
   include("../../../SMMS/CONFIG/config.php");
+
+  // Initialize variables
+  $foodDetails = null;
+  $selectedCategory = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 
   // check if a specific product ID is provided
   if (isset($_GET['id'])) {
@@ -116,40 +121,38 @@
   </section>
 
     <!-- Popup Structure -->
-    <div class="food-popup" id="food-popup" style="display: none;">
+<div class="food-popup" id="food-popup" style="display: none;">
     <span class="food-popup-close-btn" onclick="closeFoodPopup()">&times;</span>
-      <div class="food-popup-content">
+    <div class="food-popup-content">
         <img id="food-popup-img" src="" alt="Food Image" />
         <h2 id="food-popup-name"></h2>
         <p><strong>Category:</strong> <span id="food-popup-category"></span></p>
         <p id="food-popup-desc"></p>
-        <p ><strong>Price:</strong> RM <span id="food-popup-price"></span></p>
-        <form method="post" id="food-popup-cart-form" action="">
-          <h3 label for="food-popup-quantity">Quantity:</h3></label>
-          <input type="number" id="food-popup-quantity" name="quantity" value="1" min="1" max="999" position: center; required />
-          <form action="cart_action.php" method="post">
-            <input type="hidden" name="foodID" value="<?php echo $foodID; ?>"> 
-            <button type="submit" name="add_to_cart">
-              <i class="fa fa-shopping-cart"></i> Add to Cart
-            </button>
-          </form>
-        </form>
+        <p><strong>Price:</strong> RM <span id="food-popup-price"></span></p>
         
+        <!-- Single Form for Adding to Cart -->
+        <form method="post" id="food-popup-cart-form" action="../../MODULES/RESERVATION_MODULE/food_cart_action.php?action=add">
+            <h3>Quantity:</h3>
+            <input type="number" id="food-popup-quantity" name="quantity" value="1" min="1" max="999" required />
+            <input type="hidden" name="id" id="food-popup-itemID" value="">
+            <button type="submit" name="add_to_cart">
+                <i class="fa fa-shopping-cart"></i> Add to Cart
+            </button>
+        </form>
+
         <!-- Add to Wishlist form in Popup -->
         <form method="post" id="food-popup-wishlist-form" action="../WISHLIST_MODULE/wishlist.php">
-        <input type="hidden" name="itemType" value="food">
-        <input type="hidden" name="itemID" id="food-popup-itemID" value="">
-        <input type="hidden" name="itemName" id="food-popup-itemName" value="">
-        <input type="hidden" name="itemPrice" id="food-popup-itemPrice" value="">
-        <input type="hidden" name="itemImg" id="food-popup-itemImg" value="">
-
-          <button type="submit" class="wishlist-button">
-            <i class="fa fa-heart"></i> Add to Wishlist
-          </button>
+            <input type="hidden" name="itemType" value="food">
+            <input type="hidden" name="itemID" id="food-popup-itemID" value="">
+            <input type="hidden" name="itemName" id="food-popup-itemName" value="">
+            <input type="hidden" name="itemPrice" id="food-popup-itemPrice" value="">
+            <input type="hidden" name="itemImg" id="food-popup-itemImg" value="">
+            <button type="submit" class="wishlist-button">
+                <i class="fa fa-heart"></i> Add to Wishlist
+            </button>
         </form>
-
-      </div>
     </div>
+</div>
 
     <!-- Overlay -->
     <div class="food-popup-overlay" id="food-popup-overlay" style="display: none;"></div>

@@ -13,6 +13,9 @@ function openFoodPopup(food) {
   document.getElementById("food-popup-itemPrice").value = food.foodPrice;
   document.getElementById("food-popup-itemImg").value = food.foodImg;
 
+  // Set the food ID in the hidden input
+  document.getElementById('food-popup-itemID').value = food.foodID;
+
   // Show the popup
   document.getElementById("food-popup").style.display = "block";
   document.getElementById("food-popup-overlay").style.display = "block";
