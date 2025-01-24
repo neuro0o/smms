@@ -54,7 +54,7 @@
 
       // handle image upload
       $target_dir = "../../IMAGES/FOOD/";
-      $target_path = "IMAGES/FOOD/";
+      $target_path = "../../IMAGES/FOOD/";
       $target_file = $target_dir . basename($_FILES["foodImg"]["name"]);
       $target_fileDB = $target_path . basename($_FILES["foodImg"]["name"]);
       $upload_ok = 1;
