@@ -1,73 +1,73 @@
 <?php
-session_start();
-include("../../../SMMS/CONFIG/config.php");
+    session_start();
+    include("../../../SMMS/CONFIG/config.php");
 
-// Ensure the user is logged in
-if (!isset($_SESSION['UID'])) {
-    die("Error: You must log in to view this page.");
-}
+    // Ensure the user is logged in
+    if (!isset($_SESSION['UID'])) {
+        die("Error: You must log in to view this page.");
+    }
 
-// Get the user ID
-$userID = $_SESSION['UID'];
+    // Get the user ID
+    $userID = $_SESSION['UID'];
 
-// Check for success message
-if (isset($_SESSION['review_success'])) {
-    echo "<script>alert('" . $_SESSION['review_success'] . "');</script>";
-    unset($_SESSION['review_success']); // Clear the message after displaying it
-}
+    // Check for success message
+    if (isset($_SESSION['review_success'])) {
+        echo "<script>alert('" . $_SESSION['review_success'] . "');</script>";
+        unset($_SESSION['review_success']); // Clear the message after displaying it
+    }
 
-// Fetch Accommodation History
-$accommodationHistoryQuery = "
-SELECT 
-    r.reservationID, 
-    a.accommodationName, 
-    r.dateFrom, 
-    r.dateUntil, 
-    r.totalAmt 
-FROM reservation r
-JOIN accommodation a ON r.accommodationID = a.accommodationID
-WHERE r.reservedBy = '$userID' AND r.reservationStatus = 1
-ORDER BY r.dateFrom DESC";
-$accommodationHistoryResult = mysqli_query($conn, $accommodationHistoryQuery);
-if (!$accommodationHistoryResult) {
-    die("Error fetching accommodation history: " . mysqli_error($conn));
-}
+    // Fetch Accommodation History
+    $accommodationHistoryQuery = "
+    SELECT 
+        r.reservationID, 
+        a.accommodationName, 
+        r.dateFrom, 
+        r.dateUntil, 
+        r.totalAmt 
+    FROM reservation r
+    JOIN accommodation a ON r.accommodationID = a.accommodationID
+    WHERE r.reservedBy = '$userID' AND r.reservationStatus = 1
+    ORDER BY r.dateFrom DESC";
+    $accommodationHistoryResult = mysqli_query($conn, $accommodationHistoryQuery);
+    if (!$accommodationHistoryResult) {
+        die("Error fetching accommodation history: " . mysqli_error($conn));
+    }
 
-// Fetch Activity History
-$activityHistoryQuery = "
-SELECT 
-    apd.lineID, 
-    act.activityName, 
-    act.activityPrice, 
-    apd.purchaseQty AS activityQuantity,
-    (SELECT COUNT(*) FROM review_activity WHERE apID = apd.apID AND reviewedBy = '$userID') AS reviewExists
-FROM activity_purchase ap
-JOIN activity_purchase_detail apd ON ap.apID = apd.apID
-JOIN activity act ON apd.activityID = act.activityID
-WHERE ap.userID = '$userID'
-ORDER BY ap.purchaseDate DESC";
-$activityHistoryResult = mysqli_query($conn, $activityHistoryQuery);
-if (!$activityHistoryResult) {
-    die("Error fetching activity history: " . mysqli_error($conn));
-}
+    // Fetch Activity History
+    $activityHistoryQuery = "
+    SELECT 
+        apd.lineID, 
+        act.activityName, 
+        act.activityPrice, 
+        apd.purchaseQty AS activityQuantity,
+        (SELECT COUNT(*) FROM review_activity WHERE activityID = (SELECT activityID FROM activity_purchase_detail WHERE lineID = apd.lineID) AND reviewedBy = '$userID') AS reviewExists
+    FROM activity_purchase ap
+    JOIN activity_purchase_detail apd ON ap.apID = apd.apID
+    JOIN activity act ON apd.activityID = act.activityID
+    WHERE ap.userID = '$userID'
+    ORDER BY ap.purchaseDate DESC";
+    $activityHistoryResult = mysqli_query($conn, $activityHistoryQuery);
+    if (!$activityHistoryResult) {
+        die("Error fetching activity history: " . mysqli_error($conn));
+    }
 
-// Fetch Food History
-$foodHistoryQuery = "
-SELECT 
-    fpd.lineID, 
-    f.foodName, 
-    f.foodPrice, 
-    fpd.purchaseQty AS foodQuantity,
-    (SELECT COUNT(*) FROM review_food WHERE fpID = fpd.fpID AND reviewedBy = '$userID') AS reviewExists
-FROM food_purchase fp
-JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
-JOIN food f ON fpd.foodID = f.foodID
-WHERE fp.userID = '$userID'
-ORDER BY fp.purchaseDate DESC";
-$foodHistoryResult = mysqli_query($conn, $foodHistoryQuery);
-if (!$foodHistoryResult) {
-    die("Error fetching food history: " . mysqli_error($conn));
-}
+    // Fetch Food History
+    $foodHistoryQuery = "
+    SELECT 
+        fpd.lineID, 
+        f.foodName, 
+        f.foodPrice, 
+        fpd.purchaseQty AS foodQuantity,
+        (SELECT COUNT(*) FROM review_food WHERE foodID = (SELECT foodID FROM food_purchase_detail WHERE lineID = fpd.lineID) AND reviewedBy = '$userID') AS reviewExists
+    FROM food_purchase fp
+    JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
+    JOIN food f ON fpd.foodID = f.foodID
+    WHERE fp.userID = '$userID'
+    ORDER BY fp.purchaseDate DESC";
+    $foodHistoryResult = mysqli_query($conn, $foodHistoryQuery);
+    if (!$foodHistoryResult) {
+        die("Error fetching food history: " . mysqli_error($conn));
+    }
 ?>
 
 <!DOCTYPE html>
@@ -170,7 +170,7 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['dateFrom']; ?></td>
                 <td><?php echo $row['dateUntil']; ?></td>
                 <td><?php echo $row['totalAmt']; ?></td>
-                <td><a href="submit_review.php?type=accommodation&id=<?php echo $row['reservationID']; ?>" class="review-button">Write Review</a></td>
+                <td><a href="../REVIEW_MANAGEMENT_MODULE/submit_review.php?type=accommodation&id=<?php echo $row['reservationID']; ?>" class="review-button">Write Review</a></td>
             </tr>
             <?php endwhile; ?>
         </table>
@@ -192,10 +192,10 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['activityPrice']; ?></td>
                 <td><?php echo $row['activityQuantity']; ?></td>
                 <td>
-                    <?php if (isset($row['reviewExists']) && $row['reviewExists'] > 0): // Check if the review already exists ?>
+                    <?php if (isset($row['reviewExists']) && $row['reviewExists'] > 0): ?>
                     <span class="done-button">Done</span>
                     <?php else: ?>
-                    <a href="submit_review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a>
+                    <a href="../REVIEW_MANAGEMENT_MODULE/submit_review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -219,10 +219,10 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['foodPrice']; ?></td>
                 <td><?php echo $row['foodQuantity']; ?></td>
                 <td>
-                    <?php if (isset($row['reviewExists']) && $row['reviewExists'] > 0): // Check if the review already exists ?>
+                    <?php if (isset($row['reviewExists']) && $row['reviewExists'] > 0): ?>
                     <span class="done-button">Done</span>
                     <?php else: ?>
-                    <a href="submit_review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a>
+                    <a href="../REVIEW_MANAGEMENT_MODULE/submit_review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a>
                     <?php endif; ?>
                 </td>
             </tr>
