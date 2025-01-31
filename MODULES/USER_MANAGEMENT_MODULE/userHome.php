@@ -1,7 +1,37 @@
 <?php
   session_start();
+
+  ini_set('display_errors', 1);
+  error_reporting(E_ALL);
+
+// Avoid redirecting if you're already on the userHome.php page
+if (!isset($_SESSION['notification']) && !isset($_GET['redirected'])) {
+    $_SESSION['notification'] = "Reservation successful! Your reservation ID is 123.";
+    $_SESSION['notification_type'] = "success";  // Options: success, info, warning, error
+
+    // Add a query parameter to prevent infinite redirection loop
+    header("Location: userHome.php?redirected=true");
+    exit;
+}
+
   // include db config
   include("../../../SMMS/CONFIG/config.php");  
+
+  // Display notifications if set
+  if (isset($_SESSION["notification"])): ?>
+    <script>
+        window.onload = function() {
+            displayMessage('<?php echo $_SESSION["notification"]; ?>', '<?php echo $_SESSION["notification_type"]; ?>');
+        }
+    </script>
+    <?php 
+    unset($_SESSION["notification"]);
+    unset($_SESSION["notification_type"]);
+  endif;
+
+// Prevent accidental output before header call
+ob_start();
+
 ?>
 
 
@@ -29,9 +59,26 @@
     <!-- userHome css file -->
     <link rel="stylesheet" href="../../../SMMS/CSS/USER/userHome.css">
 
+    <!-- notification popup js file -->
+    <script src="../../JS/notiPopup.js"></script>
+
     <title>USER HOME</title>
   </head>
   <body>
+
+    <!-- Notification Display (Triggered by PHP session) -->
+    <?php if (isset($_SESSION["notification"])): ?>
+        <script>
+            window.onload = function() {
+                displayMessage('<?php echo $_SESSION["notification"]; ?>', '<?php echo $_SESSION["notification_type"]; ?>');
+            }
+        </script>
+        <?php 
+        unset($_SESSION["notification"]); 
+        unset($_SESSION["notification_type"]); 
+        ?>
+    <?php endif; ?>
+
 
     <!-- include topNav.php -->
     <?php include '../../INCLUDES/topHeader.php'; ?>
@@ -117,3 +164,9 @@
 
   </body>
 </html>
+
+<?php
+// After the output is buffered, perform the redirect to prevent the header warning
+ob_end_flush();
+exit;
+?>
