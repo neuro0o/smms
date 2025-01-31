@@ -28,6 +28,9 @@ function downloadReceipt($transaction) {
     exit;
 }
 
+// Set the timezone
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
 // Handle payment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pay']) && isset($_POST['amount'])) {
     $amount = $_POST['amount'];
@@ -35,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pay']) && isset($_POS
     $transaction = [
         'id' => uniqid(),
         'amount' => $amount,
-        'date' => date('Y-m-d H:i:s'),
+        'date' => date('Y-m-d H:i:s'), // Correctly formatted date and time
     ];
 
     // Add to transaction history
@@ -139,6 +142,8 @@ unset($_SESSION['receipt']); // Clear receipt to prevent re-display
             <a href="../RESERVATION_MODULE/food_checkout.php">Proceed to Food Checkout</a>
         <?php elseif ($checkoutType === 'activity'): ?>
             <a href="../RESERVATION_MODULE/activity_checkout.php">Proceed to Activity Checkout</a>
+        <?php elseif ($checkoutType === 'accommodation'): ?>
+            <a href="../RESERVATION_MODULE/accommodation_checkout.php">Proceed to Reservation Checkout</a>
         <?php else: ?>
             <span>Unknown Checkout type</span>
         <?php endif; ?>
