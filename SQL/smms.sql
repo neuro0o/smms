@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2025 at 04:35 AM
+-- Generation Time: Jan 31, 2025 at 08:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -107,6 +107,14 @@ CREATE TABLE `activity_purchase` (
   `purchaseAmt` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `activity_purchase`
+--
+
+INSERT INTO `activity_purchase` (`apID`, `userID`, `purchaseDate`, `purchaseAmt`) VALUES
+(1, 3, '2025-01-31', 480.00),
+(2, 4, '2025-01-31', 360.00);
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +127,15 @@ CREATE TABLE `activity_purchase_detail` (
   `activityID` int(11) NOT NULL,
   `purchaseQty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `activity_purchase_detail`
+--
+
+INSERT INTO `activity_purchase_detail` (`lineID`, `apID`, `activityID`, `purchaseQty`) VALUES
+(1, 1, 6, 3),
+(2, 1, 5, 4),
+(3, 2, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -231,6 +248,14 @@ CREATE TABLE `food_purchase` (
   `purchaseAmt` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `food_purchase`
+--
+
+INSERT INTO `food_purchase` (`fpID`, `userID`, `purchaseDate`, `purchaseAmt`) VALUES
+(1, 3, '2025-01-31', 82.30),
+(2, 4, '2025-01-31', 25.80);
+
 -- --------------------------------------------------------
 
 --
@@ -243,6 +268,17 @@ CREATE TABLE `food_purchase_detail` (
   `foodID` int(11) NOT NULL,
   `purchaseQty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food_purchase_detail`
+--
+
+INSERT INTO `food_purchase_detail` (`lineID`, `fpID`, `foodID`, `purchaseQty`) VALUES
+(1, 1, 44, 3),
+(2, 1, 38, 2),
+(3, 1, 47, 2),
+(4, 1, 50, 2),
+(5, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -260,6 +296,14 @@ CREATE TABLE `reservation` (
   `reservationStatus` int(11) NOT NULL COMMENT '1: Confirm 2:Cancel 3:Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`reservationID`, `dateFrom`, `dateUntil`, `totalAmt`, `reservedBy`, `accommodationID`, `reservationStatus`) VALUES
+(1, '2025-01-17', '2025-01-19', 700.00, 3, 2, 1),
+(2, '2025-01-24', '2025-01-27', 1200.00, 4, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -275,6 +319,15 @@ CREATE TABLE `review_activity` (
   `activityID` int(11) NOT NULL,
   `apID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review_activity`
+--
+
+INSERT INTO `review_activity` (`reviewID`, `reviewText`, `reviewRating`, `reviewDate`, `reviewedBy`, `activityID`, `apID`) VALUES
+(1, 'What an adrenaline rush! The Zipline Adventure was thrilling from start to finish. The safety measures were top-notch, and the guides were professional and friendly. Flying over the lush greenery was an unforgettable experience. I’d definitely do it again!', 4, '2025-01-31', 3, 5, 1),
+(2, 'The Art Workshop was such a fun and creative experience! The instructor was knowledgeable and provided great tips, making it enjoyable for beginners and experienced artists alike. I loved the hands-on approach and the chance to take home my artwork. A must-try for art lovers!', 3, '2025-01-31', 3, 6, 1),
+(3, 'The Sunset Cruise was a magical experience! The view of the sun setting over the water was breathtaking, and the whole trip was smooth and relaxing. The crew was friendly and attentive, making sure we were comfortable the entire time. A perfect romantic and scenic getaway—highly recommended!\r\n\r\n', 4, '2025-01-31', 4, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -292,6 +345,17 @@ CREATE TABLE `review_food` (
   `fpID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `review_food`
+--
+
+INSERT INTO `review_food` (`reviewID`, `reviewText`, `reviewRating`, `reviewDate`, `reviewedBy`, `foodID`, `fpID`) VALUES
+(1, 'Absolutely heavenly! The Chocolate Mousse Cakes were rich, smooth, and had just the right amount of sweetness. A delightful treat for chocolate lovers!', 4, '2025-01-31', 3, 38, 1),
+(2, 'Delicious and filling! The Mega Salad Sandwiches were packed with fresh, crisp veggies and a flavorful dressing. Perfect for a light yet satisfying meal. Highly recommended!', 4, '2025-01-31', 3, 44, 1),
+(3, 'A refreshing and unique drink! The blend of flavors was well-balanced, and it was the perfect way to cool down after a long day. Would definitely order again!', 3, '2025-01-31', 3, 47, 1),
+(4, 'Sweet, creamy, and super refreshing! The combination of mango and milk was a perfect match. Definitely a must-try for mango lovers!', 4, '2025-01-31', 3, 50, 1),
+(5, 'A delicious blend of sweet and savory flavors! The meatballs were juicy and tender, coated in a rich teriyaki glaze with just the right amount of pineapple sweetness. Perfectly seasoned and an absolute must-try for anyone who loves fusion flavors!', 5, '2025-01-31', 4, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -307,6 +371,14 @@ CREATE TABLE `review_reservation` (
   `accommodationID` int(11) NOT NULL,
   `reservationID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review_reservation`
+--
+
+INSERT INTO `review_reservation` (`reviewID`, `reviewText`, `reviewRating`, `reviewDate`, `reviewedBy`, `accommodationID`, `reservationID`) VALUES
+(1, 'I had an amazing stay at the Mountain Retreat Room! The ambiance was peaceful, and the view of the surrounding nature was breathtaking. The room was clean, cozy, and well-equipped with all the essentials. The staff was friendly and accommodating, making sure we had everything we needed. Highly recommended for a relaxing getaway!', 5, '2025-01-31', 3, 2, 1),
+(2, 'Staying at the Garden Paradise Room was an absolute delight! The room was spacious, beautifully decorated, and surrounded by lush greenery, creating a peaceful and relaxing atmosphere. The bed was incredibly comfortable, and the amenities were top-notch. The staff provided excellent service, ensuring a wonderful stay. Would definitely come back again!', 5, '2025-01-31', 4, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -329,7 +401,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`userID`, `userEmail`, `userName`, `userPwd`, `userImg`, `userRole`) VALUES
 (1, 'admin@email.com', 'admin', '$2y$10$dCcKRaRIkMofMQFHJoJdhe.hVS1NuHCwpUKfCO7Qo1GM9D0TyMmBy', '/IMAGES/PROFILE/default.png', 1),
-(2, 'user1@email.com', 'user1', '$2y$10$wfh1eN7mInFUa/2FWQYfMeSlsq2z4Ak8VCscxpdWna0LELNX9bvtS', '/IMAGES/PROFILE/default.png', 2);
+(2, 'user1@email.com', 'user1', '$2y$10$wfh1eN7mInFUa/2FWQYfMeSlsq2z4Ak8VCscxpdWna0LELNX9bvtS', '/IMAGES/PROFILE/default.png', 2),
+(3, 'ali@email.com', 'Ali', '$2y$10$bmLhOc9CP5JYqcXoj7hwXeru.9FNNZduPZwbOE0ee5zPdQcFY8bTe', '/IMAGES/PROFILE/Ali.png', 2),
+(4, 'hana@email.com', 'Hana', '$2y$10$1bzxFkMpqmqEUmLHF.fZsuoyMe9Z7/aGx/a4PLz0SQuy2G8Xm/Jq6', '/IMAGES/PROFILE/Hana.png', 2);
 
 --
 -- Indexes for dumped tables
@@ -464,13 +538,13 @@ ALTER TABLE `activity_category`
 -- AUTO_INCREMENT for table `activity_purchase`
 --
 ALTER TABLE `activity_purchase`
-  MODIFY `apID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `apID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `activity_purchase_detail`
 --
 ALTER TABLE `activity_purchase_detail`
-  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `food`
@@ -488,13 +562,13 @@ ALTER TABLE `food_category`
 -- AUTO_INCREMENT for table `food_purchase`
 --
 ALTER TABLE `food_purchase`
-  MODIFY `fpID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fpID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `food_purchase_detail`
 --
 ALTER TABLE `food_purchase_detail`
-  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `reservation`
@@ -506,25 +580,25 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT for table `review_activity`
 --
 ALTER TABLE `review_activity`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `review_food`
 --
 ALTER TABLE `review_food`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `review_reservation`
 --
 ALTER TABLE `review_reservation`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
