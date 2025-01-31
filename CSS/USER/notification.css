@@ -1,0 +1,93 @@
+/* Notification Container */
+.notification-container {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center alignment */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased space between notifications */
+  backdrop-filter: blur(5px); /* Apply blur effect to the background */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  padding: 20px; /* Increased padding */
+  border-radius: 15px; /* Rounded corners */
+  width: 100%; /* Full-width container */
+  max-width: 600px; /* Increased maximum width */
+  opacity: 1;
+  transition: opacity 0.3s ease; /* Smooth fade-out for container */
+}
+
+/* Notification */
+.notification {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 25px 30px; /* Increased padding */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(0);
+  min-width: 400px; /* Increased minimum width */
+  max-width: 550px; /* Increased maximum width */
+  margin: 0 auto;
+}
+
+/* Notification Types */
+.notification.info {
+  border-left: 10px solid #007bff;
+}
+
+.notification.success {
+  border-left: 10px solid #28a745;
+}
+
+.notification.warning {
+  border-left: 10px solid #ffc107;
+}
+
+.notification.error {
+  border-left: 10px solid #dc3545;
+}
+
+/* Notification Message */
+.notification .message {
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.6;
+  margin-right: 15px;
+}
+
+/* Close Button */
+.notification .close-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.notification .close-btn:hover {
+  color: #000;
+  transform: scale(1.2);
+  transition: 0.2s ease-in-out;
+}
+
+/* This class will apply a blur effect to the header banner */
+.header-banner.blurred {
+  filter: blur(5px); /* Adjust the blur intensity */
+  transition: filter 0.3s ease; /* Smooth transition for blur effect */
+}
+
+/* This class will apply a blur effect to the userHome section */
+.userHome.blurred {
+  filter: blur(5px); /* Adjust the blur intensity */
+  transition: filter 0.3s ease;
+}
