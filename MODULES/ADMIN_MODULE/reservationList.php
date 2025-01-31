@@ -77,7 +77,6 @@ include("../../../SMMS/CONFIG/config.php");
                     <th>CHECK OUT DATE</th>
                     <th>TOTAL AMOUNT (RM)</th>
                     <th>STATUS</th>
-                    <th>ACTIONS</th>
                 </tr>
 
                 <!-- dynamically create html table row based on output data of each row from blog table -->
@@ -92,10 +91,6 @@ include("../../../SMMS/CONFIG/config.php");
                         echo "<td>" . htmlspecialchars($row["dateUntil"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["totalAmt"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["reservationStatus"]) . "</td>";
-
-                        echo "<td>";
-                        echo "<a href='reservationEdit.php?id=" . urlencode($row["reservationID"]) . "'>Edit</a> | ";
-                        echo "</td>";
                     }
                 } else {
                     echo "<h1>No results found.</h1>";
