@@ -81,6 +81,10 @@ try {
     // Clear the cart
     unset($_SESSION["cart_item"]);
 
+    // Set session notifications
+    $_SESSION['notification'] = "Food purchase successful! Your Purchase ID is {$fpID}.";
+    $_SESSION['notification_type'] = "success";
+
     // Display success message along with the purchase ID and line IDs
     echo "
     <div id='checkout-section'>

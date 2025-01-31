@@ -87,6 +87,11 @@ try {
     // Clear the cart
     unset($_SESSION["cart_item"]);
 
+    // Set session notifications
+    $_SESSION['notification'] = "Accommodation booking is successful on {$purchaseDate}! Your Booking ID: " . implode(", ", $lineIDs) . ".";
+    $_SESSION['notification_type'] = "success";
+
+
     // Display success message along with the reservation ID(s)
     echo "
     <div id='checkout-section'>
