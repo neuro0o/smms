@@ -176,10 +176,10 @@ if (!empty($_GET["action"])) {
                 <tr id="checkout-cart">
                     <td colspan="5" align="right"></td>
                     <td colspan="1">
-                        <form method="post" action="activity_checkout.php?price=<?php echo $total_price; ?>">
-                            <input type="hidden" name="tot_price" value="<?php echo $total_price; ?>">
-                            <button id="checkout-button" type="submit">CHECKOUT</button>
-                        </form>
+                    <form method="post" action="../PAYMENT_MODULE/payment.php?total_price=<?php echo $total_price; ?>&type=activity">
+                        <input type="hidden" name="tot_price" value="<?php echo $total_price; ?>">
+                        <button id="checkout-button" type="submit">CHECKOUT</button>
+                    </form>
                     </td>
                 </tr>
 
