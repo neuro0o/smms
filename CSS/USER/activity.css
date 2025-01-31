@@ -163,7 +163,7 @@ body {
   padding: 10px 20px;
   font-size: 1.2rem;
   color: #fff;
-  background: #2dd4bf; /* Same color as book button */
+  background: #2dd4bf; 
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -177,20 +177,20 @@ body {
 }
 
 .wishlist-button:hover {
-  background: #80EE98; /* Same hover effect as book button */
+  background: #80EE98; 
   box-shadow: 0 0 5px #80EE98, 0 0 25px #80EE98, 0 0 50px #80EE98, 0 0 200px #80EE98;
   transform: translateY(-2px);
 }
 
 .wishlist-button:active {
-  background: #109e7d; /* Darker shade for active state */
+  background: #109e7d; 
   box-shadow: none;
   transform: translateY(0);
 }
 
 .wishlist-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.5); /* Subtle focus ring */
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.5); 
 }
 
 /* Responsive Design */

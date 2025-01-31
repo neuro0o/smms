@@ -1,36 +1,36 @@
 <?php
-session_start();
-// Include db config
-include("../../../SMMS/CONFIG/config.php");
+    session_start();
+    // Include db config
+    include("../../../SMMS/CONFIG/config.php");
 
-// Initialize variables
-$activityDetails = null;
-$selectedCategory = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
+    // Initialize variables
+    $activityDetails = null;
+    $selectedCategory = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 
-// Check if a specific activity ID is provided
-if (isset($_GET['id'])) {
-    $activityID = intval($_GET['id']);
+    // Check if a specific activity ID is provided
+    if (isset($_GET['id'])) {
+      $activityID = intval($_GET['id']);
 
-    // Fetch the specific activity based on the activity ID using prepared statements
-    $stmt = $conn->prepare("SELECT a.activityID, a.activityName, a.activityDesc, a.activityPrice, a.activityImg, c.categoryName
-                             FROM activity a
-                             JOIN activity_category c ON a.activityCategory = c.categoryID
-                             WHERE a.activityID = ?");
-    $stmt->bind_param("i", $activityID);
-    $stmt->execute();
-    $activityResult = $stmt->get_result();
+      // Fetch the specific activity based on the activity ID using prepared statements
+      $stmt = $conn->prepare("SELECT a.activityID, a.activityName, a.activityDesc, a.activityPrice, a.activityImg, c.categoryName
+      FROM activity a
+      JOIN activity_category c ON a.activityCategory = c.categoryID
+      WHERE a.activityID = ?");
+      $stmt->bind_param("i", $activityID);
+      $stmt->execute();
+      $activityResult = $stmt->get_result();
 
-    if ($activityResult && $activityResult->num_rows > 0) {
+      if ($activityResult && $activityResult->num_rows > 0) {
         $activityDetails = $activityResult->fetch_assoc();
-    } else {
+      } else {
         echo '<p>Activity not found.</p>';
+      }
+      $stmt->close();
     }
-    $stmt->close();
-}
 
-// Fetch categories from the activity_category table
-$categoryQuery = "SELECT * FROM activity_category";
-$categoryResult = mysqli_query($conn, $categoryQuery);
+    // Fetch categories from the activity_category table
+    $categoryQuery = "SELECT * FROM activity_category";
+    $categoryResult = mysqli_query($conn, $categoryQuery);
 ?>
 
 <!DOCTYPE html>
@@ -70,17 +70,17 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
 <section class="product">
     <h1 id="section-title">ACTIVITY PORTFOLIO</h1>
     <div class="category-container">
-        <a id="category-link" href="activityList.php?cat=0" class="category-link">All</a>
-        <?php
+      <a id="category-link" href="activityList.php?cat=0" class="category-link">All</a>
+      <?php
         // Display categories dynamically
         if ($categoryResult && mysqli_num_rows($categoryResult) > 0) {
-            while ($category = mysqli_fetch_assoc($categoryResult)) {
-                echo '<a id="category-link" href="activityList.php?cat=' . $category['categoryID'] . '" class="category-link">' . htmlspecialchars($category['categoryName']) . '</a>';
-            }
+          while ($category = mysqli_fetch_assoc($categoryResult)) {
+            echo '<a id="category-link" href="activityList.php?cat=' . $category['categoryID'] . '" class="category-link">' . htmlspecialchars($category['categoryName']) . '</a>';
+          }
         } else {
-            echo '<p id="no-category-link">No categories found.</p>';
+          echo '<p id="no-category-link">No categories found.</p>';
         }
-        ?>
+      ?>
     </div>
 
     <!-- Activity Section -->

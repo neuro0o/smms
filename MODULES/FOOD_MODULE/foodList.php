@@ -38,7 +38,7 @@
   $result = mysqli_query($conn, $sql_food);
 
   if (!$result) {
-      die("Error executing query: " . mysqli_error($conn));
+    die("Error executing query: " . mysqli_error($conn));
   }
 
   // fetch all food categories
@@ -46,7 +46,7 @@
   $categoryResult = mysqli_query($conn, $categorySql);
 
   if (!$categoryResult) {
-      die("Error fetching categories: " . mysqli_error($conn));
+    die("Error fetching categories: " . mysqli_error($conn));
   }
 ?>
 

@@ -41,7 +41,7 @@ foreach ($_SESSION["cart_item"] as $item) {
     if (!isset($item["activityPrice"], $item["quantity"])) {
         die("Error: Missing product price or quantity.");
     }
-    $purchaseAmt += $item["activityPrice"] * $item["quantity"]; // Use activityPrice instead of price
+    $purchaseAmt += $item["activityPrice"] * $item["quantity"];
 }
 
 // Begin transaction in database

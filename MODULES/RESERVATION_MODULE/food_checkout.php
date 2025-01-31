@@ -41,7 +41,7 @@ foreach ($_SESSION["cart_item"] as $item) {
     if (!isset($item["foodPrice"], $item["quantity"])) {
         die("Error: Missing product price or quantity.");
     }
-    $purchaseAmt += $item["foodPrice"] * $item["quantity"]; // Use foodPrice instead of price
+    $purchaseAmt += $item["foodPrice"] * $item["quantity"];
 }
 
 // Begin transaction in database
@@ -52,7 +52,7 @@ try {
     $stmt = $conn->prepare("INSERT INTO food_purchase (userID, purchaseDate, purchaseAmt) VALUES (?, ?, ?)");
     $stmt->bind_param("isd", $_SESSION["UID"], $purchaseDate, $purchaseAmt);
     $stmt->execute();
-    $fpID = $stmt->insert_id; // Corrected this line
+    $fpID = $stmt->insert_id;
     $stmt->close();
 
     // Insert into food_purchase_detail table

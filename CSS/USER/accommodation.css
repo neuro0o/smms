@@ -2,12 +2,10 @@
 .userHome {
   padding: 1rem;
   min-height: 100vh;
-  /* border-style: solid; */
 }
 
 #section-title {
   margin-top: 7rem;
-  /* margin-bottom: 7rem; */
   text-align: center;
   font-size: 5rem;
   font-weight: bold;
@@ -33,28 +31,19 @@ body {
 }
 
 h2 {
-  /* background: var(--gradient); */
   font-size: 24px;
   color: #0f2b44;
   text-align: center;
-  /* Center the text horizontally */
   margin: 0;
-  /* Remove default margins */
   padding: 0px;
-  /* Optional padding for visual comfort */
 }
 
 .product-container {
   display: grid;
-  /* Use grid layout */
   grid-template-columns: repeat(2, 1fr);
-  /* Two columns */
   gap: 20px;
-  /* Space between the cards */
   padding: 40px 10%;
-  /* Padding around the container */
   justify-items: center;
-  /* Center cards horizontally within their grid cells */
 }
 
 .card {
@@ -66,16 +55,12 @@ h2 {
   background: var(--card);
   border-radius: 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Add smooth transitions */
 }
 
 .card:hover {
   transform: scale(1.05);
-  /* Slightly enlarge the card */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  /* Add a shadow effect */
   background: #13b593;
-  /* Optional: Slightly change the background color */
 }
 
 .card img {
@@ -117,18 +102,14 @@ h2 {
   position: relative;
   border: 0;
   background: #4CAF50;
-  /* Change to a new color */
   color: #fff;
   padding: 12px 25px;
-  /* Add padding to increase size */
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 25px;
-  /* More rounded corners */
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow */
 }
 
 .socials form button:hover {
@@ -143,9 +124,7 @@ h2 {
   border: none;
   background: none;
   font-size: 24px;
-  /* Adjust icon size */
   margin-right: 10px;
-  /* Space between icon and text */
 }
 
 /* Make sure the icon aligns correctly */
@@ -163,11 +142,8 @@ h2 {
 @media (width <=600px) {
   .product-container {
       grid-template-columns: 1fr;
-      /* Make the grid one column */
       gap: 20px;
-      /* Maintain spacing between cards */
       padding: 20px;
-      /* Adjust padding for smaller screens */
   }
 
   .card {
