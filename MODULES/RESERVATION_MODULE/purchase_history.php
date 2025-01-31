@@ -10,6 +10,12 @@ if (!isset($_SESSION['UID'])) {
 // Get the user ID
 $userID = $_SESSION['UID'];
 
+// Check for success message
+if (isset($_SESSION['review_success'])) {
+    echo "<script>alert('" . $_SESSION['review_success'] . "');</script>";
+    unset($_SESSION['review_success']); // Clear the message after displaying it
+}
+
 // Fetch Accommodation History
 $accommodationHistoryQuery = "
 SELECT 
@@ -33,7 +39,8 @@ SELECT
     apd.lineID, 
     act.activityName, 
     act.activityPrice, 
-    apd.purchaseQty AS activityQuantity
+    apd.purchaseQty AS activityQuantity,
+    (SELECT COUNT(*) FROM review_activity WHERE apID = apd.apID AND reviewedBy = '$userID') AS reviewExists
 FROM activity_purchase ap
 JOIN activity_purchase_detail apd ON ap.apID = apd.apID
 JOIN activity act ON apd.activityID = act.activityID
@@ -50,7 +57,8 @@ SELECT
     fpd.lineID, 
     f.foodName, 
     f.foodPrice, 
-    fpd.purchaseQty AS foodQuantity
+    fpd.purchaseQty AS foodQuantity,
+    (SELECT COUNT(*) FROM review_food WHERE fpID = fpd.fpID AND reviewedBy = '$userID') AS reviewExists
 FROM food_purchase fp
 JOIN food_purchase_detail fpd ON fp.fpID = fpd.fpID
 JOIN food f ON fpd.foodID = f.foodID
@@ -183,7 +191,13 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['activityName']; ?></td>
                 <td><?php echo $row['activityPrice']; ?></td>
                 <td><?php echo $row['activityQuantity']; ?></td>
-                <td><a href="submit_review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
+                <td>
+                    <?php if (isset($row['reviewExists']) && $row['reviewExists'] > 0): // Check if the review already exists ?>
+                    <span class="done-button">Done</span>
+                    <?php else: ?>
+                    <a href="submit_review.php?type=activity&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a>
+                    <?php endif; ?>
+                </td>
             </tr>
             <?php endwhile; ?>
         </table>
@@ -204,7 +218,13 @@ if (!$foodHistoryResult) {
                 <td><?php echo $row['foodName']; ?></td>
                 <td><?php echo $row['foodPrice']; ?></td>
                 <td><?php echo $row['foodQuantity']; ?></td>
-                <td><a href="submit_review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a></td>
+                <td>
+                    <?php if (isset($row['reviewExists']) && $row['reviewExists'] > 0): // Check if the review already exists ?>
+                    <span class="done-button">Done</span>
+                    <?php else: ?>
+                    <a href="submit_review.php?type=food&id=<?php echo $row['lineID']; ?>" class="review-button">Write Review</a>
+                    <?php endif; ?>
+                </td>
             </tr>
             <?php endwhile; ?>
         </table>
